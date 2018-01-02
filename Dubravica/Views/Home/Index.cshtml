@@ -1,31 +1,73 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@using Dubravica.Controllers
+@using System.Web.Mvc
+@{
+    ViewBag.Title = "Home - Diosna cloud";
+    bool hasKBAse = false;
+    foreach (dynamic projectNumber in ViewBag.Numbers)
+    {
+        if(projectNumber == 10000) {
+            hasKBAse = true;
+            break;
+        }
+    }
+    int index;
+    if (hasKBAse == true) {
+        index = 1;
+    } else {
+        index = 0;
+    }
+    double some = Math.Ceiling((double)ViewBag.Numbers.Count / 3);
 }
-
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+<h2>Welcome to Diosna cloud homepage</h2>
+<div class="row">
+    <h6>Select your destination / bakery</h6>
+    <div class="well">
+        @for (int idx = index; idx <= some; idx++)
+        {
+            <div class="btn-group btn-group-justified">
+                @for (int i = 1; i <= 3 && index <= (ViewBag.Count - 1); i++)
+                {
+                    <a href="/Menu/Index/@ViewBag.Numbers[index]" class="btn btn-primary">@ViewBag.Text[index]&rAarr;</a>
+                    index++;
+                }
+            </div>
+            <p></p>
+        }
+    </div>
+    @if (hasKBAse == true)
+    {
+    <h6>Read general or project specific articles in our knowledge base</h6>   
+        <div class="btn-group btn-group-justified well">
+            <a href="/Menu/Index/@ViewBag.Numbers[0]" class="btn btn-primary">Knowledge Base&rAarr;</a>
+        </div>
+    }
+    <p></p>
+    <h6>Go to the guest zone (login not necessary)</h6>
+    <div class="btn-group btn-group-justified well">
+        <a href="/Home/GuestZone" class="btn btn-primary">Guest Zone</a>
+    </div>
 </div>
-
 <div class="row">
     <div class="col-md-4">
-        <h2>Getting started</h2>
+        <h2>Compatibility</h2>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            Best compatible with chrome<br>
+            Other modern browsers are also supported
         </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <p><a class="btn btn-primary" href="http://users.diosn.cz/Home/Compatibility/">See more &raquo;</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <h2>News</h2>
+        <p>
+            In latest update have been add following features:<br>
+            New style od this cloud for Dubravica priojecz<br>
+            Menu of this page hase been changed to more user-friendly platform.
+        </p>
+        <p><a class="btn btn-primary" href="http://users.diosna.cz/Home/News/">See more &raquo;</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <h2>Link to Diosna website:</h2>
+        <p>If you need to visit czech diosna website click below</p>
+        <p><a class="btn btn-primary" href="http://diosna.cz/">Bye &raquo;</a></p>
     </div>
 </div>

@@ -3,13 +3,17 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Users Diosna</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    @Scripts.Render("~/bundles/jquery")
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+@{
+    ViewBag.error = Session["tempforview"];
+    ViewBag.success = Session["success"];
+}
+<body onresize="responsive()" onload="notification()">
+    <div class="navbar navbar-inverse navbar-fixed-top" >
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -17,28 +21,83 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
+                @if (Request.IsAuthenticated)
+                {
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
+                }
+                @if (Session["types"] != null && ViewBag.menuDisable != true)
+                {
+                    <ul class="nav navbar-nav">
+                        <li onclick="menuHide()" style="cursor: pointer; cursor: hand;"><a id="menuHiding">Hide Menu</a></li>
+                    </ul>
+                }
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    @if (Session["types"] != null && ViewBag.menuDisable != true)
+    {
+        <div class="sidenav">
+            @Html.Partial("~/Views/Menu/_Menu.cshtml")
+        </div>
+    }
+    <div class="container body-content"  id="container-body">
+        <script>
+            var sidenavWidth = $('.sidenav').width();
+            document.getElementById('container-body').style.marginLeft = sidenavWidth + 'px';
+            function responsive() {
+                var sidenavWidth = $('.sidenav').width();
+                document.getElementById('container-body').style.marginLeft = sidenavWidth + 'px';
+            }
+        </script>
+        @if (ViewBag.error != null)
+        {
+        <div class="alert alert-danger">@ViewBag.error<br></div>
+            Session["tempforview"] = null;
+        }
+        @if (ViewBag.message != null)
+        {
+        <div class="alert alert-danger">@ViewBag.message<br></div>
+            ViewBag.message = null;
+        }
+        @if (ViewBag.warning != null)
+        {
+        <div class="alert alert-warning">@ViewBag.warning<br></div>
+            ViewBag.warning = null;
+        }
+        @if (ViewBag.success != null)
+        {
+            <div class="alert alert-success">@ViewBag.success<br></div>
+            Session["success"] = null;
+        }
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+        @if (Session["types"] != null && ViewBag.menuDisable != true && ViewBag.legend != null)
+        {
+        <p id="legend">
+            <br>
+            <a class="btn btn-primary btn-xs"  data-toggle="collapse" href="#legendInfo" aria-expanded="false">
+                Legend
+            </a>
+            <div class="collapse" id="legendInfo">
+                <div class="card card-block">
+                    @ViewBag.legend
+                </div>
+            </div>
+        </p>
+        }
     </div>
-
+    @{
+        Session["tempforview"] = null;
+    }
+    <footer>
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -1,0 +1,30 @@
+﻿@model Dubravica.Admin.Models.AdminAddUserModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h4>Index of Admin used only for links:</h4>
+
+@Html.ActionLink("Add Role to sytem", "AddRole", "Admin")<br>
+@Html.ActionLink("Remove Role from system", "RemoveRole", "Admin")<br>
+@Html.ActionLink("Add user to specific role", "AddUser", "Admin")<br>
+@Html.ActionLink("Remove Role from user", "RemoveUser", "Admin")<br>
+@Html.ActionLink("Add Mask to system", "AddMask", "Admin")<br>
+@Html.ActionLink("Remove Mask form system", "RemoveMask", "Admin")<br>
+@Html.ActionLink("Register", "Register", "Account")<br>
+<br>
+
+@Html.Partial("_Search")
+Existing roles: <br>
+<ul id="myUL">
+@foreach (var usersInRole in Model.UsersInRoles)
+{
+    <li>
+        <b><a class="header">@usersInRole.role</a></b>
+        @foreach (var user in usersInRole.Users)
+            {
+            <a class="ul-item">@user</a>
+        }
+    </li>
+}
+</ul>

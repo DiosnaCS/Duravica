@@ -1,0 +1,43 @@
+﻿@model Dubravica.Admin.Models.AdminAddUserModel
+@{
+    ViewBag.Title = "AddUser";
+}
+
+<h2>Add user to role</h2>
+@Html.Partial("_Search")
+<div class="message">
+    @ViewBag.message
+</div>
+@using (Html.BeginForm("AddUserToRole", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.User, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.User, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Role, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Role, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Send" class="btn btn-primary" />
+        </div>
+    </div>
+}
+Existining users:<br>
+<ul id="myUL">
+    @foreach (var rolesForUser in Model.RolesForUsers)
+    {
+        <li>
+            <b><a class="header">@rolesForUser.user</a></b>
+            @foreach (var user in rolesForUser.Roles)
+                {
+                <a class="ul-item">@user</a>
+            }
+        </li>
+    }
+</ul>

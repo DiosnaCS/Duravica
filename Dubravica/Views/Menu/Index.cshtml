@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Dubravica.Controllers.Notification>
+
+@{
+    string alarmName = string.Empty;
+    string graphName = string.Empty;
+    ViewBag.Title = "Menu center";
+    ViewBag.names = Session["names"];
+    ViewBag.plc = Session["plc"];
+    foreach (string name in ViewBag.names) {
+        if(name.ToLower().Contains("alarm"))
+        {
+            alarmName = name;
+        }
+        if (name.ToLower().Contains("graph"))
+        {
+            graphName = name;
+        }
+    }
+
+}
+<h4 id="instruction">&lAarr; Choose one link from the menu</h4>
