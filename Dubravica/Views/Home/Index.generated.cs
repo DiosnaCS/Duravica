@@ -32,10 +32,10 @@ namespace ASP
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    using UsersDiosna;
+    using Dubravica;
     
     #line 1 "..\..\Views\Home\Index.cshtml"
-    using UsersDiosna.Controllers;
+    using Dubravica.Controllers;
     
     #line default
     #line hidden
@@ -118,15 +118,15 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 850), Tuple.Create("\"", 892)
-, Tuple.Create(Tuple.Create("", 857), Tuple.Create("/Menu/Index/", 857), true)
+WriteAttribute("href", Tuple.Create(" href=\"", 848), Tuple.Create("\"", 890)
+, Tuple.Create(Tuple.Create("", 855), Tuple.Create("/Menu/Index/", 855), true)
             
             #line 30 "..\..\Views\Home\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 869), Tuple.Create<System.Object, System.Int32>(ViewBag.Numbers[index]
+, Tuple.Create(Tuple.Create("", 867), Tuple.Create<System.Object, System.Int32>(ViewBag.Numbers[index]
             
             #line default
             #line hidden
-, 869), false)
+, 867), false)
 );
 
 WriteLiteral(" class=\"btn btn-primary\"");
@@ -186,15 +186,15 @@ WriteLiteral(" class=\"btn-group btn-group-justified well\"");
 
 WriteLiteral(">\r\n            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1252), Tuple.Create("\"", 1290)
-, Tuple.Create(Tuple.Create("", 1259), Tuple.Create("/Menu/Index/", 1259), true)
+WriteAttribute("href", Tuple.Create(" href=\"", 1250), Tuple.Create("\"", 1288)
+, Tuple.Create(Tuple.Create("", 1257), Tuple.Create("/Menu/Index/", 1257), true)
             
             #line 41 "..\..\Views\Home\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 1271), Tuple.Create<System.Object, System.Int32>(ViewBag.Numbers[0]
+, Tuple.Create(Tuple.Create("", 1269), Tuple.Create<System.Object, System.Int32>(ViewBag.Numbers[0]
             
             #line default
             #line hidden
-, 1271), false)
+, 1269), false)
 );
 
 WriteLiteral(" class=\"btn btn-primary\"");
@@ -226,8 +226,9 @@ WriteLiteral(">\r\n    <div");
 
 WriteLiteral(" class=\"col-md-4\"");
 
-WriteLiteral(">\r\n        <h2>Compatibility</h2>\r\n        <p>\r\n            Compatible with chrom" +
-"e<br>\r\n        </p>\r\n        <p><a");
+WriteLiteral(">\r\n        <h2>Compatibility</h2>\r\n        <p>\r\n            Best compatible with " +
+"chrome<br>\r\n            Other modern browsers are also supported\r\n        </p>\r\n" +
+"        <p><a");
 
 WriteLiteral(" class=\"btn btn-primary\"");
 
@@ -240,12 +241,9 @@ WriteLiteral(" class=\"col-md-4\"");
 WriteLiteral(@">
         <h2>News</h2>
         <p>
-            In latest update have been added following features:<br>
-            Changes commit:  …<br>
-            scheme index h2 to h4<br>
-            graph getData async done<br>
-            graph client signals drawed<br>
-            menu small style changes<br>
+            In latest update have been add following features:<br>
+            New style od this cloud for Dubravica priojecz<br>
+            Menu of this page hase been changed to more user-friendly platform.
         </p>
         <p><a");
 
@@ -257,12 +255,12 @@ WriteLiteral(">See more &raquo;</a></p>\r\n    </div>\r\n    <div");
 
 WriteLiteral(" class=\"col-md-4\"");
 
-WriteLiteral(">\r\n        <h2>Link to old version:</h2>\r\n        <p>If you need old users click " +
-"below</p>\r\n        <p><a");
+WriteLiteral(">\r\n        <h2>Link to Diosna website:</h2>\r\n        <p>If you need to visit czec" +
+"h diosna website click below</p>\r\n        <p><a");
 
 WriteLiteral(" class=\"btn btn-primary\"");
 
-WriteLiteral(" href=\"http://users.nordit.cz/\"");
+WriteLiteral(" href=\"http://diosna.cz/\"");
 
 WriteLiteral(">Bye &raquo;</a></p>\r\n    </div>\r\n</div>");
 

@@ -30,31 +30,37 @@ namespace ASP
     using Dubravica;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
-    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Shared/Lockout.cshtml")]
-    public partial class _Views_Shared_Lockout_cshtml : System.Web.Mvc.WebViewPage<System.Web.Mvc.HandleErrorInfo>
+    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Home/Order.cshtml")]
+    public partial class _Views_Home_Order_cshtml : System.Web.Mvc.WebViewPage<dynamic>
     {
-        public _Views_Shared_Lockout_cshtml()
+        public _Views_Home_Order_cshtml()
         {
         }
         public override void Execute()
         {
+WriteLiteral("\r\n");
+
             
-            #line 3 "..\..\Views\Shared\Lockout.cshtml"
+            #line 2 "..\..\Views\Home\Order.cshtml"
   
-    ViewBag.Title = "Locked Out";
+    ViewBag.Title = "Order";
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n<hgroup>\r\n    <h1");
+WriteLiteral("\r\n\r\n<h2>Under development</h2>\r\n\r\n<div");
 
-WriteLiteral(" class=\"text-danger\"");
+WriteLiteral(" class=\"jumbotron\"");
 
-WriteLiteral(">Locked out.</h1>\r\n    <h2");
+WriteLiteral(">\r\n    <p>\r\n        I want to very apologize but we arent prepare for delivier ou" +
+"r awesome product please try it again later following year. But you should try a" +
+"ll features, which has been finished yet\r\n    </p><a");
 
-WriteLiteral(" class=\"text-danger\"");
+WriteLiteral(" href=\"http://192.168.2.13/\"");
 
-WriteLiteral(">This account has been locked out, please try again later.</h2>\r\n</hgroup>\r\n");
+WriteLiteral(" class=\"btn-primary btn-lg\"");
+
+WriteLiteral(">Back to hompepage</a>\r\n</div>\r\n");
 
         }
     }

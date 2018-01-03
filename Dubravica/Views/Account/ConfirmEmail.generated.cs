@@ -30,31 +30,41 @@ namespace ASP
     using Dubravica;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
-    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Shared/Lockout.cshtml")]
-    public partial class _Views_Shared_Lockout_cshtml : System.Web.Mvc.WebViewPage<System.Web.Mvc.HandleErrorInfo>
+    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Account/ConfirmEmail.cshtml")]
+    public partial class _Views_Account_ConfirmEmail_cshtml : System.Web.Mvc.WebViewPage<dynamic>
     {
-        public _Views_Shared_Lockout_cshtml()
+        public _Views_Account_ConfirmEmail_cshtml()
         {
         }
         public override void Execute()
         {
             
-            #line 3 "..\..\Views\Shared\Lockout.cshtml"
+            #line 1 "..\..\Views\Account\ConfirmEmail.cshtml"
   
-    ViewBag.Title = "Locked Out";
+    ViewBag.Title = "Confirm Email";
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n<hgroup>\r\n    <h1");
+WriteLiteral("\r\n\r\n<h2>");
 
-WriteLiteral(" class=\"text-danger\"");
+            
+            #line 5 "..\..\Views\Account\ConfirmEmail.cshtml"
+Write(ViewBag.Title);
 
-WriteLiteral(">Locked out.</h1>\r\n    <h2");
+            
+            #line default
+            #line hidden
+WriteLiteral(".</h2>\r\n<div>\r\n    <p>\r\n        Thank you for confirming your email. Please ");
 
-WriteLiteral(" class=\"text-danger\"");
+            
+            #line 8 "..\..\Views\Account\ConfirmEmail.cshtml"
+                                               Write(Html.ActionLink("Click here to Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }));
 
-WriteLiteral(">This account has been locked out, please try again later.</h2>\r\n</hgroup>\r\n");
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n    </p>\r\n</div>\r\n");
 
         }
     }

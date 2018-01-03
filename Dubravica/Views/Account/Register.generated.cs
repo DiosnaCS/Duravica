@@ -27,12 +27,11 @@ namespace ASP
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    using UsersDiosna;
-    using UsersDiosna.Controllers;
+    using Dubravica;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Account/Register.cshtml")]
-    public partial class _Views_Account_Register_cshtml : System.Web.Mvc.WebViewPage<UsersDiosna.Models.RegisterViewModel>
+    public partial class _Views_Account_Register_cshtml : System.Web.Mvc.WebViewPage<Dubravica.Models.RegisterViewModel>
     {
         public _Views_Account_Register_cshtml()
         {

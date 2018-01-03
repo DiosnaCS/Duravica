@@ -27,11 +27,10 @@ namespace ASP
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    using UsersDiosna;
-    using UsersDiosna.Controllers;
+    using Dubravica;
     
     #line 1 "..\..\Views\Account\Login.cshtml"
-    using UsersDiosna.Models;
+    using Dubravica.Models;
     
     #line default
     #line hidden

@@ -27,8 +27,7 @@ namespace ASP
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    using UsersDiosna;
-    using UsersDiosna.Controllers;
+    using Dubravica;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Home/News.cshtml")]
@@ -57,7 +56,7 @@ WriteLiteral(@">
         <h2>News</h2>
         <p>
             In latest update have been add following features:<br>
-            After submit page of alarms from index alarm page you wont get 0 of alarms but always 20 of them.<br>
+            New style od this cloud for Dubravica priojecz<br>
             Menu of this page hase been changed to more user-friendly platform.
         </p><a");
 

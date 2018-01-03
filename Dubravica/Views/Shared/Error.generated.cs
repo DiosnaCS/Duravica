@@ -27,8 +27,7 @@ namespace ASP
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    using UsersDiosna;
-    using UsersDiosna.Controllers;
+    using Dubravica;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Shared/Error.cshtml")]
@@ -73,7 +72,7 @@ WriteLiteral(" At: ");
 
             
             #line 10 "..\..\Views\Shared\Error.cshtml"
-                                              Write(DateTime.Now.ToShortTimeString());
+                                                   Write(DateTime.Now.ToShortTimeString());
 
             
             #line default
@@ -82,7 +81,7 @@ WriteLiteral(" Happened on: ");
 
             
             #line 10 "..\..\Views\Shared\Error.cshtml"
-                                                                                             Write(DateTime.Now.ToShortDateString());
+                                                                                                  Write(DateTime.Now.ToShortDateString());
 
             
             #line default

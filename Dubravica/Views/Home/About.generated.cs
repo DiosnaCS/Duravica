@@ -30,31 +30,41 @@ namespace ASP
     using Dubravica;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
-    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Shared/Lockout.cshtml")]
-    public partial class _Views_Shared_Lockout_cshtml : System.Web.Mvc.WebViewPage<System.Web.Mvc.HandleErrorInfo>
+    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Home/About.cshtml")]
+    public partial class _Views_Home_About_cshtml : System.Web.Mvc.WebViewPage<dynamic>
     {
-        public _Views_Shared_Lockout_cshtml()
+        public _Views_Home_About_cshtml()
         {
         }
         public override void Execute()
         {
             
-            #line 3 "..\..\Views\Shared\Lockout.cshtml"
+            #line 1 "..\..\Views\Home\About.cshtml"
   
-    ViewBag.Title = "Locked Out";
+    ViewBag.Title = "About";
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n<hgroup>\r\n    <h1");
+WriteLiteral("\r\n<h2>");
 
-WriteLiteral(" class=\"text-danger\"");
+            
+            #line 4 "..\..\Views\Home\About.cshtml"
+Write(ViewBag.Title);
 
-WriteLiteral(">Locked out.</h1>\r\n    <h2");
+            
+            #line default
+            #line hidden
+WriteLiteral(".</h2>\r\n<h3>");
 
-WriteLiteral(" class=\"text-danger\"");
+            
+            #line 5 "..\..\Views\Home\About.cshtml"
+Write(ViewBag.Message);
 
-WriteLiteral(">This account has been locked out, please try again later.</h2>\r\n</hgroup>\r\n");
+            
+            #line default
+            #line hidden
+WriteLiteral("</h3>\r\n\r\n<p>Use this area to provide additional information.</p>\r\n");
 
         }
     }

@@ -27,14 +27,13 @@ namespace ASP
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using Dubravica;
     
     #line 1 "..\..\Views\Shared\_LoginPartial.cshtml"
     using Microsoft.AspNet.Identity;
     
     #line default
     #line hidden
-    using UsersDiosna;
-    using UsersDiosna.Controllers;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Shared/_LoginPartial.cshtml")]

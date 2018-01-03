@@ -27,12 +27,11 @@ namespace ASP
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    using UsersDiosna;
-    using UsersDiosna.Controllers;
+    using Dubravica;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Admin/AddRole.cshtml")]
-    public partial class _Views_Admin_AddRole_cshtml : System.Web.Mvc.WebViewPage<UsersDiosna.Admin.Models.AdminAddRoleModel>
+    public partial class _Views_Admin_AddRole_cshtml : System.Web.Mvc.WebViewPage<Dubravica.Admin.Models.AdminAddRoleModel>
     {
         public _Views_Admin_AddRole_cshtml()
         {

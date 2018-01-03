@@ -27,12 +27,11 @@ namespace ASP
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    using UsersDiosna;
-    using UsersDiosna.Controllers;
+    using Dubravica;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Menu/Index.cshtml")]
-    public partial class _Views_Menu_Index_cshtml : System.Web.Mvc.WebViewPage<IEnumerable<UsersDiosna.Controllers.Notification>>
+    public partial class _Views_Menu_Index_cshtml : System.Web.Mvc.WebViewPage<IEnumerable<Dubravica.Controllers.Notification>>
     {
         public _Views_Menu_Index_cshtml()
         {
