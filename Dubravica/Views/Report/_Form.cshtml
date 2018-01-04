@@ -1,6 +1,8 @@
 ﻿@using Dubravica.Report.Models
 @model ReportModel
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
 
     var windowHeight;
@@ -34,7 +36,7 @@
     }
 
     // disable or enable input
-    function InputEnable(el_s,el_d) {
+    function InputEnable(el_s, el_d) {
         if ($(el_s).prop('checked') == true) {
             $(el_d).prop("disabled", false);
         }
@@ -51,11 +53,16 @@
 
     function RecalcCount(rowHeight) {
         var count;
-        count = Math.round((windowHeight() - $('.navbar').height() - $('#top_menu').height() - $('.message').height() - $('footer').height()-25) / rowHeight);
+        count = Math.round((windowHeight() - $('.navbar').height() - $('#top_menu').height() - $('.message').height() - $('footer').height() - 25) / rowHeight);
         return count;
     }
+    $('#date-time_from').datepicker();
 
 </script>
+
+
+
+
 
 <div onload="InitReportFilter()">
     <!-- pozdeji onclick tlacitka v menu -->
@@ -66,15 +73,39 @@
                 @Html.HiddenFor(model => model.StartId, new { @id = "start_id", @value = 0 })
                 @Html.HiddenFor(model => model.Count, new { @id = "count", @value = 60 })
 
+                @{ 
+                    int month = DateTime.Now.Month;
+                    string smonth = DateTime.Now.Month.ToString();
+                    int day = DateTime.Now.Day;
+                    string sday = DateTime.Now.Day.ToString();
+
+                    if (month<10)
+                    {
+                        smonth = "0" + smonth;
+                    }
+                    if (day < 10)
+                    {
+                        sday = "0" + day;
+                    }
+                    if(day == 1)
+                    {
+                        sday = "28";
+                    }
+
+                    string datetimeToValue = DateTime.Now.Year + "-" + smonth + "-" + sday + "T" + DateTime.Now.Hour + ":" + DateTime.Now.Minute;
+                    day--;
+                    string datetimeFromValue = DateTime.Now.Year + "-" + smonth + "-" + sday + "T" + DateTime.Now.Hour + ":" + DateTime.Now.Minute;
+                }
+
                 <!-- time from -->
                 <div class="form-item">
                     @Html.LabelFor(model => model.DateTimeFormFrom)
-                    @Html.TextBoxFor(model => model.DateTimeFrom, new { @id = "date-time_from", @class = "date-time", @type = "datetime-local", @name = "date-time_from", value = "2017-01-01T11:42:13.510" })
+                    @Html.TextBoxFor(model => model.DateTimeFrom, new { @class = "date-time", id = "date-time_from", type="datetime-local", Value= @datetimeFromValue  })
                 </div>
                 <!-- time to -->
                 <div class="form-item">
                     @Html.LabelFor(model => model.DateTimeFormTo)
-                    @Html.TextBoxFor(model => model.DateTimeTo, new { @id = "date-time_to", @class = "date-time", @type = "datetime-local", @name = "date-time_to" })
+                    @Html.TextBoxFor(model => model.DateTimeTo, new { @id = "date-time_to", @class = "date-time", @type = "datetime-local", Value = @datetimeToValue})
                 </div>
                 <!-- rcp -->
                 <div class="form-item">

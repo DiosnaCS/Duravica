@@ -44,63 +44,40 @@ namespace ASP
         }
         public override void Execute()
         {
-WriteLiteral(@"<script>
+WriteLiteral("<link");
 
-    var windowHeight;
+WriteLiteral(" rel=\"stylesheet\"");
 
-    function windowWidth() {
-        return $(window).width();
-    }
+WriteLiteral(" href=\"//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css\"");
 
-    function windowHeight() {
-        //return window.innerHeight;
-        return $(window).height() - 130;
-    }
+WriteLiteral(">\r\n<script");
 
-    // add Event onResize and define method
-    if (window.attachEvent) {
-        window.attachEvent('onresize', function () {
-            alert('attachEvent - resize');
-        });
-    }
-    else if (window.addEventListener) {
-        window.addEventListener('resize', function () {
-            var id;
-            $(window).resize(function () {
-                clearTimeout(id);
-                id = setTimeout(RecalcCount(25), 500);
-            });
-        }, true);
-    }
-    else {
-        //The browser does not support Javascript event binding
-    }
+WriteLiteral(" src=\"//code.jquery.com/jquery-1.10.2.js\"");
 
-    // disable or enable input
-    function InputEnable(el_s,el_d) {
-        if ($(el_s).prop('checked') == true) {
-            $(el_d).prop(""disabled"", false);
-        }
-        else {
-            console.log('false');
-            $(el_d).prop(""disabled"", true);
-            $(el_d).prop(""value"", 0);
-        }
-    }
+WriteLiteral("></script>\r\n<script");
 
-    function InitReportFilter() {
-        InputEnable();
-    }
+WriteLiteral(" src=\"//code.jquery.com/ui/1.11.4/jquery-ui.js\"");
 
-    function RecalcCount(rowHeight) {
-        var count;
-        count = Math.round((windowHeight() - $('.navbar').height() - $('#top_menu').height() - $('.message').height() - $('footer').height()-25) / rowHeight);
-        return count;
-    }
-
-</script>
-
-<div");
+WriteLiteral("></script>\r\n<script>\r\n\r\n    var windowHeight;\r\n\r\n    function windowWidth() {\r\n  " +
+"      return $(window).width();\r\n    }\r\n\r\n    function windowHeight() {\r\n       " +
+" //return window.innerHeight;\r\n        return $(window).height() - 130;\r\n    }\r\n" +
+"\r\n    // add Event onResize and define method\r\n    if (window.attachEvent) {\r\n  " +
+"      window.attachEvent(\'onresize\', function () {\r\n            alert(\'attachEve" +
+"nt - resize\');\r\n        });\r\n    }\r\n    else if (window.addEventListener) {\r\n   " +
+"     window.addEventListener(\'resize\', function () {\r\n            var id;\r\n     " +
+"       $(window).resize(function () {\r\n                clearTimeout(id);\r\n      " +
+"          id = setTimeout(RecalcCount(25), 500);\r\n            });\r\n        }, tr" +
+"ue);\r\n    }\r\n    else {\r\n        //The browser does not support Javascript event" +
+" binding\r\n    }\r\n\r\n    // disable or enable input\r\n    function InputEnable(el_s" +
+", el_d) {\r\n        if ($(el_s).prop(\'checked\') == true) {\r\n            $(el_d).p" +
+"rop(\"disabled\", false);\r\n        }\r\n        else {\r\n            console.log(\'fal" +
+"se\');\r\n            $(el_d).prop(\"disabled\", true);\r\n            $(el_d).prop(\"va" +
+"lue\", 0);\r\n        }\r\n    }\r\n\r\n    function InitReportFilter() {\r\n        InputE" +
+"nable();\r\n    }\r\n\r\n    function RecalcCount(rowHeight) {\r\n        var count;\r\n  " +
+"      count = Math.round((windowHeight() - $(\'.navbar\').height() - $(\'#top_menu\'" +
+").height() - $(\'.message\').height() - $(\'footer\').height() - 25) / rowHeight);\r\n" +
+"        return count;\r\n    }\r\n    $(\'#date-time_from\').datepicker();\r\n\r\n</script" +
+">\r\n\r\n\r\n\r\n\r\n\r\n<div");
 
 WriteLiteral(" onload=\"InitReportFilter()\"");
 
@@ -111,13 +88,13 @@ WriteLiteral(" id=\"reportForm\"");
 WriteLiteral(">\r\n");
 
             
-            #line 63 "..\..\Views\Report\_Form.cshtml"
+            #line 70 "..\..\Views\Report\_Form.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 63 "..\..\Views\Report\_Form.cshtml"
+            #line 70 "..\..\Views\Report\_Form.cshtml"
          using (Html.BeginForm("Index", "Report", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
         {
 
@@ -129,7 +106,7 @@ WriteLiteral("            <div>\r\n");
 WriteLiteral("                ");
 
             
-            #line 66 "..\..\Views\Report\_Form.cshtml"
+            #line 73 "..\..\Views\Report\_Form.cshtml"
            Write(Html.HiddenFor(model => model.StartId, new { @id = "start_id", @value = 0 }));
 
             
@@ -140,9 +117,45 @@ WriteLiteral("\r\n");
 WriteLiteral("                ");
 
             
-            #line 67 "..\..\Views\Report\_Form.cshtml"
+            #line 74 "..\..\Views\Report\_Form.cshtml"
            Write(Html.HiddenFor(model => model.Count, new { @id = "count", @value = 60 }));
 
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n\r\n");
+
+            
+            #line 76 "..\..\Views\Report\_Form.cshtml"
+                
+            
+            #line default
+            #line hidden
+            
+            #line 76 "..\..\Views\Report\_Form.cshtml"
+                   
+                    int month = DateTime.Now.Month;
+                    string smonth = DateTime.Now.Month.ToString();
+                    int day = DateTime.Now.Day;
+                    string sday = DateTime.Now.Day.ToString();
+
+                    if (month<10)
+                    {
+                        smonth = "0" + smonth;
+                    }
+                    if (day < 10)
+                    {
+                        sday = "0" + day;
+                    }
+                    if(day == 1)
+                    {
+                        sday = "28";
+                    }
+
+                    string datetimeToValue = DateTime.Now.Year + "-" + smonth + "-" + sday + "T" + DateTime.Now.Hour + ":" + DateTime.Now.Minute;
+                    day--;
+                    string datetimeFromValue = DateTime.Now.Year + "-" + smonth + "-" + sday + "T" + DateTime.Now.Hour + ":" + DateTime.Now.Minute;
+                
             
             #line default
             #line hidden
@@ -155,7 +168,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 71 "..\..\Views\Report\_Form.cshtml"
+            #line 102 "..\..\Views\Report\_Form.cshtml"
                Write(Html.LabelFor(model => model.DateTimeFormFrom));
 
             
@@ -166,8 +179,8 @@ WriteLiteral("\r\n");
 WriteLiteral("                    ");
 
             
-            #line 72 "..\..\Views\Report\_Form.cshtml"
-               Write(Html.TextBoxFor(model => model.DateTimeFrom, new { @id = "date-time_from", @class = "date-time", @type = "datetime-local", @name = "date-time_from", value = "2017-01-01T11:42:13.510" }));
+            #line 103 "..\..\Views\Report\_Form.cshtml"
+               Write(Html.TextBoxFor(model => model.DateTimeFrom, new { @class = "date-time", id = "date-time_from", type="datetime-local", Value= @datetimeFromValue  }));
 
             
             #line default
@@ -181,7 +194,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 76 "..\..\Views\Report\_Form.cshtml"
+            #line 107 "..\..\Views\Report\_Form.cshtml"
                Write(Html.LabelFor(model => model.DateTimeFormTo));
 
             
@@ -192,8 +205,8 @@ WriteLiteral("\r\n");
 WriteLiteral("                    ");
 
             
-            #line 77 "..\..\Views\Report\_Form.cshtml"
-               Write(Html.TextBoxFor(model => model.DateTimeTo, new { @id = "date-time_to", @class = "date-time", @type = "datetime-local", @name = "date-time_to" }));
+            #line 108 "..\..\Views\Report\_Form.cshtml"
+               Write(Html.TextBoxFor(model => model.DateTimeTo, new { @id = "date-time_to", @class = "date-time", @type = "datetime-local", Value = @datetimeToValue}));
 
             
             #line default
@@ -207,7 +220,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 81 "..\..\Views\Report\_Form.cshtml"
+            #line 112 "..\..\Views\Report\_Form.cshtml"
                Write(Html.LabelFor(model => model.Recipe));
 
             
@@ -218,7 +231,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                    ");
 
             
-            #line 82 "..\..\Views\Report\_Form.cshtml"
+            #line 113 "..\..\Views\Report\_Form.cshtml"
                Write(Html.TextBoxFor(model => model.Recipe, new { @id = "recipe", @class = "rcp-in", @type = "number", @name = "recipe", @value = "0", @min = 0, @max = 30, @style = "width:50px;" }));
 
             
@@ -238,7 +251,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 87 "..\..\Views\Report\_Form.cshtml"
+            #line 118 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.CheckBoxFor(model => model.Par0Sel));
 
             
@@ -249,7 +262,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                        ");
 
             
-            #line 88 "..\..\Views\Report\_Form.cshtml"
+            #line 119 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.LabelFor(model => model.Par0Sel));
 
             
@@ -265,7 +278,7 @@ WriteLiteral(">\r\n                    <div>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 94 "..\..\Views\Report\_Form.cshtml"
+            #line 125 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.CheckBoxFor(model => model.Par1Sel, new { @onchange = "InputEnable(this, tol1)" }));
 
             
@@ -276,7 +289,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                        ");
 
             
-            #line 95 "..\..\Views\Report\_Form.cshtml"
+            #line 126 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.LabelFor(model => model.Par1Sel));
 
             
@@ -292,7 +305,7 @@ WriteLiteral(">&plusmn</label>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 99 "..\..\Views\Report\_Form.cshtml"
+            #line 130 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.TextBoxFor(model => model.Par1Tol, new { @id = "tol1", @class = "tol-set", @name = "tol1", @value = "0", @type = "number", @min = 0, @max = 10, @step = "0.1" }));
 
             
@@ -308,7 +321,7 @@ WriteLiteral(">\r\n                    <div>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 107 "..\..\Views\Report\_Form.cshtml"
+            #line 138 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.CheckBoxFor(model => model.Par2Sel, new { @onchange = "InputEnable(this, tol2)" }));
 
             
@@ -319,7 +332,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                        ");
 
             
-            #line 108 "..\..\Views\Report\_Form.cshtml"
+            #line 139 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.LabelFor(model => model.Par2Sel));
 
             
@@ -335,7 +348,7 @@ WriteLiteral(">&plusmn</label>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 112 "..\..\Views\Report\_Form.cshtml"
+            #line 143 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.TextBoxFor(model => model.Par2Tol, new { @id = "tol2", @class = "tol-set", @name = "tol2", @value = "0", @type = "number", @min = 0, @max = 10, @step = "0.1" }));
 
             
@@ -351,7 +364,7 @@ WriteLiteral(">\r\n                    <div>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 119 "..\..\Views\Report\_Form.cshtml"
+            #line 150 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.CheckBoxFor(model => model.Par3Sel, new { @onchange = "InputEnable(this, tol3)" }));
 
             
@@ -362,7 +375,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                        ");
 
             
-            #line 120 "..\..\Views\Report\_Form.cshtml"
+            #line 151 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.LabelFor(model => model.Par3Sel));
 
             
@@ -378,7 +391,7 @@ WriteLiteral(">&plusmn</label>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 124 "..\..\Views\Report\_Form.cshtml"
+            #line 155 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.TextBoxFor(model => model.Par3Tol, new { @id = "tol3", @class = "tol-set", @name = "tol3", @value = "0", @type = "number", @min = 0, @max = 10, @step = "0.1" }));
 
             
@@ -394,7 +407,7 @@ WriteLiteral(">\r\n                    <div>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 131 "..\..\Views\Report\_Form.cshtml"
+            #line 162 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.CheckBoxFor(model => model.Par4Sel, new { @onchange = "InputEnable(this, tol4)" }));
 
             
@@ -405,7 +418,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                        ");
 
             
-            #line 132 "..\..\Views\Report\_Form.cshtml"
+            #line 163 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.LabelFor(model => model.Par4Sel));
 
             
@@ -421,7 +434,7 @@ WriteLiteral(">&plusmn</label>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 136 "..\..\Views\Report\_Form.cshtml"
+            #line 167 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.TextBoxFor(model => model.Par4Tol, new { @id = "tol4", @class = "tol-set", @name = "tol4", @value = "0", @type = "number", @min = 0, @max = 10, @step = "0.1" }));
 
             
@@ -444,7 +457,7 @@ WriteLiteral(" value=\"Submit\"");
 WriteLiteral(" />\r\n");
 
             
-            #line 142 "..\..\Views\Report\_Form.cshtml"
+            #line 173 "..\..\Views\Report\_Form.cshtml"
         }
 
             
