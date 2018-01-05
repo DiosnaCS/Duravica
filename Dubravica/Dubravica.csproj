@@ -235,6 +235,7 @@
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Handlers\GlobaHelper.cs" />
+    <Compile Include="Handlers\ReportHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminModels.cs" />
     <Compile Include="Models\FileViewModels.cs" />

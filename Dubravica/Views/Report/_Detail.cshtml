@@ -3,6 +3,8 @@
 
 @{
     ViewBag.TitleDetail = "Batch detail:";
+    string unit = "";
+    string statusClass;
 }
 
 <h4>@ViewBag.TitleDetail</h4>
@@ -37,27 +39,27 @@
             switch (step.OperationNr)
             {
                 case OperationType.Dosing:
-                    ViewBag.unit = "kg";
+                    unit = "kg";
                     toElementUnits = 1000;
                     break;
                 case OperationType.Kneading:
-                    ViewBag.unit = "°C";
+                    unit = "°C";
                     toElementUnits = 10;
                     break;
                 case OperationType.Ripping:
-                    ViewBag.unit = "min";
+                    unit = "min";
                     toElementUnits = 10;
                     break;
             }
-            ViewBag.Need = step.Need /toElementUnits;
-            ViewBag.Done = step.Done / toElementUnits;
-            ViewBag.Diff = (step.Done - step.Need) / toElementUnits;
+            double need = step.Need /toElementUnits;
+            double done = step.Done / toElementUnits;
+            double diff = (step.Done - step.Need) / toElementUnits;
             switch (step.Status) {
                 case StepStatus.OK:
-                    ViewBag.statusClass = "status-ok";
+                    statusClass = "status-ok";
                 break;
                 case StepStatus.Error:
-                    ViewBag.statusClass = "status-nok";
+                    statusClass = "status-nok";
                 break;
             }
         <tr data-toggle="tooltip" data-placement="left" title="Trace ID">
@@ -67,9 +69,9 @@
             <td>@step.OperationNr</td>
             <td>@step.DeviceId</td>
             <td>@step.Device</td>
-            <td class="text-right" data-toggle="tooltip" data-placement="top">@ViewBag.Need @ViewBag.unit&ensp;</td>
-            <td class="text-right">@ViewBag.Done @ViewBag.unit&ensp;</td>
-            <td class="text-right">@ViewBag.Diff @ViewBag.unit&nbsp;</td>
+            <td class="text-right" data-toggle="tooltip" data-placement="top">@need @unit&ensp;</td>
+            <td class="text-right">@done @unit&ensp;</td>
+            <td class="text-right">@diff @unit&nbsp;</td>
             <td class="@ViewBag.statusClass">@step.Status</td>
         </tr>
         }

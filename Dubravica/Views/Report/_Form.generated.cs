@@ -154,6 +154,14 @@ WriteLiteral("\r\n\r\n");
 
                     string datetimeToValue = DateTime.Now.Year + "-" + smonth + "-" + sday + "T" + DateTime.Now.Hour + ":" + DateTime.Now.Minute;
                     day--;
+                    if (day < 10)
+                    {
+                        sday = "0" + day;
+                    }
+                    if (day == 1)
+                    {
+                        sday = "28";
+                    }
                     string datetimeFromValue = DateTime.Now.Year + "-" + smonth + "-" + sday + "T" + DateTime.Now.Hour + ":" + DateTime.Now.Minute;
                 
             
@@ -168,7 +176,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 102 "..\..\Views\Report\_Form.cshtml"
+            #line 110 "..\..\Views\Report\_Form.cshtml"
                Write(Html.LabelFor(model => model.DateTimeFormFrom));
 
             
@@ -179,7 +187,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                    ");
 
             
-            #line 103 "..\..\Views\Report\_Form.cshtml"
+            #line 111 "..\..\Views\Report\_Form.cshtml"
                Write(Html.TextBoxFor(model => model.DateTimeFrom, new { @class = "date-time", id = "date-time_from", type="datetime-local", Value= @datetimeFromValue  }));
 
             
@@ -194,7 +202,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 107 "..\..\Views\Report\_Form.cshtml"
+            #line 115 "..\..\Views\Report\_Form.cshtml"
                Write(Html.LabelFor(model => model.DateTimeFormTo));
 
             
@@ -205,7 +213,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                    ");
 
             
-            #line 108 "..\..\Views\Report\_Form.cshtml"
+            #line 116 "..\..\Views\Report\_Form.cshtml"
                Write(Html.TextBoxFor(model => model.DateTimeTo, new { @id = "date-time_to", @class = "date-time", @type = "datetime-local", Value = @datetimeToValue}));
 
             
@@ -220,7 +228,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 112 "..\..\Views\Report\_Form.cshtml"
+            #line 120 "..\..\Views\Report\_Form.cshtml"
                Write(Html.LabelFor(model => model.Recipe));
 
             
@@ -231,7 +239,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                    ");
 
             
-            #line 113 "..\..\Views\Report\_Form.cshtml"
+            #line 121 "..\..\Views\Report\_Form.cshtml"
                Write(Html.TextBoxFor(model => model.Recipe, new { @id = "recipe", @class = "rcp-in", @type = "number", @name = "recipe", @value = "0", @min = 0, @max = 30, @style = "width:50px;" }));
 
             
@@ -251,7 +259,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 118 "..\..\Views\Report\_Form.cshtml"
+            #line 126 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.CheckBoxFor(model => model.Par0Sel));
 
             
@@ -262,7 +270,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                        ");
 
             
-            #line 119 "..\..\Views\Report\_Form.cshtml"
+            #line 127 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.LabelFor(model => model.Par0Sel));
 
             
@@ -278,7 +286,7 @@ WriteLiteral(">\r\n                    <div>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 125 "..\..\Views\Report\_Form.cshtml"
+            #line 133 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.CheckBoxFor(model => model.Par1Sel, new { @onchange = "InputEnable(this, tol1)" }));
 
             
@@ -289,7 +297,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                        ");
 
             
-            #line 126 "..\..\Views\Report\_Form.cshtml"
+            #line 134 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.LabelFor(model => model.Par1Sel));
 
             
@@ -305,7 +313,7 @@ WriteLiteral(">&plusmn</label>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 130 "..\..\Views\Report\_Form.cshtml"
+            #line 138 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.TextBoxFor(model => model.Par1Tol, new { @id = "tol1", @class = "tol-set", @name = "tol1", @value = "0", @type = "number", @min = 0, @max = 10, @step = "0.1" }));
 
             
@@ -321,7 +329,7 @@ WriteLiteral(">\r\n                    <div>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 138 "..\..\Views\Report\_Form.cshtml"
+            #line 146 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.CheckBoxFor(model => model.Par2Sel, new { @onchange = "InputEnable(this, tol2)" }));
 
             
@@ -332,7 +340,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                        ");
 
             
-            #line 139 "..\..\Views\Report\_Form.cshtml"
+            #line 147 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.LabelFor(model => model.Par2Sel));
 
             
@@ -348,7 +356,7 @@ WriteLiteral(">&plusmn</label>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 143 "..\..\Views\Report\_Form.cshtml"
+            #line 151 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.TextBoxFor(model => model.Par2Tol, new { @id = "tol2", @class = "tol-set", @name = "tol2", @value = "0", @type = "number", @min = 0, @max = 10, @step = "0.1" }));
 
             
@@ -364,7 +372,7 @@ WriteLiteral(">\r\n                    <div>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 150 "..\..\Views\Report\_Form.cshtml"
+            #line 158 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.CheckBoxFor(model => model.Par3Sel, new { @onchange = "InputEnable(this, tol3)" }));
 
             
@@ -375,7 +383,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                        ");
 
             
-            #line 151 "..\..\Views\Report\_Form.cshtml"
+            #line 159 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.LabelFor(model => model.Par3Sel));
 
             
@@ -391,7 +399,7 @@ WriteLiteral(">&plusmn</label>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 155 "..\..\Views\Report\_Form.cshtml"
+            #line 163 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.TextBoxFor(model => model.Par3Tol, new { @id = "tol3", @class = "tol-set", @name = "tol3", @value = "0", @type = "number", @min = 0, @max = 10, @step = "0.1" }));
 
             
@@ -407,7 +415,7 @@ WriteLiteral(">\r\n                    <div>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 162 "..\..\Views\Report\_Form.cshtml"
+            #line 170 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.CheckBoxFor(model => model.Par4Sel, new { @onchange = "InputEnable(this, tol4)" }));
 
             
@@ -418,7 +426,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                        ");
 
             
-            #line 163 "..\..\Views\Report\_Form.cshtml"
+            #line 171 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.LabelFor(model => model.Par4Sel));
 
             
@@ -434,7 +442,7 @@ WriteLiteral(">&plusmn</label>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 167 "..\..\Views\Report\_Form.cshtml"
+            #line 175 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.TextBoxFor(model => model.Par4Tol, new { @id = "tol4", @class = "tol-set", @name = "tol4", @value = "0", @type = "number", @min = 0, @max = 10, @step = "0.1" }));
 
             
@@ -457,7 +465,7 @@ WriteLiteral(" value=\"Submit\"");
 WriteLiteral(" />\r\n");
 
             
-            #line 173 "..\..\Views\Report\_Form.cshtml"
+            #line 181 "..\..\Views\Report\_Form.cshtml"
         }
 
             

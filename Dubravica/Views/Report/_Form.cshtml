@@ -94,6 +94,14 @@
 
                     string datetimeToValue = DateTime.Now.Year + "-" + smonth + "-" + sday + "T" + DateTime.Now.Hour + ":" + DateTime.Now.Minute;
                     day--;
+                    if (day < 10)
+                    {
+                        sday = "0" + day;
+                    }
+                    if (day == 1)
+                    {
+                        sday = "28";
+                    }
                     string datetimeFromValue = DateTime.Now.Year + "-" + smonth + "-" + sday + "T" + DateTime.Now.Hour + ":" + DateTime.Now.Minute;
                 }
 

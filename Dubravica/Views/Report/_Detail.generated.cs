@@ -48,6 +48,8 @@ namespace ASP
             #line 4 "..\..\Views\Report\_Detail.cshtml"
   
     ViewBag.TitleDetail = "Batch detail:";
+    string unit = "";
+    string statusClass;
 
             
             #line default
@@ -55,7 +57,7 @@ namespace ASP
 WriteLiteral("\r\n\r\n<h4>");
 
             
-            #line 8 "..\..\Views\Report\_Detail.cshtml"
+            #line 10 "..\..\Views\Report\_Detail.cshtml"
 Write(ViewBag.TitleDetail);
 
             
@@ -64,7 +66,7 @@ Write(ViewBag.TitleDetail);
 WriteLiteral("</h4>\r\n");
 
             
-            #line 9 "..\..\Views\Report\_Detail.cshtml"
+            #line 11 "..\..\Views\Report\_Detail.cshtml"
    if (ViewBag.Steps != null)
 {
 
@@ -78,7 +80,7 @@ WriteLiteral(" class=\"det-header\"");
 WriteLiteral(">    \r\n    <p>Batch ID:<span>");
 
             
-            #line 12 "..\..\Views\Report\_Detail.cshtml"
+            #line 14 "..\..\Views\Report\_Detail.cshtml"
                  Write(ViewBag.Steps.Id);
 
             
@@ -87,7 +89,7 @@ WriteLiteral(">    \r\n    <p>Batch ID:<span>");
 WriteLiteral("</span></p>\r\n    <p>Bowl ID:<span>");
 
             
-            #line 13 "..\..\Views\Report\_Detail.cshtml"
+            #line 15 "..\..\Views\Report\_Detail.cshtml"
                 Write(ViewBag.Steps.BowlId);
 
             
@@ -96,7 +98,7 @@ WriteLiteral("</span></p>\r\n    <p>Bowl ID:<span>");
 WriteLiteral("</span></p>\r\n    <p>Recipe:<span>");
 
             
-            #line 14 "..\..\Views\Report\_Detail.cshtml"
+            #line 16 "..\..\Views\Report\_Detail.cshtml"
                Write(ViewBag.Steps.RecipeNo);
 
             
@@ -105,7 +107,7 @@ WriteLiteral("</span></p>\r\n    <p>Recipe:<span>");
 WriteLiteral(" - ");
 
             
-            #line 14 "..\..\Views\Report\_Detail.cshtml"
+            #line 16 "..\..\Views\Report\_Detail.cshtml"
                                          Write(ViewBag.Steps.RecipeName);
 
             
@@ -114,7 +116,7 @@ WriteLiteral(" - ");
 WriteLiteral("</span></p>\r\n    <p>Time:<span>");
 
             
-            #line 15 "..\..\Views\Report\_Detail.cshtml"
+            #line 17 "..\..\Views\Report\_Detail.cshtml"
              Write(ViewBag.Steps.StartTime);
 
             
@@ -123,7 +125,7 @@ WriteLiteral("</span></p>\r\n    <p>Time:<span>");
 WriteLiteral("</span>-<span>");
 
             
-            #line 15 "..\..\Views\Report\_Detail.cshtml"
+            #line 17 "..\..\Views\Report\_Detail.cshtml"
                                                    Write(ViewBag.Steps.EndTime);
 
             
@@ -132,7 +134,7 @@ WriteLiteral("</span>-<span>");
 WriteLiteral("</span></p>    \r\n</div>\r\n");
 
             
-            #line 17 "..\..\Views\Report\_Detail.cshtml"
+            #line 19 "..\..\Views\Report\_Detail.cshtml"
 } 
             
             #line default
@@ -184,7 +186,7 @@ WriteLiteral(" style=\"width: 100px\"");
 WriteLiteral(">Status</th>\r\n        </tr>\r\n");
 
             
-            #line 32 "..\..\Views\Report\_Detail.cshtml"
+            #line 34 "..\..\Views\Report\_Detail.cshtml"
    
     if (ViewBag.Steps != null) {
         int toElementUnits = 1;
@@ -193,27 +195,27 @@ WriteLiteral(">Status</th>\r\n        </tr>\r\n");
             switch (step.OperationNr)
             {
                 case OperationType.Dosing:
-                    ViewBag.unit = "kg";
+                    unit = "kg";
                     toElementUnits = 1000;
                     break;
                 case OperationType.Kneading:
-                    ViewBag.unit = "°C";
+                    unit = "°C";
                     toElementUnits = 10;
                     break;
                 case OperationType.Ripping:
-                    ViewBag.unit = "min";
+                    unit = "min";
                     toElementUnits = 10;
                     break;
             }
-            ViewBag.Need = step.Need /toElementUnits;
-            ViewBag.Done = step.Done / toElementUnits;
-            ViewBag.Diff = (step.Done - step.Need) / toElementUnits;
+            double need = step.Need /toElementUnits;
+            double done = step.Done / toElementUnits;
+            double diff = (step.Done - step.Need) / toElementUnits;
             switch (step.Status) {
                 case StepStatus.OK:
-                    ViewBag.statusClass = "status-ok";
+                    statusClass = "status-ok";
                 break;
                 case StepStatus.Error:
-                    ViewBag.statusClass = "status-nok";
+                    statusClass = "status-nok";
                 break;
             }
 
@@ -231,7 +233,7 @@ WriteLiteral(" title=\"Trace ID\"");
 WriteLiteral(">\r\n            <td>");
 
             
-            #line 64 "..\..\Views\Report\_Detail.cshtml"
+            #line 66 "..\..\Views\Report\_Detail.cshtml"
            Write(step.step);
 
             
@@ -240,7 +242,7 @@ WriteLiteral(">\r\n            <td>");
 WriteLiteral("</td>\r\n            <td>");
 
             
-            #line 65 "..\..\Views\Report\_Detail.cshtml"
+            #line 67 "..\..\Views\Report\_Detail.cshtml"
            Write(step.StartTime);
 
             
@@ -249,7 +251,7 @@ WriteLiteral("</td>\r\n            <td>");
 WriteLiteral("</td>\r\n            <td>");
 
             
-            #line 66 "..\..\Views\Report\_Detail.cshtml"
+            #line 68 "..\..\Views\Report\_Detail.cshtml"
            Write(step.EndTime);
 
             
@@ -258,7 +260,7 @@ WriteLiteral("</td>\r\n            <td>");
 WriteLiteral("</td>\r\n            <td>");
 
             
-            #line 67 "..\..\Views\Report\_Detail.cshtml"
+            #line 69 "..\..\Views\Report\_Detail.cshtml"
            Write(step.OperationNr);
 
             
@@ -267,7 +269,7 @@ WriteLiteral("</td>\r\n            <td>");
 WriteLiteral("</td>\r\n            <td>");
 
             
-            #line 68 "..\..\Views\Report\_Detail.cshtml"
+            #line 70 "..\..\Views\Report\_Detail.cshtml"
            Write(step.DeviceId);
 
             
@@ -276,7 +278,7 @@ WriteLiteral("</td>\r\n            <td>");
 WriteLiteral("</td>\r\n            <td>");
 
             
-            #line 69 "..\..\Views\Report\_Detail.cshtml"
+            #line 71 "..\..\Views\Report\_Detail.cshtml"
            Write(step.Device);
 
             
@@ -293,8 +295,8 @@ WriteLiteral(" data-placement=\"top\"");
 WriteLiteral(">");
 
             
-            #line 70 "..\..\Views\Report\_Detail.cshtml"
-                                                                         Write(ViewBag.Need);
+            #line 72 "..\..\Views\Report\_Detail.cshtml"
+                                                                         Write(need);
 
             
             #line default
@@ -302,8 +304,8 @@ WriteLiteral(">");
 WriteLiteral(" ");
 
             
-            #line 70 "..\..\Views\Report\_Detail.cshtml"
-                                                                                       Write(ViewBag.unit);
+            #line 72 "..\..\Views\Report\_Detail.cshtml"
+                                                                               Write(unit);
 
             
             #line default
@@ -315,8 +317,8 @@ WriteLiteral(" class=\"text-right\"");
 WriteLiteral(">");
 
             
-            #line 71 "..\..\Views\Report\_Detail.cshtml"
-                              Write(ViewBag.Done);
+            #line 73 "..\..\Views\Report\_Detail.cshtml"
+                              Write(done);
 
             
             #line default
@@ -324,8 +326,8 @@ WriteLiteral(">");
 WriteLiteral(" ");
 
             
-            #line 71 "..\..\Views\Report\_Detail.cshtml"
-                                            Write(ViewBag.unit);
+            #line 73 "..\..\Views\Report\_Detail.cshtml"
+                                    Write(unit);
 
             
             #line default
@@ -337,8 +339,8 @@ WriteLiteral(" class=\"text-right\"");
 WriteLiteral(">");
 
             
-            #line 72 "..\..\Views\Report\_Detail.cshtml"
-                              Write(ViewBag.Diff);
+            #line 74 "..\..\Views\Report\_Detail.cshtml"
+                              Write(diff);
 
             
             #line default
@@ -346,28 +348,28 @@ WriteLiteral(">");
 WriteLiteral(" ");
 
             
-            #line 72 "..\..\Views\Report\_Detail.cshtml"
-                                            Write(ViewBag.unit);
+            #line 74 "..\..\Views\Report\_Detail.cshtml"
+                                    Write(unit);
 
             
             #line default
             #line hidden
 WriteLiteral("&nbsp;</td>\r\n            <td");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 2859), Tuple.Create("\"", 2887)
+WriteAttribute("class", Tuple.Create(" class=\"", 2816), Tuple.Create("\"", 2844)
             
-            #line 73 "..\..\Views\Report\_Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 2867), Tuple.Create<System.Object, System.Int32>(ViewBag.statusClass
+            #line 75 "..\..\Views\Report\_Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 2824), Tuple.Create<System.Object, System.Int32>(ViewBag.statusClass
             
             #line default
             #line hidden
-, 2867), false)
+, 2824), false)
 );
 
 WriteLiteral(">");
 
             
-            #line 73 "..\..\Views\Report\_Detail.cshtml"
+            #line 75 "..\..\Views\Report\_Detail.cshtml"
                                         Write(step.Status);
 
             
@@ -376,7 +378,7 @@ WriteLiteral(">");
 WriteLiteral("</td>\r\n        </tr>\r\n");
 
             
-            #line 75 "..\..\Views\Report\_Detail.cshtml"
+            #line 77 "..\..\Views\Report\_Detail.cshtml"
         }
         for (int i = 0; i<(ViewBag.Steps.StepsCount-ViewBag.Steps.BatchSteps.Count);i++)
         {
@@ -417,7 +419,7 @@ WriteLiteral(" class=\"status-ok\"");
 WriteLiteral(">&ensp;</td>\r\n            </tr>\r\n");
 
             
-            #line 90 "..\..\Views\Report\_Detail.cshtml"
+            #line 92 "..\..\Views\Report\_Detail.cshtml"
         }
     }
 

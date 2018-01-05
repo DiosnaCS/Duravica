@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Dubravica.Report.Models;
+using Dubravica.Handlers;
 
 namespace Dubravica.Controllers
 {
@@ -28,6 +29,7 @@ namespace Dubravica.Controllers
         public ActionResult getBatch()
         {
             int batchId = int.Parse(Request.QueryString["batchid"].ToString());
+            ViewBag.Steps = getBatchData(batchId);
             ViewBag.Steps = getBatchData(batchId);
             return View("Index", RVM);
         }
@@ -176,10 +178,10 @@ namespace Dubravica.Controllers
             return results;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="batchId"></param>
+
+            /// 
+            /// </summary>
+            /// <param name="batchId"></param>
         public Steps getBatchData(int batchId)
         {
             string sql = "";
