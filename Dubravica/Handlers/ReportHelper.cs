@@ -19,15 +19,17 @@ namespace Dubravica.Handlers
             List<object[]> results = new List<object[]>();
             db db = new db("Dubravica", 12);
             List<int> traceNumbers = new List<int>();
-            sql = string.Format("SELECT \"diNegToler\" FROM events WHERE \"iRecordType\"=11 AND \"diBatchNo\"={0}", batchNo);
+            sql = string.Format("SELECT \"diNegToler\" FROM events WHERE \"iRecordType\"=11 AND \"diBatchNo\"={0} ORDER BY \"siRecipeStep\" DESC", batchNo);
 
             results = db.multipleItemSelectPostgres(sql);
-            foreach (object[] result in results)
+            if (results != null)
             {
-                int traceNumber = (int)result[0];
-                traceNumbers.Add(traceNumber);
+                foreach (object[] result in results)
+                {
+                    int traceNumber = (int)result[0];
+                    traceNumbers.Add(traceNumber);
+                }
             }
-
             return traceNumbers;
         }
         /// <sum

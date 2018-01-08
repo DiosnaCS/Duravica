@@ -4,7 +4,9 @@
 @{
     ViewBag.TitleDetail = "Batch detail:";
     string unit = "";
-    string statusClass;
+    string statusClass = "";
+    string traceToolpit = "";
+    int tracePos = 0;
 }
 
 <h4>@ViewBag.TitleDetail</h4>
@@ -36,9 +38,15 @@
         int toElementUnits = 1;
         foreach (RecipeStep step in ViewBag.Steps.BatchSteps)
         {
+            traceToolpit = "";
             switch (step.OperationNr)
             {
                 case OperationType.Dosing:
+                    if (ViewBag.traceNumbers != null)
+                    {
+                        traceToolpit = "Trace ID:" + ViewBag.traceNumbers[tracePos];
+                        tracePos++;
+                    }
                     unit = "kg";
                     toElementUnits = 1000;
                     break;
@@ -51,18 +59,18 @@
                     toElementUnits = 10;
                     break;
             }
-            double need = step.Need /toElementUnits;
-            double done = step.Done / toElementUnits;
+            double need = (double)step.Need / (double)toElementUnits;
+            double done = (double) step.Done / (double)toElementUnits;
             double diff = (step.Done - step.Need) / toElementUnits;
             switch (step.Status) {
                 case StepStatus.OK:
                     statusClass = "status-ok";
-                break;
+                    break;
                 case StepStatus.Error:
                     statusClass = "status-nok";
-                break;
+                    break;
             }
-        <tr data-toggle="tooltip" data-placement="left" title="Trace ID">
+        <tr data-toggle="tooltip" data-placement="left" title="@traceToolpit">
             <td>@step.step</td>
             <td>@step.StartTime</td>
             <td>@step.EndTime</td>
@@ -72,12 +80,12 @@
             <td class="text-right" data-toggle="tooltip" data-placement="top">@need @unit&ensp;</td>
             <td class="text-right">@done @unit&ensp;</td>
             <td class="text-right">@diff @unit&nbsp;</td>
-            <td class="@ViewBag.statusClass">@step.Status</td>
+            <td class="@statusClass">@step.Status</td>
         </tr>
         }
         for (int i = 0; i<(ViewBag.Steps.StepsCount-ViewBag.Steps.BatchSteps.Count);i++)
         {
-            <tr data-toggle="tooltip" data-placement="left" title="Trace ID">
+            <tr data-toggle="tooltip" data-placement="left" title="Expected step">
                 <td>&ensp;</td>
                 <td>&ensp;</td>
                 <td>&ensp;</td>

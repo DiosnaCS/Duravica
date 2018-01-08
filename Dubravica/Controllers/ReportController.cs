@@ -13,24 +13,30 @@ namespace Dubravica.Controllers
         // GET: Report
         public ActionResult Index()
         {
-            ReportModel RVM = new ReportModel();
-            RVM = SelectReports(RVM);
-            ViewBag.RVM = RVM;
-            return View(RVM);
+            //ReportModel RVM = new ReportModel();
+            //VM = SelectReports(RVM);
+            //ViewBag.RVM = RVM;
+            ReportModel model = new ReportModel();
+            ViewBag.firstinit = true;
+            return View(model);
         }
         
         [HttpPost]
         public ActionResult Index(ReportModel model) {
+            ViewBag.firstinit = false;
             RVM = SelectReports(model);
             ViewBag.RVM = RVM;
+            
             return View(RVM);
         }
 
         public ActionResult getBatch()
         {
+            ViewBag.firstinit = false;
             int batchId = int.Parse(Request.QueryString["batchid"].ToString());
             ViewBag.Steps = getBatchData(batchId);
-            ViewBag.Steps = getBatchData(batchId);
+            //they are returned in the list
+            ViewBag.traceNumbers = ReportHelper.getTraceNumbers(batchId);
             return View("Index", RVM);
         }
         /// <summary>
@@ -158,7 +164,13 @@ namespace Dubravica.Controllers
             bool TempSel = model.Par2Sel;
             bool StepTimeSel = model.Par3Sel;
             bool InterStepTimeSel = model.Par4Sel;
-
+            if(AmountSel == true || TempSel == true || StepTimeSel == true || true || InterStepTimeSel == true)
+            {
+                AmountSel = true;
+                TempSel = true;
+                StepTimeSel = true;
+                InterStepTimeSel = true;
+            }
             List<object[]> results = new List<object[]>();
             string sql = "";
             db db = new db("Dubravica", 12);

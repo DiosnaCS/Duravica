@@ -37,7 +37,7 @@ namespace Dubravica.Report.Models
             {
                 if (DateTimeFormTo.Ticks == 0)
                 {
-                    pkTimeFrom = ConvertDT2pkTime(new DateTime(DateTime.Today.Ticks - 864000000000));
+                    pkTimeFrom = ConvertDT2pkTime(new DateTime(DateTime.Now.Ticks - 864000000000));
                     return DateTimeFormTo;
                 }
                 else
@@ -46,7 +46,8 @@ namespace Dubravica.Report.Models
                 }
             }
             set {
-                    pkTimeFrom = ConvertDT2pkTime(value);
+                DateTimeFormFrom = value;
+                pkTimeFrom = ConvertDT2pkTime(value);
             }
         }
 
@@ -56,17 +57,10 @@ namespace Dubravica.Report.Models
         [DataType(DataType.DateTime)]
         public DateTime DateTimeTo {
             get {
-                if (DateTimeFormTo.Ticks == 0)
-                {
-                    pkTimeTo = ConvertDT2pkTime(new DateTime(DateTime.Today.Ticks));
                     return DateTimeFormTo;
-                }
-                else
-                {
-                    return DateTimeFormTo;
-                }
             }
             set {
+                    DateTimeFormTo = value;
                     pkTimeTo = ConvertDT2pkTime(value);
             }
         }
