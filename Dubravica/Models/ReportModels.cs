@@ -64,7 +64,7 @@ namespace Dubravica.Report.Models
                     pkTimeTo = ConvertDT2pkTime(value);
             }
         }
-
+        public bool RecipeSel { get; set; }
         // recipe        
         [Display(Name = "Recipe:")]
         public int Recipe { get; set; }

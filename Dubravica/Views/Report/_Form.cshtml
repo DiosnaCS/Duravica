@@ -39,6 +39,7 @@
     function InputEnable(el_s, el_d) {
         if ($(el_s).prop('checked') == true) {
             $(el_d).prop("disabled", false);
+            //$(el_d).removeAttr("disabled");
             $(el_d).prop("value", 0);
         }
         else {
@@ -69,220 +70,245 @@
     <section id="reportForm">
         @using (Html.BeginForm("Index", "Report", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
         {
-        <div>
-            @Html.HiddenFor(model => model.StartId, new { @id = "start_id", @value = 0 })
-            @Html.HiddenFor(model => model.Count, new { @id = "count", @value = 60 })
-            <input type="hidden" value="@ViewBag.firstinit"/>
-            @{
-                int year, month, day, hours, minutes;
-                string datetimeToValue = "";
-                string datetimeFromValue = "";
-                if (Model.DateTimeFormFrom.Ticks == 0)
-                {
-                    year = DateTime.Now.Year;
-                    month = DateTime.Now.Month;
-                    day = DateTime.Now.Day - 1;
-                    hours = DateTime.Now.Hour;
-                    minutes = DateTime.Now.Minute;
-                }
-                else
-                {
-                    year = Model.DateTimeFormFrom.Year;
-                    month = Model.DateTimeFormFrom.Month;
-                    day = Model.DateTimeFormFrom.Day;
-                    hours = Model.DateTimeFormFrom.Hour;
-                    minutes = Model.DateTimeFormFrom.Minute;
-                }
-
-                string smonth = month.ToString();
-                string sday = day.ToString();
-                string shours = hours.ToString();
-                string sminutes = minutes.ToString();
-
-                if (month < 10)
-                {
-                    smonth = "0" + smonth;
-                }
-                if (day < 10)
-                {
-                    sday = "0" + day;
-                }
-                if (hours < 10)
-                {
-                    shours = "0" + hours;
-                }
-                if (minutes < 10)
-                {
-                    sminutes = "0" + sminutes;
-                }
-                if (day < 1)
-                {
-                    sday = "28";
-                }
-
-                datetimeFromValue = year + "-" + smonth + "-" + sday + "T" + shours + ":" + sminutes;
-
-                if (Model.DateTimeFormTo.Ticks == 0)
-                {
-                    year = DateTime.Now.Year;
-                    month = DateTime.Now.Month;
-                    day = DateTime.Now.Day;
-                    hours = DateTime.Now.Hour;
-                    minutes = DateTime.Now.Minute;
-                }
-                else
-                {
-                    year = Model.DateTimeFormTo.Year;
-                    month = Model.DateTimeFormTo.Month;
-                    day = Model.DateTimeFormTo.Day;
-                    hours = Model.DateTimeFormTo.Hour;
-                    minutes = Model.DateTimeFormTo.Minute;
-                }
-                if (month < 10)
-                {
-                    smonth = "0" + month;
-                }
-                if (day < 10)
-                {
-                    sday = "0" + day;
-                }
-                if (day < 1)
-                {
-                    sday = "28";
-                }
-                if (hours < 10)
-                {
-                    shours = "0" + hours;
-                }
-                if (minutes < 10)
-                {
-                    sminutes = "0" + minutes;
-                }
-                datetimeToValue = year + "-" + smonth + "-" + sday + "T" + shours + ":" + sminutes;
-                bool par0 = false, par1 = false, par2 = false, par3 = false, par4 = false;
-                if (Model.Par0Sel == true)
-                {
-                    par0 = true;
-                }
-                if (Model.Par1Sel == true)
-                {
-                    par1 = true;
-                }
-                if (Model.Par2Sel == true)
-                {
-                    par3 = true;
-                }
-                if (Model.Par3Sel == true)
-                {
-                    par3 = true;
-                }
-                if (Model.Par4Sel == true)
-                {
-                    par4 = true;
-                }
-            }
-
-            <!-- time from -->
-            <div class="form-item">
-                @Html.LabelFor(model => model.DateTimeFormFrom)
-                @Html.TextBoxFor(model => model.DateTimeFrom, new { @class = "date-time", id = "date-time_from", type = "datetime-local", Value = @datetimeFromValue })
-            </div>
-            <!-- time to -->
-            <div class="form-item">
-                @Html.LabelFor(model => model.DateTimeFormTo)
-                @Html.TextBoxFor(model => model.DateTimeTo, new { @id = "date-time_to", @class = "date-time", @type = "datetime-local", Value = @datetimeToValue })
-            </div>
-            <!-- rcp -->
-            <div class="form-item">
-                @Html.LabelFor(model => model.Recipe)
-                @Html.TextBoxFor(model => model.Recipe, new { @id = "recipe", @class = "rcp-in", @type = "number", @name = "recipe", @value = Model.Recipe, @min = 0, @max = 30, @style = "width:50px;" })
-            </div>
-            <!-- over Rcp limits -->
-            <div class="form-item">
-                <div class="checkbox">
-                    @Html.CheckBoxFor(model => model.Par0Sel, new { @checked = par0 })
-                    @Html.LabelFor(model => model.Par0Sel)
-                </div>
-            </div>
-            <!-- amount -->
-            <div class="form-item">
-                <div>
-                    @Html.CheckBoxFor(model => model.Par1Sel, new { @onClick = "InputEnable(this, tol1)", @checked = par1 })
-                    @Html.LabelFor(model => model.Par1Sel)
-                </div>
-                <div>
-                    <label for="tol1">&plusmn</label>
-                    @if (ViewBag.firstinit == false)
+            <div>
+                @Html.HiddenFor(model => model.StartId, new { @id = "start_id", @value = 0 })
+                @Html.HiddenFor(model => model.Count, new { @id = "count", @value = 60 })
+                <input type="hidden" value="@ViewBag.firstinit" />
+                @{
+                    int year, month, day, hours, minutes;
+                    string datetimeToValue = "";
+                    string datetimeFromValue = "";
+                    if (Model.DateTimeFormFrom.Ticks == 0)
                     {
-                        @Html.TextBoxFor(model => model.Par1Tol, new { @id = "tol1", @class = "tol-set", @name = "Par1Tol", @value = Model.Par1Tol, @type = "number", @min = 0, @step = "0.1" })
+                        year = DateTime.Now.Year;
+                        month = DateTime.Now.Month;
+                        day = DateTime.Now.Day - 1;
+                        hours = DateTime.Now.Hour;
+                        minutes = DateTime.Now.Minute;
                     }
                     else
                     {
-                        <input class="tol-set" disabled id="tol1" min="0" name="Par1Tol" step="0.1" type="number" value="0">
+                        year = Model.DateTimeFormFrom.Year;
+                        month = Model.DateTimeFormFrom.Month;
+                        day = Model.DateTimeFormFrom.Day;
+                        hours = Model.DateTimeFormFrom.Hour;
+                        minutes = Model.DateTimeFormFrom.Minute;
                     }
-                    <span>kg</span>
-                </div>
 
-            </div>
-            <!-- temperature -->
-            <div class="form-item">
-                <div>
-                    @Html.CheckBoxFor(model => model.Par2Sel, new { @onclick = "InputEnable(this, tol2)", @checked = par2 })
-                    @Html.LabelFor(model => model.Par2Sel)
-                </div>
-                <div>
-                    <label for="tol2">&plusmn</label>
-                    @if (ViewBag.firstinit == false)
+                    string smonth = month.ToString();
+                    string sday = day.ToString();
+                    string shours = hours.ToString();
+                    string sminutes = minutes.ToString();
+
+                    if (month < 10)
                     {
-                    @Html.TextBoxFor(model => model.Par2Tol, new { @id = "tol2", @class = "tol-set", @name = "Par2Tol", @value = Model.Par2Tol, @type = "number", @min = 0, @step = "0.1" })
+                        smonth = "0" + smonth;
+                    }
+                    if (day < 10)
+                    {
+                        sday = "0" + day;
+                    }
+                    if (hours < 10)
+                    {
+                        shours = "0" + hours;
+                    }
+                    if (minutes < 10)
+                    {
+                        sminutes = "0" + sminutes;
+                    }
+                    if (day < 1)
+                    {
+                        sday = "28";
+                    }
+
+                    datetimeFromValue = year + "-" + smonth + "-" + sday + "T" + shours + ":" + sminutes;
+
+                    if (Model.DateTimeFormTo.Ticks == 0)
+                    {
+                        year = DateTime.Now.Year;
+                        month = DateTime.Now.Month;
+                        day = DateTime.Now.Day;
+                        hours = DateTime.Now.Hour;
+                        minutes = DateTime.Now.Minute;
                     }
                     else
                     {
-                        <input class="tol-set" disabled id="tol2" min="0" name="Par2Tol" step="0.1" type="number" value="0">
+                        year = Model.DateTimeFormTo.Year;
+                        month = Model.DateTimeFormTo.Month;
+                        day = Model.DateTimeFormTo.Day;
+                        hours = Model.DateTimeFormTo.Hour;
+                        minutes = Model.DateTimeFormTo.Minute;
                     }
-                    <span>°C</span>
+                    if (month < 10)
+                    {
+                        smonth = "0" + month;
+                    }
+                    if (day < 10)
+                    {
+                        sday = "0" + day;
+                    }
+                    if (day < 1)
+                    {
+                        sday = "28";
+                    }
+                    if (hours < 10)
+                    {
+                        shours = "0" + hours;
+                    }
+                    if (minutes < 10)
+                    {
+                        sminutes = "0" + minutes;
+                    }
+                    datetimeToValue = year + "-" + smonth + "-" + sday + "T" + shours + ":" + sminutes;
+                    bool recipeSel = false, par0 = false, par1 = false, par2 = false, par3 = false, par4 = false;
+                    if (Model.RecipeSel == true)
+                    {
+                        recipeSel = true;
+                    }
+                    if (Model.Par0Sel == true)
+                    {
+                        par0 = true;
+                    }
+                    if (Model.Par1Sel == true)
+                    {
+                        par1 = true;
+                    }
+                    if (Model.Par2Sel == true)
+                    {
+                        par3 = true;
+                    }
+                    if (Model.Par3Sel == true)
+                    {
+                        par3 = true;
+                    }
+                    if (Model.Par4Sel == true)
+                    {
+                        par4 = true;
+                    }
+                }
+
+                <!-- time from -->
+                <div class="form-item">
+                    <div>
+                        @Html.LabelFor(model => model.DateTimeFormFrom)
+                    </div>
+                    <div>
+                        @Html.TextBoxFor(model => model.DateTimeFrom, new { @class = "date-time", id = "date-time_from", type = "datetime-local", Value = @datetimeFromValue })
+                    </div>
+                </div>
+                <!-- time to -->
+                <div class="form-item">
+                    <div>
+                        @Html.LabelFor(model => model.DateTimeFormTo)
+                    </div>
+                    <div>
+                        @Html.TextBoxFor(model => model.DateTimeTo, new { @id = "date-time_to", @class = "date-time", @type = "datetime-local", Value = @datetimeToValue })
+                    </div>
+                </div>
+                <!-- rcpNo-->
+                <div class="form-item">
+                    <div>
+                        @Html.CheckBoxFor(model => model.RecipeSel, new { @onclick = "InputEnable(this, recipe)", @checked = recipeSel })
+                        @Html.LabelFor(model => model.Recipe)
+                    </div>
+                    <div>
+                        @if (ViewBag.firstinit == false && Model.RecipeSel == true)
+                        {
+                            @Html.TextBoxFor(model => model.Recipe, new { @id = "recipe", @class = "date-time", @type = "number", @name = "recipe", @value = Model.Recipe, @min = 0, @style = "width:50px;" })
+                        }
+                        else
+                        {
+                            <input class="tol-set" disabled id="recipe" min="0" name="recipe" type="number" value="0">
+                        }
+                    </div>
+                </div>
+                <!-- amount -->
+                <div class="form-item">
+                    <div>
+                        @Html.CheckBoxFor(model => model.Par1Sel, new { @onclick = "InputEnable(this, tol1)", @checked = par1 })
+                        @Html.LabelFor(model => model.Par1Sel)
+                    </div>
+                    <div>
+                        <label for="tol1">&plusmn</label>
+                        @if (ViewBag.firstinit == false && Model.Par1Sel == true)
+                        {
+                            @Html.TextBoxFor(model => model.Par1Tol, new { @id = "tol1", @class = "tol-set", @name = "Par1Tol", @value = Model.Par1Tol, @type = "number", @min = 0, @step = "0.1" })
+                        }
+                        else
+                        {
+                            <input class="tol-set" disabled id="tol1" min="0" name="Par1Tol" step="0.1" type="number" value="0">
+                        }
+                        <span>kg</span>
+                    </div>
+
+                </div>
+                <!-- temperature -->
+                <div class="form-item">
+                    <div>
+                        @Html.CheckBoxFor(model => model.Par2Sel, new { @onclick = "InputEnable(this, tol2)", @checked = par2 })
+                        @Html.LabelFor(model => model.Par2Sel)
+                    </div>
+                    <div>
+                        <label for="tol2">&plusmn</label>
+                        @if (ViewBag.firstinit == false && Model.Par2Sel == true)
+                        {
+                            @Html.TextBoxFor(model => model.Par2Tol, new { @id = "tol2", @class = "tol-set", @name = "Par2Tol", @value = Model.Par2Tol, @type = "number", @min = 0, @step = "0.1" })
+                        }
+                        else
+                        {
+                            <input class="tol-set" disabled id="tol2" min="0" name="Par2Tol" step="0.1" type="number" value="0">
+                        }
+                        <span>°C</span>
+                    </div>
+                </div>
+                <!-- step time -->
+                <div class="form-item">
+                    <div>
+                        @Html.CheckBoxFor(model => model.Par3Sel, new { @onclick = "InputEnable(this, tol3)", @checked = par3 })
+                        @Html.LabelFor(model => model.Par3Sel)
+                    </div>
+                    <div>
+                        <label for="tol3">&plusmn</label>
+                        @if (ViewBag.firstinit == false && Model.Par3Sel == true)
+                        {
+                            @Html.TextBoxFor(model => model.Par3Tol, new { @id = "tol3", @class = "tol-set", @name = "Par3Tol", @value = Model.Par3Tol, @type = "number", @min = 0, @step = "0.1" })
+                        }
+                        else
+                        {
+                            <input class="tol-set" disabled id="tol3" min="0" name="Par3Tol" step="0.1" type="number" value="0">
+                        }
+                        <span>min</span>
+                    </div>
+                </div>
+                <!-- interstep time -->
+                <div class="form-item">
+                    <div>
+                        @Html.CheckBoxFor(model => model.Par4Sel, new { @onclick = "InputEnable(this, tol4)", @checked = par4 })
+                        @Html.LabelFor(model => model.Par4Sel)
+                    </div>
+                    <div>
+                        <label for="tol4">&plusmn</label>
+                        @if (ViewBag.firstinit == false && Model.Par4Sel == true)
+                        {
+                            @Html.TextBoxFor(model => model.Par4Tol, new { @id = "tol4", @class = "tol-set", @name = "Par4Tol", @value = Model.Par4Tol, @type = "number", @min = 0, @step = "0.1" })
+                        }
+                        else
+                        {
+                            <input class="tol-set" disabled id="tol4" min="0" name="Par4Tol" step="0.1" type="number" value="0">
+                        }
+                        <span>min</span>
+                    </div>
+                </div>
+                <!-- over Rcp limits -->
+                <div class="form-item">
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(model => model.Par0Sel, new { @checked = par0 })
+                        @Html.LabelFor(model => model.Par0Sel)
+                    </div>
                 </div>
             </div>
-            <!-- step time -->
-            <div class="form-item">
-                <div>
-                    @Html.CheckBoxFor(model => model.Par3Sel, new { @onclick = "InputEnable(this, tol3)", @checked = par3 })
-                    @Html.LabelFor(model => model.Par3Sel)
-                </div>
-                <div>
-                    <label for="tol3">&plusmn</label>
-                    @if (ViewBag.firstinit == false)
-                    {
-                         @Html.TextBoxFor(model => model.Par3Tol, new { @id = "tol3", @class = "tol-set", @name = "Par3Tol", @value = Model.Par3Tol, @type = "number", @min = 0, @step = "0.1" })
-                    }
-                    else
-                    {
-                        <input class="tol-set" disabled id="tol3" min="0" name="Par3Tol" step="0.1" type="number" value="0">
-                    }
-                    <span>min</span>
-                </div>
-            </div>
-            <!-- interstep time -->
-            <div class="form-item">
-                <div>
-                    @Html.CheckBoxFor(model => model.Par4Sel, new { @onclick = "InputEnable(this, tol4)", @checked = par4 })
-                    @Html.LabelFor(model => model.Par4Sel)
-                </div>
-                <div>
-                    <label for="tol4">&plusmn</label>
-                    @if (ViewBag.firstinit == false)
-                    {
-                        @Html.TextBoxFor(model => model.Par4Tol, new { @id = "tol4", @class = "tol-set", @name = "Par4Tol", @value = Model.Par4Tol, @type = "number", @min = 0, @step = "0.1" })
-                    }
-                    else
-                    {
-                        <input class="tol-set" disabled id="tol4" min="0" name="Par4Tol" step="0.1" type="number" value="0">
-                    }
-                    <span>min</span>
-                </div>
-            </div>
-        </div>
-            <input class="btn btn-default" style="display: block; float: right; margin-left: 15px; padding: 2px 2px 2px 2px;" type="submit" value="Submit" />
+
         }
     </section>
+    <input class="btn btn-default" style="display: block; float: right; margin-left: 15px; padding: 2px 2px 2px 2px;" type="submit" value="Submit" />
 </div>

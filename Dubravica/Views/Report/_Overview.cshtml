@@ -29,10 +29,10 @@
             <td>@batch.RecipeName</td>
             <td id="recipeno">@batch.RecipeNo</td>
             @{ string title = ""; }
-            @if (batch.maxDiffAM != 0) { title += " AmountMAXdiff: " + batch.maxDiffAM + " AmountMINdiff: " + batch.minDiffAM; }
-            @if (batch.maxDiffTemp != 0) { title += " TempMAXdiff: " + batch.maxDiffTemp + " TempMINdiff: " + batch.minDiffTemp; }
-            @if (batch.maxDiffST != 0) { title += "  StepTimeMAXdiff: " + batch.maxDiffST + " StepTimeMINdiff: " + batch.minDiffST; }
-            @if (batch.maxDiffIST != 0) { title += " InsterStepTimeMAXdiff: " + batch.maxDiffIST + " InterStepTimeMINdiff: " + batch.minDiffIST; }  
+            @if (batch.maxDiffAM != 0) { title +="Amount diff-" + "MAX: " + (double)(batch.maxDiffAM/1000) + "kg MIN: " + (double)(batch.minDiffAM/1000) + "kg \n"; }
+            @if (batch.maxDiffTemp != 0) { title += "Temperature diff-" + "MAX: " + (double)(batch.maxDiffTemp/10) + "°C MIN: " + (double)(batch.minDiffTemp/10) + "°C \n"; }
+            @if (batch.maxDiffST != 0) { title += "  StepTime diff- MAX: " + (double)(batch.maxDiffST/60) + "min MIN: " + (double)(batch.minDiffST/60) + "min \n"; }
+            @if (batch.maxDiffIST != 0) { title += " InsterStepTime diff- MAX: " + (double)(batch.maxDiffIST/60) + "min MIN: " + (double)(batch.minDiffIST/60) + "min \n"; }  
             <td style="color: #ff0000;" title="@title"><span><b>@batch.status</b></span></td>   
         </tr>
          }

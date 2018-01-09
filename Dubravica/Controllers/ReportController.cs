@@ -20,13 +20,38 @@ namespace Dubravica.Controllers
             ViewBag.firstinit = true;
             return View(model);
         }
-        
+
+        public ActionResult exportCSV()
+        {
+            uint[] batchIds = null;
+            if (Session["batchesIds"] !=null)
+            {
+                batchIds = (uint[])Session["batchesIds"];
+            }
+            ReportHelper reportHelper = new ReportHelper();
+            if (batchIds != null)
+            {
+                reportHelper.ToCSV(batchIds);
+            } else
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Index(ReportModel model) {
             ViewBag.firstinit = false;
             RVM = SelectReports(model);
+            int index = 0;
+            uint[] batchIds = new uint[RVM.Batches.Count];
+            foreach (Batch batch in RVM.Batches)
+            {
+                batchIds[index] = batch.Id;
+                index++;
+            }
+            Session["batchesIds"] = batchIds;
             ViewBag.RVM = RVM;
-            
             return View(RVM);
         }
 

@@ -197,7 +197,7 @@ WriteLiteral("\r\n");
             #line hidden
             
             #line 32 "..\..\Views\Report\_Overview.cshtml"
-             if (batch.maxDiffAM != 0) { title += " AmountMAXdiff: " + batch.maxDiffAM + " AmountMINdiff: " + batch.minDiffAM; }
+             if (batch.maxDiffAM != 0) { title +="Amount diff-" + "MAX: " + (double)(batch.maxDiffAM/1000) + "kg MIN: " + (double)(batch.minDiffAM/1000) + "kg \n"; }
 
             
             #line default
@@ -206,7 +206,7 @@ WriteLiteral("            ");
 
             
             #line 33 "..\..\Views\Report\_Overview.cshtml"
-             if (batch.maxDiffTemp != 0) { title += " TempMAXdiff: " + batch.maxDiffTemp + " TempMINdiff: " + batch.minDiffTemp; }
+             if (batch.maxDiffTemp != 0) { title += "Temperature diff-" + "MAX: " + (double)(batch.maxDiffTemp/10) + "°C MIN: " + (double)(batch.minDiffTemp/10) + "°C \n"; }
 
             
             #line default
@@ -215,7 +215,7 @@ WriteLiteral("            ");
 
             
             #line 34 "..\..\Views\Report\_Overview.cshtml"
-             if (batch.maxDiffST != 0) { title += "  StepTimeMAXdiff: " + batch.maxDiffST + " StepTimeMINdiff: " + batch.minDiffST; }
+             if (batch.maxDiffST != 0) { title += "  StepTime diff- MAX: " + (double)(batch.maxDiffST/60) + "min MIN: " + (double)(batch.minDiffST/60) + "min \n"; }
 
             
             #line default
@@ -224,7 +224,7 @@ WriteLiteral("            ");
 
             
             #line 35 "..\..\Views\Report\_Overview.cshtml"
-             if (batch.maxDiffIST != 0) { title += " InsterStepTimeMAXdiff: " + batch.maxDiffIST + " InterStepTimeMINdiff: " + batch.minDiffIST; }  
+             if (batch.maxDiffIST != 0) { title += " InsterStepTime diff- MAX: " + (double)(batch.maxDiffIST/60) + "min MIN: " + (double)(batch.minDiffIST/60) + "min \n"; }  
 
             
             #line default
@@ -233,14 +233,14 @@ WriteLiteral("            <td");
 
 WriteLiteral(" style=\"color: #ff0000;\"");
 
-WriteAttribute("title", Tuple.Create(" title=\"", 1725), Tuple.Create("\"", 1739)
+WriteAttribute("title", Tuple.Create(" title=\"", 1862), Tuple.Create("\"", 1876)
             
             #line 36 "..\..\Views\Report\_Overview.cshtml"
-, Tuple.Create(Tuple.Create("", 1733), Tuple.Create<System.Object, System.Int32>(title
+, Tuple.Create(Tuple.Create("", 1870), Tuple.Create<System.Object, System.Int32>(title
             
             #line default
             #line hidden
-, 1733), false)
+, 1870), false)
 );
 
 WriteLiteral("><span><b>");
