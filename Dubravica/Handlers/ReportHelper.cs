@@ -36,12 +36,40 @@ namespace Dubravica.Handlers
 
         public string ToCSV (uint[] batchIds)
         {
-            List<Steps> data = new List<Steps>();
+            List<CSVSteps> stepdata = new List<CSVSteps>();
+            string csv = "";
             foreach (uint Id in batchIds) {
+                /*
                 Steps recipe = getBatchData(Id);
-                data.Add(recipe);
+                List<RecipeStep> recipeSteps = recipe.BatchSteps;
+                recipedata.Add(recipe);
+                // why this function is only for IEnurable
+                csv += CsvSerializer.SerializeToCsv(recipedata);
+                recipedata.Remove(recipe);
+                csv += CsvSerializer.SerializeToCsv(recipeSteps);
+                */
+                Steps recipe = getBatchData(Id);
+                foreach (var batchstep in recipe.BatchSteps) {
+                    CSVSteps CSVstep = new CSVSteps();
+                    CSVstep.BatchNo = recipe.Id;
+                    CSVstep.BowlId = recipe.BowlId;
+                    CSVstep.StartTime = recipe.StartTime;
+                    CSVstep.EndTime = recipe.EndTime;
+                    CSVstep.RecipeNo = recipe.RecipeNo;
+                    CSVstep.RecipeName = recipe.RecipeName;
+                    CSVstep.StepsCount = recipe.StepsCount;
+                    CSVstep.step = batchstep.step;
+                    CSVstep.DeviceId = batchstep.DeviceId;
+                    CSVstep.Device = batchstep.Device;
+                    CSVstep.OperationNr = batchstep.OperationNr;
+                    CSVstep.Need = batchstep.Need;
+                    CSVstep.Done = batchstep.Done;
+                    CSVstep.Status = batchstep.Status;
+                    //this will add step into big list of all steps in all batches
+                    stepdata.Add(CSVstep);
+                }
             }
-            string csv = CsvSerializer.SerializeToCsv(data);
+            csv = CsvSerializer.SerializeToCsv(stepdata);
             return csv;
         }
         public Steps getBatchData(uint batchId)

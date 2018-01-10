@@ -8,60 +8,66 @@
         window.location = "/Report/getBatch?batchid=" + id; //+ "&recipeno=" + recipeno;
     }
 </script>
-<div class="ov-tab">
-    <table class="table table-bordered thin-row">
- @{if (Model.Batches != null)
-     {
-        <tr>
-            <th style="width: 65px">ID</th>
-            <th style="width: 155px">Start</th>
-            <th style="width: 155px">End</th>
-            <th>Product</th>
-            <th style="width: 55px;">Recipe</th>
-            <th style="width: 150px">Status</th>
-        </tr>
+@*<div class="table table-bordered thin-row">*@
+<table class="table table-condensed table-bordered table-hover table-responsive">
+    @{if (Model.Batches != null)
+        {
+            <tr>
+                <!--<th style="width: 65px">Batch No.</th>
+                <th style="width: 155px">Start</th>
+                <th style="width: 155px">End</th>
+                <th>Product</th>
+                <th style="width: 55px;">Recipe</th>
+                <th style="width: 150px">Differences</th> -->
+                <th>Batch No.</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Product</th>
+                <th>Recipe</th>
+                <th>Differences</th>
+            </tr>
             foreach (Batch batch in Model.Batches)
             {
-        <tr onclick="getBatch(@batch.Id)">
-            <td id="">@batch.Id</td>
-            <td>@batch.StartTime</td>
-            <td>@batch.EndTime</td>
-            <td>@batch.RecipeName</td>
-            <td id="recipeno">@batch.RecipeNo</td>
-            @{ string title = ""; }
-            @if (batch.maxDiffAM != 0) { title +="Amount diff-" + "MAX: " + (double)(batch.maxDiffAM/1000) + "kg MIN: " + (double)(batch.minDiffAM/1000) + "kg \n"; }
-            @if (batch.maxDiffTemp != 0) { title += "Temperature diff-" + "MAX: " + (double)(batch.maxDiffTemp/10) + "°C MIN: " + (double)(batch.minDiffTemp/10) + "°C \n"; }
-            @if (batch.maxDiffST != 0) { title += "  StepTime diff- MAX: " + (double)(batch.maxDiffST/60) + "min MIN: " + (double)(batch.minDiffST/60) + "min \n"; }
-            @if (batch.maxDiffIST != 0) { title += " InsterStepTime diff- MAX: " + (double)(batch.maxDiffIST/60) + "min MIN: " + (double)(batch.minDiffIST/60) + "min \n"; }  
-            <td style="color: #ff0000;" title="@title"><span><b>@batch.status</b></span></td>   
-        </tr>
-         }
+                <tr onclick="getBatch(@batch.Id)">
+                    <td id="">@batch.Id</td>
+                    <td>@batch.StartTime</td>
+                    <td>@batch.EndTime</td>
+                    <td>@batch.RecipeName</td>
+                    <td id="recipeno">@batch.RecipeNo</td>
+                    @{ string title = ""; }
+                    @if (batch.maxDiffAM != 0 || batch.minDiffAM != 0) { title += "Amount diff-" + "MAX: " + Math.Round((double)batch.maxDiffAM / 1000, 3) + "kg MIN: " + Math.Round((double)batch.minDiffAM / 1000, 3) + "kg \n"; }
+                    @if (batch.maxDiffTemp != 0 || batch.minDiffTemp != 0) { title += "Temperature diff-" + "MAX: " + Math.Round((double)batch.maxDiffTemp / 10, 1) + "°C MIN: " + Math.Round((double)batch.minDiffTemp / 10, 2) + "°C \n"; }
+                    @if (batch.maxDiffST != 0 || batch.minDiffST != 0) { title += "steptime diff- MAX: " + Math.Round((double)batch.maxDiffST / 60, 2) + "min MIN: " + Math.Round((double)batch.minDiffST / 60, 2) + "min \n"; }
+                    @if (batch.maxDiffIST != 0 || batch.minDiffIST != 0) { title += "Inter step time diff- MAX: " + Math.Round((double)batch.maxDiffIST / 60, 2) + "min MIN: " + Math.Round((double)batch.minDiffIST / 60, 2) + "min \n"; }
+                    <td style="color: #ff0000;" title="@title"><span><b>@batch.status</b></span></td>
+                </tr>
+            }
         }
     }
-            @*<tr>
-                <td>1235</td>
-                <td>11.02.2017 08:00</td>
-                <td>11.02.2017 08:35</td>
-                <td>Receptura 1</td>
-                <td>1</td>
-                <td>(<span class="status-ok">am</span>)(<span class="status-ok">t</span>)(<span class="status-err">st</span>)(<span class="status-err">ist</span>)</td>
-            </tr>*@
-            @*<tr>
-                <td>1238</td>
-                <td>12.02.2017 08:00</td>
-                <td>12.02.2017 09:15</td>
-                <td>Receptura 3</td>
-                <td>1</td>
-                <td>(<span class="status-ok">am</span>)(<span class="status-ok">t</span>)(<span class="status-err">st</span>)(<span class="status-ok">ist</span>)</td>
-            </tr>
-            <tr class="col-red">
-                <td>1246</td>
-                <td>11.02. 08:00</td>
-                <td>26.02. 08:00</td>
-                <td>Receptura 2</td>
-                <td>1</td>
-                <td>(<span class="status-ok">am</span>)(<span class="status-err">t</span>)(<span class="status-ok">st</span>)(<span class="status-err">ist</span>)</td>
-            </tr>*@
+    @*<tr>
+            <td>1235</td>
+            <td>11.02.2017 08:00</td>
+            <td>11.02.2017 08:35</td>
+            <td>Receptura 1</td>
+            <td>1</td>
+            <td>(<span class="status-ok">am</span>)(<span class="status-ok">t</span>)(<span class="status-err">st</span>)(<span class="status-err">ist</span>)</td>
+        </tr>*@
+    @*<tr>
+            <td>1238</td>
+            <td>12.02.2017 08:00</td>
+            <td>12.02.2017 09:15</td>
+            <td>Receptura 3</td>
+            <td>1</td>
+            <td>(<span class="status-ok">am</span>)(<span class="status-ok">t</span>)(<span class="status-err">st</span>)(<span class="status-ok">ist</span>)</td>
+        </tr>
+        <tr class="col-red">
+            <td>1246</td>
+            <td>11.02. 08:00</td>
+            <td>26.02. 08:00</td>
+            <td>Receptura 2</td>
+            <td>1</td>
+            <td>(<span class="status-ok">am</span>)(<span class="status-err">t</span>)(<span class="status-ok">st</span>)(<span class="status-err">ist</span>)</td>
+        </tr>*@
 </table>
-</div>
+@*</div>*@
 

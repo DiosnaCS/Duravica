@@ -217,6 +217,28 @@ namespace Dubravica.Report.Models
         
     }
 
+    public class CSVSteps
+    {
+        public uint BatchNo { get; set; }
+        public int BowlId { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public int RecipeNo { get; set; }
+        public string RecipeName { get; set; }
+        public int StepsCount { get; set; }
+        
+        //Whole model sorted from steps ascending
+        public int step /*step*/ { get; set; }
+        public int DeviceId /*Device id*/{ get; set; }
+        public string Device /*DeviceName directly from db*/ { get; set; }
+        public OperationType OperationNr /*Resolve how to get that*/ { get; set; }
+        public Int32 Need /*DeviceName directly from db*/ { get; set; }
+        public Int32 Done /*diNeedDone directly from db*/ { get; set; }
+        //Diff should be calculted by client
+        public StepStatus Status /*siStatus directly from db*/ { get; set; }
+    }
+
+
     public class RecipeStep
     {
 

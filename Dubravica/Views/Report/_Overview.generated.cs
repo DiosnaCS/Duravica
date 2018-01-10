@@ -52,123 +52,115 @@ WriteLiteral(@"<script>
         window.location = ""/Report/getBatch?batchid="" + id; //+ ""&recipeno="" + recipeno;
     }
 </script>
-<div");
+");
 
-WriteLiteral(" class=\"ov-tab\"");
+WriteLiteral("\r\n<table");
 
-WriteLiteral(">\r\n    <table");
-
-WriteLiteral(" class=\"table table-bordered thin-row\"");
+WriteLiteral(" class=\"table table-condensed table-bordered table-hover table-responsive\"");
 
 WriteLiteral(">\r\n");
 
             
             #line 13 "..\..\Views\Report\_Overview.cshtml"
- 
+    
             
             #line default
             #line hidden
             
             #line 13 "..\..\Views\Report\_Overview.cshtml"
-   if (Model.Batches != null)
-     {
+      if (Model.Batches != null)
+        {
 
             
             #line default
             #line hidden
-WriteLiteral("        <tr>\r\n            <th");
-
-WriteLiteral(" style=\"width: 65px\"");
-
-WriteLiteral(">ID</th>\r\n            <th");
-
-WriteLiteral(" style=\"width: 155px\"");
-
-WriteLiteral(">Start</th>\r\n            <th");
-
-WriteLiteral(" style=\"width: 155px\"");
-
-WriteLiteral(">End</th>\r\n            <th>Product</th>\r\n            <th");
-
-WriteLiteral(" style=\"width: 55px;\"");
-
-WriteLiteral(">Recipe</th>\r\n            <th");
-
-WriteLiteral(" style=\"width: 150px\"");
-
-WriteLiteral(">Status</th>\r\n        </tr>\r\n");
+WriteLiteral(@"            <tr>
+                <!--<th style=""width: 65px"">Batch No.</th>
+                <th style=""width: 155px"">Start</th>
+                <th style=""width: 155px"">End</th>
+                <th>Product</th>
+                <th style=""width: 55px;"">Recipe</th>
+                <th style=""width: 150px"">Differences</th> -->
+                <th>Batch No.</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Product</th>
+                <th>Recipe</th>
+                <th>Differences</th>
+            </tr>
+");
 
             
-            #line 23 "..\..\Views\Report\_Overview.cshtml"
+            #line 29 "..\..\Views\Report\_Overview.cshtml"
             foreach (Batch batch in Model.Batches)
             {
 
             
             #line default
             #line hidden
-WriteLiteral("        <tr");
+WriteLiteral("                <tr");
 
-WriteAttribute("onclick", Tuple.Create(" onclick=\"", 863), Tuple.Create("\"", 892)
-, Tuple.Create(Tuple.Create("", 873), Tuple.Create("getBatch(", 873), true)
+WriteAttribute("onclick", Tuple.Create(" onclick=\"", 1191), Tuple.Create("\"", 1220)
+, Tuple.Create(Tuple.Create("", 1201), Tuple.Create("getBatch(", 1201), true)
             
-            #line 25 "..\..\Views\Report\_Overview.cshtml"
-, Tuple.Create(Tuple.Create("", 882), Tuple.Create<System.Object, System.Int32>(batch.Id
+            #line 31 "..\..\Views\Report\_Overview.cshtml"
+, Tuple.Create(Tuple.Create("", 1210), Tuple.Create<System.Object, System.Int32>(batch.Id
             
             #line default
             #line hidden
-, 882), false)
-, Tuple.Create(Tuple.Create("", 891), Tuple.Create(")", 891), true)
+, 1210), false)
+, Tuple.Create(Tuple.Create("", 1219), Tuple.Create(")", 1219), true)
 );
 
-WriteLiteral(">\r\n            <td");
+WriteLiteral(">\r\n                    <td");
 
 WriteLiteral(" id=\"\"");
 
 WriteLiteral(">");
 
             
-            #line 26 "..\..\Views\Report\_Overview.cshtml"
-                 Write(batch.Id);
+            #line 32 "..\..\Views\Report\_Overview.cshtml"
+                         Write(batch.Id);
 
             
             #line default
             #line hidden
-WriteLiteral("</td>\r\n            <td>");
+WriteLiteral("</td>\r\n                    <td>");
 
             
-            #line 27 "..\..\Views\Report\_Overview.cshtml"
-           Write(batch.StartTime);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n            <td>");
-
-            
-            #line 28 "..\..\Views\Report\_Overview.cshtml"
-           Write(batch.EndTime);
+            #line 33 "..\..\Views\Report\_Overview.cshtml"
+                   Write(batch.StartTime);
 
             
             #line default
             #line hidden
-WriteLiteral("</td>\r\n            <td>");
+WriteLiteral("</td>\r\n                    <td>");
 
             
-            #line 29 "..\..\Views\Report\_Overview.cshtml"
-           Write(batch.RecipeName);
+            #line 34 "..\..\Views\Report\_Overview.cshtml"
+                   Write(batch.EndTime);
 
             
             #line default
             #line hidden
-WriteLiteral("</td>\r\n            <td");
+WriteLiteral("</td>\r\n                    <td>");
+
+            
+            #line 35 "..\..\Views\Report\_Overview.cshtml"
+                   Write(batch.RecipeName);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</td>\r\n                    <td");
 
 WriteLiteral(" id=\"recipeno\"");
 
 WriteLiteral(">");
 
             
-            #line 30 "..\..\Views\Report\_Overview.cshtml"
-                         Write(batch.RecipeNo);
+            #line 36 "..\..\Views\Report\_Overview.cshtml"
+                                 Write(batch.RecipeNo);
 
             
             #line default
@@ -176,97 +168,99 @@ WriteLiteral(">");
 WriteLiteral("</td>\r\n");
 
             
-            #line 31 "..\..\Views\Report\_Overview.cshtml"
-            
+            #line 37 "..\..\Views\Report\_Overview.cshtml"
+                    
             
             #line default
             #line hidden
             
-            #line 31 "..\..\Views\Report\_Overview.cshtml"
-               string title = ""; 
+            #line 37 "..\..\Views\Report\_Overview.cshtml"
+                       string title = ""; 
             
             #line default
             #line hidden
 WriteLiteral("\r\n");
 
             
-            #line 32 "..\..\Views\Report\_Overview.cshtml"
-            
-            
-            #line default
-            #line hidden
-            
-            #line 32 "..\..\Views\Report\_Overview.cshtml"
-             if (batch.maxDiffAM != 0) { title +="Amount diff-" + "MAX: " + (double)(batch.maxDiffAM/1000) + "kg MIN: " + (double)(batch.minDiffAM/1000) + "kg \n"; }
-
+            #line 38 "..\..\Views\Report\_Overview.cshtml"
+                    
             
             #line default
             #line hidden
-WriteLiteral("            ");
-
             
-            #line 33 "..\..\Views\Report\_Overview.cshtml"
-             if (batch.maxDiffTemp != 0) { title += "Temperature diff-" + "MAX: " + (double)(batch.maxDiffTemp/10) + "°C MIN: " + (double)(batch.minDiffTemp/10) + "°C \n"; }
+            #line 38 "..\..\Views\Report\_Overview.cshtml"
+                     if (batch.maxDiffAM != 0 || batch.minDiffAM != 0) { title += "Amount diff-" + "MAX: " + Math.Round((double)batch.maxDiffAM / 1000, 3) + "kg MIN: " + Math.Round((double)batch.minDiffAM / 1000, 3) + "kg \n"; }
 
             
             #line default
             #line hidden
-WriteLiteral("            ");
+WriteLiteral("                    ");
 
             
-            #line 34 "..\..\Views\Report\_Overview.cshtml"
-             if (batch.maxDiffST != 0) { title += "  StepTime diff- MAX: " + (double)(batch.maxDiffST/60) + "min MIN: " + (double)(batch.minDiffST/60) + "min \n"; }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("            ");
-
-            
-            #line 35 "..\..\Views\Report\_Overview.cshtml"
-             if (batch.maxDiffIST != 0) { title += " InsterStepTime diff- MAX: " + (double)(batch.maxDiffIST/60) + "min MIN: " + (double)(batch.minDiffIST/60) + "min \n"; }  
+            #line 39 "..\..\Views\Report\_Overview.cshtml"
+                     if (batch.maxDiffTemp != 0 || batch.minDiffTemp != 0) { title += "Temperature diff-" + "MAX: " + Math.Round((double)batch.maxDiffTemp / 10, 1) + "°C MIN: " + Math.Round((double)batch.minDiffTemp / 10, 2) + "°C \n"; }
 
             
             #line default
             #line hidden
-WriteLiteral("            <td");
+WriteLiteral("                    ");
+
+            
+            #line 40 "..\..\Views\Report\_Overview.cshtml"
+                     if (batch.maxDiffST != 0 || batch.minDiffST != 0) { title += "steptime diff- MAX: " + Math.Round((double)batch.maxDiffST / 60, 2) + "min MIN: " + Math.Round((double)batch.minDiffST / 60, 2) + "min \n"; }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                    ");
+
+            
+            #line 41 "..\..\Views\Report\_Overview.cshtml"
+                     if (batch.maxDiffIST != 0 || batch.minDiffIST != 0) { title += "Inter step time diff- MAX: " + Math.Round((double)batch.maxDiffIST / 60, 2) + "min MIN: " + Math.Round((double)batch.minDiffIST / 60, 2) + "min \n"; }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                    <td");
 
 WriteLiteral(" style=\"color: #ff0000;\"");
 
-WriteAttribute("title", Tuple.Create(" title=\"", 1862), Tuple.Create("\"", 1876)
+WriteAttribute("title", Tuple.Create(" title=\"", 2494), Tuple.Create("\"", 2508)
             
-            #line 36 "..\..\Views\Report\_Overview.cshtml"
-, Tuple.Create(Tuple.Create("", 1870), Tuple.Create<System.Object, System.Int32>(title
+            #line 42 "..\..\Views\Report\_Overview.cshtml"
+, Tuple.Create(Tuple.Create("", 2502), Tuple.Create<System.Object, System.Int32>(title
             
             #line default
             #line hidden
-, 1870), false)
+, 2502), false)
 );
 
 WriteLiteral("><span><b>");
 
             
-            #line 36 "..\..\Views\Report\_Overview.cshtml"
-                                                           Write(batch.status);
+            #line 42 "..\..\Views\Report\_Overview.cshtml"
+                                                                   Write(batch.status);
 
             
             #line default
             #line hidden
-WriteLiteral("</b></span></td>   \r\n        </tr>\r\n");
+WriteLiteral("</b></span></td>\r\n                </tr>\r\n");
 
             
-            #line 38 "..\..\Views\Report\_Overview.cshtml"
-         }
+            #line 44 "..\..\Views\Report\_Overview.cshtml"
+            }
         }
     
             
             #line default
             #line hidden
-WriteLiteral("\r\n            ");
+WriteLiteral("\r\n    ");
 
-WriteLiteral("\r\n            ");
+WriteLiteral("\r\n    ");
 
-WriteLiteral("\r\n</table>\r\n</div>\r\n\r\n");
+WriteLiteral("\r\n</table>\r\n");
+
+WriteLiteral("\r\n\r\n");
 
         }
     }

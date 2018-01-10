@@ -21,8 +21,9 @@ namespace Dubravica.Controllers
             return View(model);
         }
 
-        public ActionResult exportCSV()
+        public void exportCSV()
         {
+            string csv;
             uint[] batchIds = null;
             if (Session["batchesIds"] !=null)
             {
@@ -31,12 +32,18 @@ namespace Dubravica.Controllers
             ReportHelper reportHelper = new ReportHelper();
             if (batchIds != null)
             {
-                reportHelper.ToCSV(batchIds);
+                csv = reportHelper.ToCSV(batchIds);
+
+                Response.AddHeader("Content-Length", csv.Length.ToString());
+                Response.ContentType = "text/csv";
+                Response.AppendHeader("content-disposition", "attachment;filename=\"exported_CSV.csv\"");
+
+                Response.Write(csv);
+                Response.End();
             } else
             {
-                return RedirectToAction("Index");
+                RedirectToAction("Index");
             }
-            return View();
         }
 
         [HttpPost]

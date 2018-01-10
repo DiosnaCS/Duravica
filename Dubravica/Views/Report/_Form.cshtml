@@ -61,10 +61,6 @@
     $('#date-time_from').datepicker();
 </script>
 
-
-
-
-
 <div>
     <!-- pozdeji onclick tlacitka v menu -->
     <section id="reportForm">
@@ -306,9 +302,48 @@
                         @Html.LabelFor(model => model.Par0Sel)
                     </div>
                 </div>
+                <!-- Buttons -->
+                <div class="form-item">
+                    <div>
+                        <!-- old code of this button: style="display: block; float: right; margin-left: 15px; padding: 2px 2px 2px 2px;" -->
+                        <input style="margin: 5px;" class="btn btn-default" type="submit" value="Submit" />
+                    </div>
+                    <div>
+                        @if (Model.Batches.Count > 0)
+                        {
+                         
+                        <button data-toggle="modal" data-target="#myModal" style="margin:5px;" class="btn btn-sm btn-default">CSV Export</button>
+                        <div id="myModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Batch report export to CSV</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>
+                                        @{
+                                            double time = ((double)Model.Batches.Count / 1000);
+                                        }
+                                        You will export export @Model.Batches.Count batches to csv<br>
+                                        Very aproximatly it will take @time s
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="~/Report/exportCSV" style="margin:5px;" class="btn btn-sm btn-default">CSV Export</a>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        }
+                    </div>
+                    </div>
             </div>
 
         }
     </section>
-    <input class="btn btn-default" style="display: block; float: right; margin-left: 15px; padding: 2px 2px 2px 2px;" type="submit" value="Submit" />
+    
 </div>

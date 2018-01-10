@@ -224,6 +224,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\db.cs" />
+    <Compile Include="Controllers\GraphReportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
@@ -595,6 +596,7 @@
     <Folder Include="Views\Alarm\" />
     <Folder Include="Views\CMS\" />
     <Folder Include="Views\Download\" />
+    <Folder Include="Views\GraphReport\" />
     <Folder Include="Views\Graph\" />
     <Folder Include="Views\Scheme\" />
     <Folder Include="Views\Security\" />
