@@ -29,6 +29,12 @@ namespace Dubravica
             bundles.Add(new ScriptBundle("~/bundles/hideShow").Include(
                         "~/Scripts/hideShow.js"
             ));
+            bundles.Add(new ScriptBundle("~/bundles/chart").Include(
+                        "~/Scripts/chart.js"
+            ));
+            bundles.Add(new ScriptBundle("~/bundles/barChart").Include(
+                        "~/Scripts/barChart.js"
+            ));
         }
     }
 }

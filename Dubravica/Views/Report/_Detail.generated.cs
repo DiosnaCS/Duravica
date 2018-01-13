@@ -198,7 +198,7 @@ WriteLiteral(">Status</th>\r\n        </tr>\r\n");
             switch (step.OperationNr)
             {
                 case OperationType.Dosing:
-                    if (ViewBag.traceNumbers != null)
+                    if (ViewBag.traceNumbers.Count >= tracePos && ViewBag.traceNumbers.Count > 0)
                     {
                         traceToolpit = "Trace ID:" + ViewBag.traceNumbers[tracePos];
                         tracePos++;
@@ -236,14 +236,14 @@ WriteLiteral(" data-toggle=\"tooltip\"");
 
 WriteLiteral(" data-placement=\"left\"");
 
-WriteAttribute("title", Tuple.Create(" title=\"", 2699), Tuple.Create("\"", 2720)
+WriteAttribute("title", Tuple.Create(" title=\"", 2743), Tuple.Create("\"", 2764)
             
             #line 73 "..\..\Views\Report\_Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 2707), Tuple.Create<System.Object, System.Int32>(traceToolpit
+, Tuple.Create(Tuple.Create("", 2751), Tuple.Create<System.Object, System.Int32>(traceToolpit
             
             #line default
             #line hidden
-, 2707), false)
+, 2751), false)
 );
 
 WriteLiteral(">\r\n            <td>");
@@ -372,14 +372,14 @@ WriteLiteral(" ");
             #line hidden
 WriteLiteral("&nbsp;</td>\r\n            <td");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 3178), Tuple.Create("\"", 3198)
+WriteAttribute("class", Tuple.Create(" class=\"", 3222), Tuple.Create("\"", 3242)
             
             #line 83 "..\..\Views\Report\_Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 3186), Tuple.Create<System.Object, System.Int32>(statusClass
+, Tuple.Create(Tuple.Create("", 3230), Tuple.Create<System.Object, System.Int32>(statusClass
             
             #line default
             #line hidden
-, 3186), false)
+, 3230), false)
 );
 
 WriteLiteral(">");

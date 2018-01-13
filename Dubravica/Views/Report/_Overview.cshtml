@@ -1,6 +1,25 @@
 ﻿@using Dubravica.Report.Models
 @model ReportModel
 <script>
+    /*$(document).ready(function () {
+        var startDateTimes = document.getElementsByClassName("startDT");
+        var endDateTimes = document.getElementsByClassName("endDT");
+        for (var i = 0; i < startDateTimes.length; i++) {
+            console.log(endDateTimes[i].innerHTML);
+            endDateTimes[i].innerHTML = getLocalDateTime(startDateTimes[i].innerHTML);
+        }
+        for (var i = 0; i < endDateTimes.length; i++) {
+            endDateTimes[i].innerHTML = getLocalDateTime(endDateTimes[i].innerHTML);
+        }
+    });
+
+    function getLocalDateTime(date) {
+        var date = new Date(date);
+        var localDateTime = DateTime(date);
+        console.log(date);
+        console.log(localDateTime);
+        return localDateTime;
+    }*/
     function getBatch(id) {
         //var batchId = document.getElementById("batchid").textContent;
         console.log(id);
@@ -26,12 +45,14 @@
                 <th>Recipe</th>
                 <th>Differences</th>
             </tr>
+            int i = 0;
             foreach (Batch batch in Model.Batches)
             {
-                <tr onclick="getBatch(@batch.Id)">
-                    <td id="">@batch.Id</td>
-                    <td>@batch.StartTime</td>
-                    <td>@batch.EndTime</td>
+                @* to write ids *@
+                <tr onclick="getBatch(@batch.Id)" style="cursor: pointer;">
+                    <td id="BatchNo">@batch.Id</td>
+                    <td class="startDT_@i">@batch.StartTime</td>
+                    <td class="endDT_@i">@batch.EndTime</td>
                     <td>@batch.RecipeName</td>
                     <td id="recipeno">@batch.RecipeNo</td>
                     @{ string title = ""; }
@@ -41,6 +62,7 @@
                     @if (batch.maxDiffIST != 0 || batch.minDiffIST != 0) { title += "Inter step time diff- MAX: " + Math.Round((double)batch.maxDiffIST / 60, 2) + "min MIN: " + Math.Round((double)batch.minDiffIST / 60, 2) + "min \n"; }
                     <td style="color: #ff0000;" title="@title"><span><b>@batch.status</b></span></td>
                 </tr>
+                i++;
             }
         }
     }
@@ -69,5 +91,37 @@
             <td>(<span class="status-ok">am</span>)(<span class="status-err">t</span>)(<span class="status-ok">st</span>)(<span class="status-err">ist</span>)</td>
         </tr>*@
 </table>
+<script>
+    function DateTime(date) {
+        var offset = date.getTimezoneOffset();
+        //console.log(offset);
+        var offseted_miliseconds = date.getTime() - (offset * 60000);
+        var DateTime = new Date(offseted_miliseconds);
+        var localDateTime = DateTime.toLocaleString();
+        return localDateTime;
+    }
+</script>
+@for(int i=0; i < Model.Batches.Count;i++) { 
+<script>
+        var year = @Model.Batches[i].StartTime.Year;
+        var month = @Model.Batches[i].StartTime.Month;
+        var day = @Model.Batches[i].StartTime.Day;
+        var hour = @Model.Batches[i].StartTime.Hour;
+        var minute = @Model.Batches[i].StartTime.Minute;
+        var second = @Model.Batches[i].StartTime.Second;
+        var date = new Date(year, month - 1, day, hour, minute, second, 0);
+        var yearExp = @Model.Batches[i].EndTime.Year;
+        var monthExp = @Model.Batches[i].EndTime.Month;
+        var dayExp = @Model.Batches[i].EndTime.Day;
+        var hourExp = @Model.Batches[i].EndTime.Hour;
+        var minuteExp = @Model.Batches[i].EndTime.Minute;
+        var secondExp = @Model.Batches[i].EndTime.Second;
+        var expDate = new Date(yearExp, monthExp - 1, dayExp, hourExp, minuteExp, secondExp, 0);
+        var localDateTime = DateTime(date);
+        document.getElementById("startDT_" + "@i").innerText = localDateTime;
+        var localExpDateTime = DateTime(expDate);
+        document.getElementById("endDT_" + "@i").innerHTML = localExpDateTime;
+</script>
+}
 @*</div>*@
 

@@ -11,6 +11,10 @@
         return $(window).width();
     }
 
+    function closeDataModal() {
+        $('#exportModal').modal('hide');
+    }
+
     function windowHeight() {
         //return window.innerHeight;
         return $(window).height() - 130;
@@ -135,6 +139,10 @@
                         hours = Model.DateTimeFormTo.Hour;
                         minutes = Model.DateTimeFormTo.Minute;
                     }
+                    smonth = month.ToString();
+                    sday = day.ToString();
+                    shours = hours.ToString();
+                    sminutes = minutes.ToString();
                     if (month < 10)
                     {
                         smonth = "0" + month;
@@ -312,8 +320,8 @@
                         @if (Model.Batches.Count > 0)
                         {
                          
-                        <button data-toggle="modal" data-target="#myModal" style="margin:5px;" class="btn btn-sm btn-default">CSV Export</button>
-                        <div id="myModal" class="modal fade" role="dialog">
+                        <button data-toggle="modal" data-target="#exportModal" style="margin:5px;" class="btn btn-sm btn-default">CSV Export</button>
+                        <div id="exportModal" class="modal fade" role="dialog">
                         <div class="modal-dialog">
 
                             <!-- Modal content-->
@@ -332,7 +340,7 @@
                                     </p>
                                 </div>
                                 <div class="modal-footer">
-                                    <a href="~/Report/exportCSV" style="margin:5px;" class="btn btn-sm btn-default">CSV Export</a>
+                                    <a href="~/Report/exportCSV" style="margin:5px;" class="btn btn-sm btn-default" onclick="closeDataModal()">CSV Export</a>
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 </div>
                             </div>

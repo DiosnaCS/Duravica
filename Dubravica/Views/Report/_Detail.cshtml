@@ -42,7 +42,7 @@
             switch (step.OperationNr)
             {
                 case OperationType.Dosing:
-                    if (ViewBag.traceNumbers != null)
+                    if (ViewBag.traceNumbers.Count >= tracePos && ViewBag.traceNumbers.Count > 0)
                     {
                         traceToolpit = "Trace ID:" + ViewBag.traceNumbers[tracePos];
                         tracePos++;

@@ -27,12 +27,11 @@ namespace ASP
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    using UsersDiosna;
-    using UsersDiosna.Controllers;
+    using Dubravica;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Manage/DefaultView.cshtml")]
-    public partial class _Views_Manage_DefaultView_cshtml : System.Web.Mvc.WebViewPage<UsersDiosna.Models.ChangePasswordViewModel>
+    public partial class _Views_Manage_DefaultView_cshtml : System.Web.Mvc.WebViewPage<Dubravica.Models.ChangePasswordViewModel>
     {
         public _Views_Manage_DefaultView_cshtml()
         {
@@ -154,21 +153,21 @@ WriteLiteral("\r\n                \r\n");
             #line hidden
 WriteLiteral("                    <option");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 1011), Tuple.Create("\"", 1039)
+WriteAttribute("value", Tuple.Create(" value=\"", 1009), Tuple.Create("\"", 1037)
             
             #line 32 "..\..\Views\Manage\DefaultView.cshtml"
-, Tuple.Create(Tuple.Create("", 1019), Tuple.Create<System.Object, System.Int32>(name
+, Tuple.Create(Tuple.Create("", 1017), Tuple.Create<System.Object, System.Int32>(name
             
             #line default
             #line hidden
-, 1019), false)
+, 1017), false)
             
             #line 32 "..\..\Views\Manage\DefaultView.cshtml"
-, Tuple.Create(Tuple.Create("", 1024), Tuple.Create<System.Object, System.Int32>(ViewBag.plc[i]
+, Tuple.Create(Tuple.Create("", 1022), Tuple.Create<System.Object, System.Int32>(ViewBag.plc[i]
             
             #line default
             #line hidden
-, 1024), false)
+, 1022), false)
 );
 
 WriteLiteral(">");
