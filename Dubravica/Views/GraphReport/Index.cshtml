@@ -21,7 +21,39 @@
         scaleGridLineColor: "#000"
 
     }
+    function getData() {
+        var xmlHttp = new XMLHttpRequest();
+
+        var url = '/graph/getData';
+        dataType: "json";
+        xmlHttp.open("POST", url, true);
+        xmlHttp.send(dataRequest);
+
+        if (xmlHttp.readyState != xmlHttp.DONE) {
+            $('#loading').css('display', 'block');
+        };
+
+        xmlHttp.onreadystatechange = function () {
+            if (xmlHttp.readyState == xmlHttp.DONE) {
+                data = JSON.parse(xmlHttp.responseText.replace(/NaN/g, 'null'));
+                if (data.tags[0].vals == null) {
+                    //window.location = "/Account/Login";
+                }
+                else {
+                    setData();
+                    redrawChart(view, beginTime, markerTime, timeAxisIdx);
+                    redrawValues(view, markerTime, lang);
+                    $('#loading').css('display', 'none');
+                };
+            };
+        };   
+    };
+
+
     window.onload = function () {
+
+        //getData();
+
         var ctx = document.getElementById("barChart").getContext("2d");
         window.myBar = new Chart(ctx).Bar(barChartData, {
             responsive: true

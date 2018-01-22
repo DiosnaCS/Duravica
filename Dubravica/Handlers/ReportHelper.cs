@@ -107,7 +107,7 @@ namespace Dubravica.Handlers
         {
             Steps Steps = new Steps();
             RecipeStep rcpStep = new RecipeStep();
-
+            int stepStatus = 0;
             //BatchId to model
             if (results[0][0] != DBNull.Value)
             {
@@ -187,14 +187,26 @@ namespace Dubravica.Handlers
                 {
                     switch ((int)results[i][5])
                     {
+                        case 11:
+                            recipeStep.OperationNr = OperationType.Dosing;
+                            break;
                         case 15:
                             recipeStep.OperationNr = OperationType.Dosing;
+                            break;
+                        case 21:
+                            recipeStep.OperationNr = OperationType.Kneading;
                             break;
                         case 25:
                             recipeStep.OperationNr = OperationType.Kneading;
                             break;
+                        case 31:
+                            recipeStep.OperationNr = OperationType.Ripping;
+                            break;
                         case 35:
                             recipeStep.OperationNr = OperationType.Ripping;
+                            break;
+                        case 41:
+                            recipeStep.OperationNr = OperationType.Tipping;
                             break;
                         case 45:
                             recipeStep.OperationNr = OperationType.Tipping;
@@ -225,30 +237,14 @@ namespace Dubravica.Handlers
                 //StepStatus
                 if (results[i][10] != DBNull.Value)
                 {
-                    switch ((int)results[i][10])
-                    {
-                        case 0:
-                            recipeStep.Status = StepStatus.Error;
-                            break;
-                        case 1:
-                            recipeStep.Status = StepStatus.ForcedStart;
-                            break;
-                    }
+                    stepStatus = (int)results[i][10];
+                    recipeStep.Status = (StepStatus)stepStatus;    
                 }
                 if (results[i][11] != DBNull.Value)
                 {
-                    switch ((int)results[i][11])
-                    {
-                        case 0:
-                            recipeStep.Status |= StepStatus.Error;
-                            break;
-                        case 1:
-                            recipeStep.Status |= StepStatus.OK;
-                            break;
-                        case 2:
-                            recipeStep.Status |= StepStatus.Skipped;
-                            break;
-                    }
+                    stepStatus = (int)results[i][11];
+                    stepStatus = stepStatus >> 16;
+                    recipeStep.Status |= (StepStatus)stepStatus;
                 }
                 Steps.BatchSteps.Add(recipeStep);
             }

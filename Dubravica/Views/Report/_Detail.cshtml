@@ -22,7 +22,7 @@
 <div>
     <table class="table table-bordered thin-row det-tab">
         <tr>
-            <th style="width: 40px;">Step</th>            
+            <th style="width: 40px;">Step</th>
             <th style="width: 155px">Start</th>
             <th style="width: 155px">End</th>
             <th style="width: 100px">Operation</th>
@@ -30,100 +30,116 @@
             <th style="min-width: 160px">Device Name</th>
             <th style="width: 105px">Need</th>
             <th style="width: 105px">Done</th>
-            <th style="width: 105px">Diff</th>            
+            <th style="width: 105px">Diff</th>
             <th style="width: 100px">Status</th>
         </tr>
-@{ 
-    if (ViewBag.Steps != null) {
-        int toElementUnits = 1;
-        foreach (RecipeStep step in ViewBag.Steps.BatchSteps)
-        {
-            traceToolpit = "";
-            switch (step.OperationNr)
+        @{
+            if (ViewBag.Steps != null)
             {
-                case OperationType.Dosing:
-                    if (ViewBag.traceNumbers.Count >= tracePos && ViewBag.traceNumbers.Count > 0)
+                int toElementUnits = 1;
+                int id = 0;
+                foreach (RecipeStep step in ViewBag.Steps.BatchSteps)
+                {
+                    traceToolpit = "";
+                    switch (step.OperationNr)
                     {
-                        traceToolpit = "Trace ID:" + ViewBag.traceNumbers[tracePos];
-                        tracePos++;
+                        case OperationType.Dosing:
+                            if (ViewBag.traceNumbers.Count >= tracePos && ViewBag.traceNumbers.Count > 0)
+                            {
+                                traceToolpit = "Trace ID:" + ViewBag.traceNumbers[tracePos];
+                                tracePos++;
+                            }
+                            unit = "kg";
+                            toElementUnits = 1000;
+                            break;
+                        case OperationType.Kneading:
+                            unit = "°C";
+                            toElementUnits = 10;
+                            break;
+                        case OperationType.Ripping:
+                            unit = "min";
+                            toElementUnits = 10;
+                            break;
                     }
-                    unit = "kg";
-                    toElementUnits = 1000;
-                    break;
-                case OperationType.Kneading:
-                    unit = "°C";
-                    toElementUnits = 10;
-                    break;
-                case OperationType.Ripping:
-                    unit = "min";
-                    toElementUnits = 10;
-                    break;
+                    double need = (double)step.Need / (double)toElementUnits;
+                    double done = (double)step.Done / (double)toElementUnits;
+                    double diff = (step.Done - step.Need) / toElementUnits;
+                    switch (step.Status)
+                    {
+                        case StepStatus.OK:
+                            statusClass = "status-ok";
+                            break;
+                        case StepStatus.Error:
+                            statusClass = "status-nok";
+                            break;
+                    }
+                    <tr data-toggle="tooltip" data-placement="left" title="@traceToolpit">
+                        <td>@step.step</td>
+                        <td id="startStep_@id">@step.StartTime</td>
+                        <td id="endStep_@id">@step.EndTime</td>
+                        <td>@step.OperationNr</td>
+                        <td>@step.DeviceId</td>
+                        <td>@step.Device</td>
+                        <td class="text-right" data-toggle="tooltip" data-placement="top">@need @unit&ensp;</td>
+                        <td class="text-right">@done @unit&ensp;</td>
+                        <td class="text-right">@diff @unit&nbsp;</td>
+                        <td class="@statusClass">@step.Status</td>
+                    </tr>
+                    id++;
+                }
+                for (int j = 0; j < (ViewBag.Steps.StepsCount - ViewBag.Steps.BatchSteps.Count); j++)
+                {
+                    <tr data-toggle="tooltip" data-placement="left" title="Expected step">
+                        <td>&ensp;</td>
+                        <td>&ensp;</td>
+                        <td>&ensp;</td>
+                        <td>&ensp;</td>
+                        <td>&ensp;</td>
+                        <td>&ensp;</td>
+                        <td class="text-right" data-toggle="tooltip" data-placement="top">&ensp;</td>
+                        <td class="text-right">&ensp;</td>
+                        <td class="text-right">&ensp;</td>
+                        <td class="status-ok">&ensp;</td>
+                    </tr>
+                }
             }
-            double need = (double)step.Need / (double)toElementUnits;
-            double done = (double) step.Done / (double)toElementUnits;
-            double diff = (step.Done - step.Need) / toElementUnits;
-            switch (step.Status) {
-                case StepStatus.OK:
-                    statusClass = "status-ok";
-                    break;
-                case StepStatus.Error:
-                    statusClass = "status-nok";
-                    break;
-            }
-        <tr data-toggle="tooltip" data-placement="left" title="@traceToolpit">
-            <td>@step.step</td>
-            <td>@step.StartTime</td>
-            <td>@step.EndTime</td>
-            <td>@step.OperationNr</td>
-            <td>@step.DeviceId</td>
-            <td>@step.Device</td>
-            <td class="text-right" data-toggle="tooltip" data-placement="top">@need @unit&ensp;</td>
-            <td class="text-right">@done @unit&ensp;</td>
-            <td class="text-right">@diff @unit&nbsp;</td>
-            <td class="@statusClass">@step.Status</td>
-        </tr>
         }
-        for (int i = 0; i<(ViewBag.Steps.StepsCount-ViewBag.Steps.BatchSteps.Count);i++)
-        {
-            <tr data-toggle="tooltip" data-placement="left" title="Expected step">
-                <td>&ensp;</td>
-                <td>&ensp;</td>
-                <td>&ensp;</td>
-                <td>&ensp;</td>
-                <td>&ensp;</td>
-                <td>&ensp;</td>
-                <td class="text-right" data-toggle="tooltip" data-placement="top">&ensp;</td>
-                <td class="text-right">&ensp;</td>
-                <td class="text-right">&ensp;</td>
-                <td class="status-ok">&ensp;</td>
-            </tr>
-        }
-    }
-}
-        @*<tr>
-            <td>02</td>            
-            <td>11.02. 08:14:00</td>
-            <td>11.02. 08:18:30</td>
-            <td>kneading</td>
-            <td>11465</td>
-            <td>kneading 1</td>
-            <td class="text-right" data-toggle="tooltip" data-placement="top" title="-3min / +2min">5:00 min</td>
-            <td class="text-right">4:30 min</td>
-            <td class="text-right">- 0:30 min</td>
-            <td class="status-nok" data-toggle="tooltip" data-placement="top" title="skipped by user">error</td>
-        </tr>
-        <tr>
-            <td>03</td>            
-            <td>11.02. 08:35:15</td>
-            <td>11.02. 08:42:10</td>
-            <td>outdosing</td>            
-            <td>21335</td>
-            <td>outdosing 1</td>
-            <td class="text-right" data-toggle="tooltip" data-placement="top" title="-1,2°C / +0,7°C">15 °C&ensp;</td>
-            <td class="text-right">15,6 °C&ensp;</td>
-            <td class="text-right">+  0,6 °C&ensp;</td>
-            <td class="status-ok">ok</td>
-        </tr>*@
     </table>
+    <script>
+        function DateTime(date) {
+            var offset = date.getTimezoneOffset();
+            console.log(offset);
+            var offseted_miliseconds = date.getTime() - (offset * 60000);
+            var DateTime = new Date(offseted_miliseconds);
+            var localDateTime = DateTime.toLocaleString();
+            return localDateTime;
+        }
+    </script>
+    @{int i = 0; }
+    @foreach(RecipeStep step in ViewBag.Steps.BatchSteps)
+    {
+        <script>
+        var year = @step.StartTime.Year;
+        var month = @step.StartTime.Month;
+        var day = @step.StartTime.Day;
+        var hour = @step.StartTime.Hour;
+        var minute = @step.StartTime.Minute;
+        var second = @step.StartTime.Second;
+        var date = new Date(year, month - 1, day, hour, minute, second, 0);
+        console.log(date);
+        var yearExp = @step.EndTime.Year;
+        var monthExp = @step.EndTime.Month;
+        var dayExp = @step.EndTime.Day;
+        var hourExp = @step.EndTime.Hour;
+        var minuteExp = @step.EndTime.Minute;
+        var secondExp = @step.EndTime.Second;
+        var expDate = new Date(yearExp, monthExp - 1, dayExp, hourExp, minuteExp, secondExp, 0);
+            var localDateTime = DateTime(date);
+            document.getElementById("starStep_" + "@i").innerHTML = localDateTime;
+        var localExpDateTime = DateTime(expDate);
+        document.getElementById("endStep_" + "@i").innerHTML = localExpDateTime;
+        </script>
+        i++;
+    }
 </div>
 

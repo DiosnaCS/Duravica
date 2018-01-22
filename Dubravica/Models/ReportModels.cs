@@ -170,21 +170,24 @@ namespace Dubravica.Report.Models
         IST = 8 //InterStepTime
     }
 
+    /// <summary>
+    /// Horni jsou end 0x0001 a dolni start 0x0000001 
+    /// </summary>
     [Flags]
     public enum StepStatus
     {
-        Error = 0,
-        ForcedStart = 1,
-        OK = 2,
-        Skipped = 4
+        None = 0,
+        ForcedStart = 0x00000001,
+        OK = 0x00010000, 
+        Skipped = 0x00020000
     }
 
     public enum OperationType
     {
-        Dosing = 15,
-        Kneading = 25,
-        Ripping = 35,
-        Tipping = 45
+        Dosing = 11,
+        Kneading = 21,
+        Ripping = 31,
+        Tipping = 41
     }
 
     public class Batch

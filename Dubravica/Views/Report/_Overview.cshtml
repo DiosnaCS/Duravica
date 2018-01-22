@@ -51,8 +51,14 @@
                 @* to write ids *@
                 <tr onclick="getBatch(@batch.Id)" style="cursor: pointer;">
                     <td id="BatchNo">@batch.Id</td>
-                    <td class="startDT_@i">@batch.StartTime</td>
-                    <td class="endDT_@i">@batch.EndTime</td>
+                    <td id="startDT_@i">@batch.StartTime</td>
+                    @if (batch.EndTime.Year < 2016) {
+                        <td><b>Batch have no end yet</b></td>
+                    }
+                    else
+                    {
+                        <td id="endDT_@i">@batch.EndTime</td>
+                    }
                     <td>@batch.RecipeName</td>
                     <td id="recipeno">@batch.RecipeNo</td>
                     @{ string title = ""; }
@@ -102,26 +108,32 @@
     }
 </script>
 @for(int i=0; i < Model.Batches.Count;i++) { 
-<script>
-        var year = @Model.Batches[i].StartTime.Year;
-        var month = @Model.Batches[i].StartTime.Month;
-        var day = @Model.Batches[i].StartTime.Day;
-        var hour = @Model.Batches[i].StartTime.Hour;
-        var minute = @Model.Batches[i].StartTime.Minute;
-        var second = @Model.Batches[i].StartTime.Second;
-        var date = new Date(year, month - 1, day, hour, minute, second, 0);
-        var yearExp = @Model.Batches[i].EndTime.Year;
-        var monthExp = @Model.Batches[i].EndTime.Month;
-        var dayExp = @Model.Batches[i].EndTime.Day;
-        var hourExp = @Model.Batches[i].EndTime.Hour;
-        var minuteExp = @Model.Batches[i].EndTime.Minute;
-        var secondExp = @Model.Batches[i].EndTime.Second;
-        var expDate = new Date(yearExp, monthExp - 1, dayExp, hourExp, minuteExp, secondExp, 0);
-        var localDateTime = DateTime(date);
-        document.getElementById("startDT_" + "@i").innerText = localDateTime;
-        var localExpDateTime = DateTime(expDate);
-        document.getElementById("endDT_" + "@i").innerHTML = localExpDateTime;
-</script>
+    <script>
+            var year = @Model.Batches[i].StartTime.Year;
+            var month = @Model.Batches[i].StartTime.Month;
+            var day = @Model.Batches[i].StartTime.Day;
+            var hour = @Model.Batches[i].StartTime.Hour;
+            var minute = @Model.Batches[i].StartTime.Minute;
+            var second = @Model.Batches[i].StartTime.Second;
+            var date = new Date(year, month - 1, day, hour, minute, second, 0);
+            var localDateTime = DateTime(date);
+            document.getElementById("startDT_" + "@i").innerHTML = localDateTime;
+    </script>
+
+    if (Model.Batches[i].EndTime.Year < 2016) {
+        <script>
+            var yearExp = @Model.Batches[i].EndTime.Year;
+            var monthExp = @Model.Batches[i].EndTime.Month;
+            var dayExp = @Model.Batches[i].EndTime.Day;
+            var hourExp = @Model.Batches[i].EndTime.Hour;
+            var minuteExp = @Model.Batches[i].EndTime.Minute;
+            var secondExp = @Model.Batches[i].EndTime.Second;
+            var expDate = new Date(yearExp, monthExp - 1, dayExp, hourExp, minuteExp, secondExp, 0);
+
+            var localExpDateTime = DateTime(expDate);
+            document.getElementById("endDT_" + "@i").innerHTML = localExpDateTime;
+        </script>
+    }
 }
 @*</div>*@
 

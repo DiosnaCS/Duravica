@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Dubravica.GraphReport.Models;
+using Dubravica.Report.Models;
 
 namespace Dubravica.Controllers
 {
@@ -15,5 +16,13 @@ namespace Dubravica.Controllers
         {
             return View();
         }
+
+        /*public JsonResult getData()
+        {
+            ReportModel RVM = new ReportModel();
+            
+            var data = 
+            return Json();
+        }*/
     }
 }

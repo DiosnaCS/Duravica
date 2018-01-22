@@ -242,6 +242,7 @@ WriteLiteral(@">
         <h2>News</h2>
         <p>
             In latest update have been add following features:<br>
+            Time of starts and ends are in the local time zone<br />
             New style od this cloud for Dubravica priojecz<br>
             Menu of this page hase been changed to more user-friendly platform.
         </p>
