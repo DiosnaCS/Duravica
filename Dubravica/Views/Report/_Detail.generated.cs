@@ -226,14 +226,15 @@ WriteLiteral(">Status</th>\r\n        </tr>\r\n");
                     double need = (double)step.Need / (double)toElementUnits;
                     double done = (double)step.Done / (double)toElementUnits;
                     double diff = (step.Done - step.Need) / toElementUnits;
-                    switch (step.Status)
+                    if (step.Status.HasFlag(StepStatus.OK))
                     {
-                        case StepStatus.OK:
-                            statusClass = "status-ok";
-                            break;
-                        case StepStatus.Error:
-                            statusClass = "status-nok";
-                            break;
+                        statusClass = "status-ok";
+                    }
+                    if (step.Status.HasFlag(StepStatus.ForcedStart) || step.Status.HasFlag(StepStatus.Error)) {
+                        statusClass = "status-nok";
+                    }
+                    if (step.Status.HasFlag(StepStatus.Skipped) || step.Status.HasFlag(StepStatus.Cancelled)) {
+                        statusClass = "status-skipped";
                     }
 
             
@@ -245,20 +246,20 @@ WriteLiteral(" data-toggle=\"tooltip\"");
 
 WriteLiteral(" data-placement=\"left\"");
 
-WriteAttribute("title", Tuple.Create(" title=\"", 3088), Tuple.Create("\"", 3109)
+WriteAttribute("title", Tuple.Create(" title=\"", 3263), Tuple.Create("\"", 3284)
             
-            #line 76 "..\..\Views\Report\_Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 3096), Tuple.Create<System.Object, System.Int32>(traceToolpit
+            #line 77 "..\..\Views\Report\_Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 3271), Tuple.Create<System.Object, System.Int32>(traceToolpit
             
             #line default
             #line hidden
-, 3096), false)
+, 3271), false)
 );
 
 WriteLiteral(">\r\n                        <td>");
 
             
-            #line 77 "..\..\Views\Report\_Detail.cshtml"
+            #line 78 "..\..\Views\Report\_Detail.cshtml"
                        Write(step.step);
 
             
@@ -266,21 +267,21 @@ WriteLiteral(">\r\n                        <td>");
             #line hidden
 WriteLiteral("</td>\r\n                        <td");
 
-WriteAttribute("id", Tuple.Create(" id=\"", 3185), Tuple.Create("\"", 3203)
-, Tuple.Create(Tuple.Create("", 3190), Tuple.Create("startStep_", 3190), true)
+WriteAttribute("id", Tuple.Create(" id=\"", 3360), Tuple.Create("\"", 3378)
+, Tuple.Create(Tuple.Create("", 3365), Tuple.Create("startStep_", 3365), true)
             
-            #line 78 "..\..\Views\Report\_Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 3200), Tuple.Create<System.Object, System.Int32>(id
+            #line 79 "..\..\Views\Report\_Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 3375), Tuple.Create<System.Object, System.Int32>(id
             
             #line default
             #line hidden
-, 3200), false)
+, 3375), false)
 );
 
 WriteLiteral(">");
 
             
-            #line 78 "..\..\Views\Report\_Detail.cshtml"
+            #line 79 "..\..\Views\Report\_Detail.cshtml"
                                           Write(step.StartTime);
 
             
@@ -288,21 +289,21 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</td>\r\n                        <td");
 
-WriteAttribute("id", Tuple.Create(" id=\"", 3254), Tuple.Create("\"", 3270)
-, Tuple.Create(Tuple.Create("", 3259), Tuple.Create("endStep_", 3259), true)
+WriteAttribute("id", Tuple.Create(" id=\"", 3429), Tuple.Create("\"", 3445)
+, Tuple.Create(Tuple.Create("", 3434), Tuple.Create("endStep_", 3434), true)
             
-            #line 79 "..\..\Views\Report\_Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 3267), Tuple.Create<System.Object, System.Int32>(id
+            #line 80 "..\..\Views\Report\_Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 3442), Tuple.Create<System.Object, System.Int32>(id
             
             #line default
             #line hidden
-, 3267), false)
+, 3442), false)
 );
 
 WriteLiteral(">");
 
             
-            #line 79 "..\..\Views\Report\_Detail.cshtml"
+            #line 80 "..\..\Views\Report\_Detail.cshtml"
                                         Write(step.EndTime);
 
             
@@ -311,7 +312,7 @@ WriteLiteral(">");
 WriteLiteral("</td>\r\n                        <td>");
 
             
-            #line 80 "..\..\Views\Report\_Detail.cshtml"
+            #line 81 "..\..\Views\Report\_Detail.cshtml"
                        Write(step.OperationNr);
 
             
@@ -320,7 +321,7 @@ WriteLiteral("</td>\r\n                        <td>");
 WriteLiteral("</td>\r\n                        <td>");
 
             
-            #line 81 "..\..\Views\Report\_Detail.cshtml"
+            #line 82 "..\..\Views\Report\_Detail.cshtml"
                        Write(step.DeviceId);
 
             
@@ -329,7 +330,7 @@ WriteLiteral("</td>\r\n                        <td>");
 WriteLiteral("</td>\r\n                        <td>");
 
             
-            #line 82 "..\..\Views\Report\_Detail.cshtml"
+            #line 83 "..\..\Views\Report\_Detail.cshtml"
                        Write(step.Device);
 
             
@@ -346,7 +347,7 @@ WriteLiteral(" data-placement=\"top\"");
 WriteLiteral(">");
 
             
-            #line 83 "..\..\Views\Report\_Detail.cshtml"
+            #line 84 "..\..\Views\Report\_Detail.cshtml"
                                                                                      Write(need);
 
             
@@ -355,7 +356,7 @@ WriteLiteral(">");
 WriteLiteral(" ");
 
             
-            #line 83 "..\..\Views\Report\_Detail.cshtml"
+            #line 84 "..\..\Views\Report\_Detail.cshtml"
                                                                                            Write(unit);
 
             
@@ -368,7 +369,7 @@ WriteLiteral(" class=\"text-right\"");
 WriteLiteral(">");
 
             
-            #line 84 "..\..\Views\Report\_Detail.cshtml"
+            #line 85 "..\..\Views\Report\_Detail.cshtml"
                                           Write(done);
 
             
@@ -377,7 +378,7 @@ WriteLiteral(">");
 WriteLiteral(" ");
 
             
-            #line 84 "..\..\Views\Report\_Detail.cshtml"
+            #line 85 "..\..\Views\Report\_Detail.cshtml"
                                                 Write(unit);
 
             
@@ -390,7 +391,7 @@ WriteLiteral(" class=\"text-right\"");
 WriteLiteral(">");
 
             
-            #line 85 "..\..\Views\Report\_Detail.cshtml"
+            #line 86 "..\..\Views\Report\_Detail.cshtml"
                                           Write(diff);
 
             
@@ -399,7 +400,7 @@ WriteLiteral(">");
 WriteLiteral(" ");
 
             
-            #line 85 "..\..\Views\Report\_Detail.cshtml"
+            #line 86 "..\..\Views\Report\_Detail.cshtml"
                                                 Write(unit);
 
             
@@ -407,20 +408,20 @@ WriteLiteral(" ");
             #line hidden
 WriteLiteral("&nbsp;</td>\r\n                        <td");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 3723), Tuple.Create("\"", 3743)
+WriteAttribute("class", Tuple.Create(" class=\"", 3898), Tuple.Create("\"", 3918)
             
-            #line 86 "..\..\Views\Report\_Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 3731), Tuple.Create<System.Object, System.Int32>(statusClass
+            #line 87 "..\..\Views\Report\_Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 3906), Tuple.Create<System.Object, System.Int32>(statusClass
             
             #line default
             #line hidden
-, 3731), false)
+, 3906), false)
 );
 
 WriteLiteral(">");
 
             
-            #line 86 "..\..\Views\Report\_Detail.cshtml"
+            #line 87 "..\..\Views\Report\_Detail.cshtml"
                                             Write(step.Status);
 
             
@@ -429,7 +430,7 @@ WriteLiteral(">");
 WriteLiteral("</td>\r\n                    </tr>\r\n");
 
             
-            #line 88 "..\..\Views\Report\_Detail.cshtml"
+            #line 89 "..\..\Views\Report\_Detail.cshtml"
                     id++;
                 }
                 for (int j = 0; j < (ViewBag.Steps.StepsCount - ViewBag.Steps.BatchSteps.Count); j++)
@@ -476,7 +477,7 @@ WriteLiteral(" class=\"status-ok\"");
 WriteLiteral(">&ensp;</td>\r\n                    </tr>\r\n");
 
             
-            #line 104 "..\..\Views\Report\_Detail.cshtml"
+            #line 105 "..\..\Views\Report\_Detail.cshtml"
                 }
             }
         
@@ -498,13 +499,13 @@ WriteLiteral(@"
 ");
 
             
-            #line 118 "..\..\Views\Report\_Detail.cshtml"
+            #line 119 "..\..\Views\Report\_Detail.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 118 "..\..\Views\Report\_Detail.cshtml"
+            #line 119 "..\..\Views\Report\_Detail.cshtml"
       int i = 0; 
             
             #line default
@@ -512,13 +513,13 @@ WriteLiteral(@"
 WriteLiteral("\r\n");
 
             
-            #line 119 "..\..\Views\Report\_Detail.cshtml"
+            #line 120 "..\..\Views\Report\_Detail.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 119 "..\..\Views\Report\_Detail.cshtml"
+            #line 120 "..\..\Views\Report\_Detail.cshtml"
      foreach(RecipeStep step in ViewBag.Steps.BatchSteps)
     {
 
@@ -528,7 +529,7 @@ WriteLiteral("\r\n");
 WriteLiteral("        <script>\r\n        var year = ");
 
             
-            #line 122 "..\..\Views\Report\_Detail.cshtml"
+            #line 123 "..\..\Views\Report\_Detail.cshtml"
               Write(step.StartTime.Year);
 
             
@@ -537,7 +538,7 @@ WriteLiteral("        <script>\r\n        var year = ");
 WriteLiteral(";\r\n        var month = ");
 
             
-            #line 123 "..\..\Views\Report\_Detail.cshtml"
+            #line 124 "..\..\Views\Report\_Detail.cshtml"
                Write(step.StartTime.Month);
 
             
@@ -546,7 +547,7 @@ WriteLiteral(";\r\n        var month = ");
 WriteLiteral(";\r\n        var day = ");
 
             
-            #line 124 "..\..\Views\Report\_Detail.cshtml"
+            #line 125 "..\..\Views\Report\_Detail.cshtml"
              Write(step.StartTime.Day);
 
             
@@ -555,7 +556,7 @@ WriteLiteral(";\r\n        var day = ");
 WriteLiteral(";\r\n        var hour = ");
 
             
-            #line 125 "..\..\Views\Report\_Detail.cshtml"
+            #line 126 "..\..\Views\Report\_Detail.cshtml"
               Write(step.StartTime.Hour);
 
             
@@ -564,7 +565,7 @@ WriteLiteral(";\r\n        var hour = ");
 WriteLiteral(";\r\n        var minute = ");
 
             
-            #line 126 "..\..\Views\Report\_Detail.cshtml"
+            #line 127 "..\..\Views\Report\_Detail.cshtml"
                 Write(step.StartTime.Minute);
 
             
@@ -573,7 +574,7 @@ WriteLiteral(";\r\n        var minute = ");
 WriteLiteral(";\r\n        var second = ");
 
             
-            #line 127 "..\..\Views\Report\_Detail.cshtml"
+            #line 128 "..\..\Views\Report\_Detail.cshtml"
                 Write(step.StartTime.Second);
 
             
@@ -583,7 +584,7 @@ WriteLiteral(";\r\n        var date = new Date(year, month - 1, day, hour, minut
 "       console.log(date);\r\n        var yearExp = ");
 
             
-            #line 130 "..\..\Views\Report\_Detail.cshtml"
+            #line 131 "..\..\Views\Report\_Detail.cshtml"
                  Write(step.EndTime.Year);
 
             
@@ -592,7 +593,7 @@ WriteLiteral(";\r\n        var date = new Date(year, month - 1, day, hour, minut
 WriteLiteral(";\r\n        var monthExp = ");
 
             
-            #line 131 "..\..\Views\Report\_Detail.cshtml"
+            #line 132 "..\..\Views\Report\_Detail.cshtml"
                   Write(step.EndTime.Month);
 
             
@@ -601,7 +602,7 @@ WriteLiteral(";\r\n        var monthExp = ");
 WriteLiteral(";\r\n        var dayExp = ");
 
             
-            #line 132 "..\..\Views\Report\_Detail.cshtml"
+            #line 133 "..\..\Views\Report\_Detail.cshtml"
                 Write(step.EndTime.Day);
 
             
@@ -610,7 +611,7 @@ WriteLiteral(";\r\n        var dayExp = ");
 WriteLiteral(";\r\n        var hourExp = ");
 
             
-            #line 133 "..\..\Views\Report\_Detail.cshtml"
+            #line 134 "..\..\Views\Report\_Detail.cshtml"
                  Write(step.EndTime.Hour);
 
             
@@ -619,7 +620,7 @@ WriteLiteral(";\r\n        var hourExp = ");
 WriteLiteral(";\r\n        var minuteExp = ");
 
             
-            #line 134 "..\..\Views\Report\_Detail.cshtml"
+            #line 135 "..\..\Views\Report\_Detail.cshtml"
                    Write(step.EndTime.Minute);
 
             
@@ -628,7 +629,7 @@ WriteLiteral(";\r\n        var minuteExp = ");
 WriteLiteral(";\r\n        var secondExp = ");
 
             
-            #line 135 "..\..\Views\Report\_Detail.cshtml"
+            #line 136 "..\..\Views\Report\_Detail.cshtml"
                    Write(step.EndTime.Second);
 
             
@@ -639,7 +640,7 @@ WriteLiteral(";\r\n        var expDate = new Date(yearExp, monthExp - 1, dayExp,
 " document.getElementById(\"starStep_\" + \"");
 
             
-            #line 138 "..\..\Views\Report\_Detail.cshtml"
+            #line 139 "..\..\Views\Report\_Detail.cshtml"
                                               Write(i);
 
             
@@ -649,7 +650,7 @@ WriteLiteral("\").innerHTML = localDateTime;\r\n        var localExpDateTime = D
 "\n        document.getElementById(\"endStep_\" + \"");
 
             
-            #line 140 "..\..\Views\Report\_Detail.cshtml"
+            #line 141 "..\..\Views\Report\_Detail.cshtml"
                                          Write(i);
 
             
@@ -658,7 +659,7 @@ WriteLiteral("\").innerHTML = localDateTime;\r\n        var localExpDateTime = D
 WriteLiteral("\").innerHTML = localExpDateTime;\r\n        </script>\r\n");
 
             
-            #line 142 "..\..\Views\Report\_Detail.cshtml"
+            #line 143 "..\..\Views\Report\_Detail.cshtml"
         i++;
     }
 

@@ -51,13 +51,29 @@
 
 
     window.onload = function () {
-
-        //getData();
+        var datetime = Date.now();
+        var chartData  = getData(datetime);
 
         var ctx = document.getElementById("barChart").getContext("2d");
-        window.myBar = new Chart(ctx).Bar(barChartData, {
+        window.myBar = new Chart(ctx).Bar(chartData, {
             responsive: true
         });
+        //window.myBar = new Chart(ctx, {});
+    }
+
+    function getData(datetime) {
+        var url = "GraphReport/getData";
+        var dataRequest = "{beginTime: '" + datetime + "' }";
+
+        dataType: "json";
+        xmlHttp.open("POST", url, true);
+        xmlHttp.send(dataRequest);
+
+        xmlHttp.onreadystatechange = function () {
+            if (xmlHttp.readyState == xmlHttp.DONE) {
+                data = JSON.parse(xmlHttp.responseText);
+            };
+        };
     }
 </script>
 <h2>Bar chart first example</h2>

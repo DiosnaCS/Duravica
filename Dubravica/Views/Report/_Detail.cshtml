@@ -64,14 +64,15 @@
                     double need = (double)step.Need / (double)toElementUnits;
                     double done = (double)step.Done / (double)toElementUnits;
                     double diff = (step.Done - step.Need) / toElementUnits;
-                    switch (step.Status)
+                    if (step.Status.HasFlag(StepStatus.OK))
                     {
-                        case StepStatus.OK:
-                            statusClass = "status-ok";
-                            break;
-                        case StepStatus.Error:
-                            statusClass = "status-nok";
-                            break;
+                        statusClass = "status-ok";
+                    }
+                    if (step.Status.HasFlag(StepStatus.ForcedStart) || step.Status.HasFlag(StepStatus.Error)) {
+                        statusClass = "status-nok";
+                    }
+                    if (step.Status.HasFlag(StepStatus.Skipped) || step.Status.HasFlag(StepStatus.Cancelled)) {
+                        statusClass = "status-skipped";
                     }
                     <tr data-toggle="tooltip" data-placement="left" title="@traceToolpit">
                         <td>@step.step</td>

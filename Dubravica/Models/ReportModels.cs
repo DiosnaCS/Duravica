@@ -160,6 +160,20 @@ namespace Dubravica.Report.Models
         //Data should be also there
         public List<Batch> Batches = new List<Batch>(); //array of current batches 
     }
+
+    /// <summary>
+    /// Status bits of (E)nd and (S)tart of step 0xEEEE_SSSS
+    /// </summary>
+    [Flags]
+    public enum StepStatus
+    {
+        OK = 0,
+        ForcedStart = 0x00000001,
+        Error = 0x00010000,
+        Skipped = 0x00020000,
+        Cancelled = 0x00040000
+    }
+
     [Flags]
     public enum BatchStatus
     {
@@ -170,18 +184,7 @@ namespace Dubravica.Report.Models
         IST = 8 //InterStepTime
     }
 
-    /// <summary>
-    /// Horni jsou end 0x0001 a dolni start 0x0000001 
-    /// </summary>
-    [Flags]
-    public enum StepStatus
-    {
-        None = 0,
-        ForcedStart = 0x00000001,
-        OK = 0x00010000, 
-        Skipped = 0x00020000
-    }
-
+    
     public enum OperationType
     {
         Dosing = 11,
@@ -189,6 +192,8 @@ namespace Dubravica.Report.Models
         Ripping = 31,
         Tipping = 41
     }
+
+
 
     public class Batch
     {

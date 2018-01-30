@@ -243,7 +243,7 @@ namespace Dubravica.Handlers
                 if (results[i][11] != DBNull.Value)
                 {
                     stepStatus = (int)results[i][11];
-                    stepStatus = stepStatus >> 16;
+                    stepStatus = stepStatus << 16;
                     recipeStep.Status |= (StepStatus)stepStatus;
                 }
                 Steps.BatchSteps.Add(recipeStep);

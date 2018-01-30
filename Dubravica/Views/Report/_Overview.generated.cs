@@ -313,23 +313,21 @@ WriteLiteral("                    ");
             #line hidden
 WriteLiteral("                    <td");
 
-WriteLiteral(" style=\"color: #ff0000;\"");
-
-WriteAttribute("title", Tuple.Create(" title=\"", 3617), Tuple.Create("\"", 3631)
+WriteAttribute("title", Tuple.Create(" title=\"", 3593), Tuple.Create("\"", 3607)
             
             #line 69 "..\..\Views\Report\_Overview.cshtml"
-, Tuple.Create(Tuple.Create("", 3625), Tuple.Create<System.Object, System.Int32>(title
+, Tuple.Create(Tuple.Create("", 3601), Tuple.Create<System.Object, System.Int32>(title
             
             #line default
             #line hidden
-, 3625), false)
+, 3601), false)
 );
 
 WriteLiteral("><span><b>");
 
             
             #line 69 "..\..\Views\Report\_Overview.cshtml"
-                                                                   Write(batch.status);
+                                           Write(batch.status);
 
             
             #line default
