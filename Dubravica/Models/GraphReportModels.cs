@@ -5,10 +5,10 @@ using System.ComponentModel.DataAnnotations;
 namespace Dubravica.GraphReport.Models
 {   
 
-    public class GraphReportModelResponse
+    public class GraphReportResponse
     {
-          public double[] dataSet { get; set; }
-          public string[] labels { get; set; }
+          public List<double> dataSet { get; set; }
+          public List<string> labels { get; set; }
     }
     public class DataRequest
     {
@@ -27,8 +27,13 @@ namespace Dubravica.GraphReport.Models
 
     public enum RequestType
     {
+        batches,
         frequency,
         differences,
         absoulteScale
+    }
+    public enum GraphType
+    {
+
     }
 }
