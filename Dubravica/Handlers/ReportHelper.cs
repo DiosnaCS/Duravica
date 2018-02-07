@@ -393,7 +393,7 @@ namespace Dubravica.Handlers
             sql += "MAX(maxtemperature) AS maxtemp, MAX(mintemperature) AS mintemp,";
             sql += "MAX(maxsteptime) AS maxst, MAX(minsteptime) AS minst,";
             sql += "MAX(maxintersteptime) AS maxist, MAX(minintersteptime) AS minist ";
-            sql = string.Format(sql + "FROM get_bad_batches({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}) GROUP BY dibatchno ORDER BY dibatchno ASC",
+            sql = string.Format(sql + "FROM get_bad_batches({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}) GROUP BY dibatchno ORDER BY dibatchno DESC",
                 dateFrom, dateTo, recipeNo, OverLimits, AmountSel, model.AmountTolerance,
                 TempSel, model.TempTolerance, StepTimeSel, model.StepTimeTolerance, InterStepTimeSel,
                 model.InterStepTimeTolerance);

@@ -208,62 +208,7 @@ WriteLiteral(">Knowledge Base&rAarr;</a>\r\n        </div>\r\n");
             
             #line default
             #line hidden
-WriteLiteral("    <p></p>\r\n    <h6>Go to the guest zone (login not necessary)</h6>\r\n    <div");
-
-WriteLiteral(" class=\"btn-group btn-group-justified well\"");
-
-WriteLiteral(">\r\n        <a");
-
-WriteLiteral(" href=\"/Home/GuestZone\"");
-
-WriteLiteral(" class=\"btn btn-primary\"");
-
-WriteLiteral(">Guest Zone</a>\r\n    </div>\r\n</div>\r\n<div");
-
-WriteLiteral(" class=\"row\"");
-
-WriteLiteral(">\r\n    <div");
-
-WriteLiteral(" class=\"col-md-4\"");
-
-WriteLiteral(">\r\n        <h2>Compatibility</h2>\r\n        <p>\r\n            Best compatible with " +
-"chrome<br>\r\n            Other modern browsers are also supported\r\n        </p>\r\n" +
-"        <p><a");
-
-WriteLiteral(" class=\"btn btn-primary\"");
-
-WriteLiteral(" href=\"http://users.diosn.cz/Home/Compatibility/\"");
-
-WriteLiteral(">See more &raquo;</a></p>\r\n    </div>\r\n    <div");
-
-WriteLiteral(" class=\"col-md-4\"");
-
-WriteLiteral(@">
-        <h2>News</h2>
-        <p>
-            In latest update have been add following features:<br>
-            Time of starts and ends are in the local time zone<br />
-            New style od this cloud for Dubravica priojecz<br>
-            Menu of this page hase been changed to more user-friendly platform.
-        </p>
-        <p><a");
-
-WriteLiteral(" class=\"btn btn-primary\"");
-
-WriteLiteral(" href=\"http://users.diosna.cz/Home/News/\"");
-
-WriteLiteral(">See more &raquo;</a></p>\r\n    </div>\r\n    <div");
-
-WriteLiteral(" class=\"col-md-4\"");
-
-WriteLiteral(">\r\n        <h2>Link to Diosna website:</h2>\r\n        <p>If you need to visit czec" +
-"h diosna website click below</p>\r\n        <p><a");
-
-WriteLiteral(" class=\"btn btn-primary\"");
-
-WriteLiteral(" href=\"http://diosna.cz/\"");
-
-WriteLiteral(">Bye &raquo;</a></p>\r\n    </div>\r\n</div>");
+WriteLiteral("    <p></p>\r\n</div>\r\n");
 
         }
     }
