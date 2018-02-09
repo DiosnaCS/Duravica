@@ -246,22 +246,7 @@ WriteLiteral(" />\r\n                    </div>\r\n                </div>\r\n");
             
             #line default
             #line hidden
-WriteLiteral("        </section>\r\n    </div>\r\n</div>\r\n<h6>Go to the guest zone (login not neces" +
-"sary):</h6>\r\n<div");
-
-WriteLiteral(" class=\"well\"");
-
-WriteLiteral(">\r\n    <div");
-
-WriteLiteral(" class=\"btn-group btn-group-justified\"");
-
-WriteLiteral(">\r\n        <a");
-
-WriteLiteral(" href=\"/Home/GuestZone\"");
-
-WriteLiteral(" class=\"btn btn-primary \"");
-
-WriteLiteral(">Guest Zone</a>\r\n    </div>\r\n</div>\r\n");
+WriteLiteral("        </section>\r\n    </div>\r\n</div>\r\n");
 
 DefineSection("Scripts", () => {
 
@@ -270,7 +255,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 52 "..\..\Views\Account\Login.cshtml"
+            #line 46 "..\..\Views\Account\Login.cshtml"
 Write(Scripts.Render("~/bundles/jqueryval"));
 
             

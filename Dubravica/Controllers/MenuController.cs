@@ -7,47 +7,18 @@ namespace Dubravica.Controllers
 {
     public class MenuController : Controller
     {
-        /*
-        // GET: Menu\
-        [Authorize]
-        public ActionResult Index()
-        {
-            int i = 0;
-            getMenu();
-
-
-            int id = 00000;
-            db db = new db();
-            object s = db.singleItemSelect("DefaultView", "AspNetUsers", "UserName = '" + User.Identity.Name.ToString() + "'");
-            string name = s.ToString();
-            foreach (String key in Session.Keys)
-            {
-                if (key.Contains(name))
-                {
-                    ViewBag.url = Session[key];
-                    i++;
-                }
-            }
-
-            Session["SchemeURLImage"] = ViewBag.url;
-            XMLController XC = new XMLController();
-            if ((Int32.TryParse(Session["id"].ToString(), out id)) == true)
-            {
-                ViewBag.ProjectName = XC.readNodeXML("name", id);
-            }
-            
-            return View();
-        }
-        */
         [Authorize]
         public ActionResult Index(int id)
         {
             bool bMenu = getMenu(id);
             if (!bMenu)
                 return RedirectToAction("Login", "Account");
-            NotificationDataContext db = new NotificationDataContext();
-            List<Notification> data = db.Notifications.Where(p => p.Owner.Contains(User.Identity.Name) && p.BakeryID == id).ToList();
-            return View(data);
+            XMLController XC = new XMLController();
+            List<string> plc = XC.readNodesNameXML("plc", id, 1);
+            List<string> names = XC.readNodesNameXML("plc", id, 2);
+            List<string> types = XC.XMLgetTypes("plc", id);
+            string url = "/" + types[1] + "?name=" + names[0] + "&plc=" + plc[0];
+            return Redirect(url);
         }
 
         /*
@@ -85,7 +56,7 @@ namespace Dubravica.Controllers
                     }
                 }
             }
-            
+
 
             XMLController XC = new XMLController();
             List<String> values = XC.readXML("plc", id);
