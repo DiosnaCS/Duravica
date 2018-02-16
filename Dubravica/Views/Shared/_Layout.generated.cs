@@ -57,7 +57,7 @@ WriteLiteral(">\r\n    <title>");
             
             #line default
             #line hidden
-WriteLiteral(" - Users Diosna</title>\r\n");
+WriteLiteral(" - Diosna cloud</title>\r\n");
 
 WriteLiteral("    ");
 

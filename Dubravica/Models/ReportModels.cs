@@ -167,9 +167,9 @@ namespace Dubravica.Report.Models
     [Flags]
     public enum StepStatus
     {
-        OK = 0,
+        Error = 0,
         ForcedStart = 0x00000001,
-        Error = 0x00010000,
+        OK = 0x00010000,
         Skipped = 0x00020000,
         Cancelled = 0x00040000
     }

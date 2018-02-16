@@ -54,7 +54,7 @@
                     switch (step.OperationNr)
                     {
                         case OperationType.Dosing:
-                            if (ViewBag.traceNumbers.Count >= tracePos && ViewBag.traceNumbers.Count > 0)
+                            if (ViewBag.traceNumbers.Count > tracePos && ViewBag.traceNumbers.Count > 0)
                             {
                                 traceToolpit = "Trace ID:" + ViewBag.traceNumbers[tracePos];
                                 tracePos++;
@@ -77,10 +77,6 @@
                     done = Math.Round(done, 2);
                     double diff = (double)(step.Done - step.Need) / (double)toElementUnits;
                     diff = Math.Round(diff, 2);
-                    if (step.Status.HasFlag(StepStatus.OK))
-                    {
-                        statusClass = "status-ok";
-                    }
                     if (step.Status.HasFlag(StepStatus.Skipped) || step.Status.HasFlag(StepStatus.Cancelled))
                     {
                         statusClass = "status-skipped";
@@ -88,23 +84,41 @@
                     if (step.Status.HasFlag(StepStatus.ForcedStart) || step.Status.HasFlag(StepStatus.Error)) {
                         statusClass = "status-nok";
                     }
+                    if (step.Status.HasFlag(StepStatus.OK))
+                    {
+                        statusClass = "status-ok";
+                    }
                     <tr data-toggle="tooltip" data-placement="left" title="@traceToolpit">
                         <td>@step.step</td>
                         <td id="startStep_@id">@step.StartTime</td>
                         @if (step.EndTime.Year < 2016)
                         {
-                            <td><b>Step have no end yet</b></td>
+                            <td><b>No end</b></td>
                         }
                         else
                         {
                             <td id="endStep_@id">@step.EndTime</td>
                         }
                         <td>@step.OperationNr</td>
-                        <td>@step.DeviceId</td>
+                        @if (step.DeviceId != 0)
+                        {
+                            <td>@step.DeviceId</td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
                         <td>@step.Device</td>
                         <td class="text-right" data-toggle="tooltip" data-placement="top">@need @unit&ensp;</td>
                         <td class="text-right">@done @unit&ensp;</td>
-                        <td class="text-right">@diff @unit&nbsp;</td>
+                        @if (diff != 0)
+                        {
+                            <td class="text-right">@diff @unit&nbsp;</td>
+                        }
+                        else
+                        {
+                            <td class="text-right"></td>
+                        }
                         <td class="@statusClass">@step.Status</td>
                     </tr>
                     id++;

@@ -14,11 +14,11 @@ namespace Dubravica.Handlers
         /// 
         /// </summary>
         /// <param name="batchNo"></param>
-        public  static List<int> getTraceNumbers(int batchNo)
+        public  static List<int> getTraceNumbers(int batchNo, string dbName)
         {
             string sql = "";
             List<object[]> results = new List<object[]>();
-            db db = new db("Dubravica", 12);
+            db db = new db(dbName, 12);
             List<int> traceNumbers = new List<int>();
             sql = string.Format("SELECT \"diNegToler\" FROM events WHERE \"iRecordType\"=11 AND \"diBatchNo\"={0} ORDER BY \"siRecipeStep\" DESC", batchNo);
 
@@ -34,7 +34,7 @@ namespace Dubravica.Handlers
             return traceNumbers;
         }
 
-        public string ToCSV (uint[] batchIds)
+        public string ToCSV (uint[] batchIds, string dbName)
         {
             List<CSVSteps> stepdata = new List<CSVSteps>();
             string csv = "";
@@ -48,7 +48,7 @@ namespace Dubravica.Handlers
                 recipedata.Remove(recipe);
                 csv += CsvSerializer.SerializeToCsv(recipeSteps);
                 */
-                Steps recipe = getBatchData(Id);
+                Steps recipe = getBatchData(Id, dbName);
                 foreach (var batchstep in recipe.BatchSteps) {
                     CSVSteps CSVstep = new CSVSteps();
                     CSVstep.BatchNo = recipe.Id;
@@ -72,11 +72,11 @@ namespace Dubravica.Handlers
             csv = CsvSerializer.SerializeToCsv(stepdata);
             return csv;
         }
-        public Steps getBatchData(uint batchId)
+        public Steps getBatchData(uint batchId, string dbName)
         {
             string sql = "";
             List<object[]> results = new List<object[]>();
-            db db = new db("Dubravica", 12);
+            db db = new db(dbName, 12);
 
             sql = "SELECT MAX(batchno)," +
                     "step," +
@@ -255,9 +255,9 @@ namespace Dubravica.Handlers
         /// Unfortuantly this is only for Dubravica 
         /// </summary>
         /// <param name="model">Model with data from form</param>
-        public ReportModel SelectReports(ReportModel model)
+        public ReportModel SelectReports(ReportModel model, string dbName)
         {
-            List<object[]> results = getReportData(model);
+            List<object[]> results = getReportData(model, dbName);
             //model.Batches = new Batch[results.Count];
             //int i = 0;
             foreach (object[] result in results)
@@ -365,7 +365,7 @@ namespace Dubravica.Handlers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public static List<object[]> getReportData(ReportModel model)
+        public List<object[]> getReportData(ReportModel model, string dbName)
         {
             int dateFrom = model.pkTimeFrom; //in pkTime
             int dateTo = model.pkTimeTo; //in pkTime
@@ -385,7 +385,7 @@ namespace Dubravica.Handlers
             }
             List<object[]> results = new List<object[]>();
             string sql = "";
-            db db = new db("Dubravica", 12);
+            db db = new db(dbName, 12);
 
             sql = "SELECT dibatchno, MAX(pktimefrom) AS timefrom, MAX(pktimeto) AS timeto,";
             sql += "MAX(rcpname) AS rcpname, MAX(recipenumber) AS recipenumber,";
@@ -406,11 +406,11 @@ namespace Dubravica.Handlers
         /// 
         /// </summary>
         /// <param name="batchId"></param>
-        public Steps getBatchData(int batchId)
+        public Steps getBatchData(int batchId, string dbName)
         {
             string sql = "";
             List<object[]> results = new List<object[]>();
-            db db = new db("Dubravica", 12);
+            db db = new db(dbName, 12);
 
             sql = "SELECT MAX(batchno)," +
                     "step," +

@@ -172,7 +172,7 @@ WriteLiteral("</td>\r\n");
             
             #line default
             #line hidden
-WriteLiteral("                        <td><b>Batch have no end yet</b></td>\r\n");
+WriteLiteral("                        <td><b>No end</b></td>\r\n");
 
             
             #line 38 "..\..\Views\Report\_Overview.cshtml"
@@ -185,15 +185,15 @@ WriteLiteral("                        <td><b>Batch have no end yet</b></td>\r\n"
             #line hidden
 WriteLiteral("                        <td");
 
-WriteAttribute("id", Tuple.Create(" id=\"", 1642), Tuple.Create("\"", 1655)
-, Tuple.Create(Tuple.Create("", 1647), Tuple.Create("endDT_", 1647), true)
+WriteAttribute("id", Tuple.Create(" id=\"", 1627), Tuple.Create("\"", 1640)
+, Tuple.Create(Tuple.Create("", 1632), Tuple.Create("endDT_", 1632), true)
             
             #line 41 "..\..\Views\Report\_Overview.cshtml"
-, Tuple.Create(Tuple.Create("", 1653), Tuple.Create<System.Object, System.Int32>(i
+, Tuple.Create(Tuple.Create("", 1638), Tuple.Create<System.Object, System.Int32>(i
             
             #line default
             #line hidden
-, 1653), false)
+, 1638), false)
 );
 
 WriteLiteral(">");
@@ -294,14 +294,14 @@ WriteLiteral("                    ");
             #line hidden
 WriteLiteral("                    <td");
 
-WriteAttribute("title", Tuple.Create(" title=\"", 2809), Tuple.Create("\"", 2823)
+WriteAttribute("title", Tuple.Create(" title=\"", 2794), Tuple.Create("\"", 2808)
             
             #line 50 "..\..\Views\Report\_Overview.cshtml"
-, Tuple.Create(Tuple.Create("", 2817), Tuple.Create<System.Object, System.Int32>(title
+, Tuple.Create(Tuple.Create("", 2802), Tuple.Create<System.Object, System.Int32>(title
             
             #line default
             #line hidden
-, 2817), false)
+, 2802), false)
 );
 
 WriteLiteral("><span><b>");

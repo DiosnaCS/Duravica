@@ -9,6 +9,10 @@
 	</contract>
 	<plc name="Dubravica RFID">	
 	    <Report name="Reports">
+		<dbName>Dubravica</dbName>
+	    </Report>
+	    <Report name="Reports-old">
+		<dbName>Dubravica-old</dbName>
 	    </Report>
 	</plc>
 </configuration>
