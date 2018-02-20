@@ -777,7 +777,7 @@ WriteLiteral(" class=\"form-item\"");
 
 WriteLiteral(">\r\n                    <div");
 
-WriteLiteral(" class=\"checkbox\"");
+WriteLiteral(" class=\"checkbox md\"");
 
 WriteLiteral(">\r\n");
 
@@ -830,12 +830,11 @@ WriteLiteral(" />\r\n                    </div>\r\n                    <div>\r\n
             #line 320 "..\..\Views\Report\_Form.cshtml"
                          if (Model.Batches.Count > 0)
                         {
-                         
 
             
             #line default
             #line hidden
-WriteLiteral("                        <button");
+WriteLiteral("                            <button");
 
 WriteLiteral(" data-toggle=\"modal\"");
 
@@ -847,7 +846,7 @@ WriteLiteral(" class=\"btn btn-sm btn-default\"");
 
 WriteLiteral(">CSV Export</button>\r\n");
 
-WriteLiteral("                        <div");
+WriteLiteral("                            <div");
 
 WriteLiteral(" id=\"exportModal\"");
 
@@ -855,20 +854,20 @@ WriteLiteral(" class=\"modal fade\"");
 
 WriteLiteral(" role=\"dialog\"");
 
-WriteLiteral(">\r\n                        <div");
+WriteLiteral(">\r\n                                <div");
 
 WriteLiteral(" class=\"modal-dialog\"");
 
-WriteLiteral(">\r\n\r\n                            <!-- Modal content-->\r\n                         " +
-"   <div");
+WriteLiteral(">\r\n\r\n                                    <!-- Modal content-->\r\n                 " +
+"                   <div");
 
 WriteLiteral(" class=\"modal-content\"");
 
-WriteLiteral(">\r\n                                <div");
+WriteLiteral(">\r\n                                        <div");
 
 WriteLiteral(" class=\"modal-header\"");
 
-WriteLiteral(">\r\n                                    <button");
+WriteLiteral(">\r\n                                            <button");
 
 WriteLiteral(" type=\"button\"");
 
@@ -876,60 +875,60 @@ WriteLiteral(" class=\"close\"");
 
 WriteLiteral(" data-dismiss=\"modal\"");
 
-WriteLiteral(">&times;</button>\r\n                                    <h4");
+WriteLiteral(">&times;</button>\r\n                                            <h4");
 
 WriteLiteral(" class=\"modal-title\"");
 
-WriteLiteral(">Batch report export to CSV</h4>\r\n                                </div>\r\n       " +
-"                         <div");
+WriteLiteral(">Batch report export to CSV</h4>\r\n                                        </div>\r" +
+"\n                                        <div");
 
 WriteLiteral(" class=\"modal-body\"");
 
-WriteLiteral(">\r\n                                    <p>\r\n");
+WriteLiteral(">\r\n                                            <p>\r\n");
 
             
-            #line 335 "..\..\Views\Report\_Form.cshtml"
-                                        
+            #line 334 "..\..\Views\Report\_Form.cshtml"
+                                                
             
             #line default
             #line hidden
             
-            #line 335 "..\..\Views\Report\_Form.cshtml"
-                                          
-                                            double time = ((double)Model.Batches.Count / 1000);
-                                        
+            #line 334 "..\..\Views\Report\_Form.cshtml"
+                                                  
+                                                    double time = ((double)Model.Batches.Count / 1000);
+                                                
             
             #line default
             #line hidden
-WriteLiteral("\r\n                                        You will export export ");
+WriteLiteral("\r\n                                                You will export export ");
+
+            
+            #line 337 "..\..\Views\Report\_Form.cshtml"
+                                                                  Write(Model.Batches.Count);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" batches to csv<br>\r\n                                                Very aproxim" +
+"atly it will take ");
 
             
             #line 338 "..\..\Views\Report\_Form.cshtml"
-                                                          Write(Model.Batches.Count);
+                                                                         Write(time);
 
             
             #line default
             #line hidden
-WriteLiteral(" batches to csv<br>\r\n                                        Very aproximatly it " +
-"will take ");
-
-            
-            #line 339 "..\..\Views\Report\_Form.cshtml"
-                                                                 Write(time);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" s\r\n                                    </p>\r\n                                </d" +
-"iv>\r\n                                <div");
+WriteLiteral(" s\r\n                                            </p>\r\n                           " +
+"             </div>\r\n                                        <div");
 
 WriteLiteral(" class=\"modal-footer\"");
 
-WriteLiteral(">\r\n                                    <a");
+WriteLiteral(">\r\n                                            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 15262), Tuple.Create("\"", 15287)
-, Tuple.Create(Tuple.Create("", 15269), Tuple.Create<System.Object, System.Int32>(Href("~/Report/exportCSV")
-, 15269), false)
+WriteAttribute("href", Tuple.Create(" href=\"", 15390), Tuple.Create("\"", 15415)
+, Tuple.Create(Tuple.Create("", 15397), Tuple.Create<System.Object, System.Int32>(Href("~/Report/exportCSV")
+, 15397), false)
 );
 
 WriteLiteral(" style=\"margin:5px;\"");
@@ -938,7 +937,7 @@ WriteLiteral(" class=\"btn btn-sm btn-default\"");
 
 WriteLiteral(" onclick=\"closeDataModal()\"");
 
-WriteLiteral(">CSV Export</a>\r\n                                    <button");
+WriteLiteral(">CSV Export</a>\r\n                                            <button");
 
 WriteLiteral(" type=\"button\"");
 
@@ -946,27 +945,99 @@ WriteLiteral(" class=\"btn btn-default\"");
 
 WriteLiteral(" data-dismiss=\"modal\"");
 
-WriteLiteral(">Close</button>\r\n                                </div>\r\n                        " +
-"    </div>\r\n                        </div>\r\n                        </div>\r\n");
+WriteLiteral(">Close</button>\r\n                                        </div>\r\n                " +
+"                    </div>\r\n                                </div>\r\n            " +
+"                </div>\r\n");
 
             
-            #line 349 "..\..\Views\Report\_Form.cshtml"
+            #line 348 "..\..\Views\Report\_Form.cshtml"
                         }
 
             
             #line default
             #line hidden
-WriteLiteral("                    </div>\r\n                    </div>\r\n            </div>\r\n");
+WriteLiteral("                    </div>\r\n                </div>\r\n                <!-- recipes " +
+"multi field -->\r\n                <div");
+
+WriteLiteral(" class=\"form-item\"");
+
+WriteLiteral(">\r\n                    <div>\r\n");
+
+WriteLiteral("                        ");
 
             
-            #line 353 "..\..\Views\Report\_Form.cshtml"
+            #line 354 "..\..\Views\Report\_Form.cshtml"
+                   Write(Html.LabelFor(model => model.RecipesRanges));
 
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                    </div>\r\n                    <div>\r\n");
+
+WriteLiteral("                        ");
+
+            
+            #line 357 "..\..\Views\Report\_Form.cshtml"
+                   Write(Html.TextBoxFor(model => model.RecipesRanges, new { @class = "form-control", id = "recipes_numbers", onclick = "getValuesFromRcpMultiSelect()" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                    </div>\r\n                </div>\r\n                <!-- recipe" +
+"s multi select -->\r\n                <div");
+
+WriteLiteral(" class=\"form-group\"");
+
+WriteLiteral(">\r\n                    <div>\r\n");
+
+WriteLiteral("                        ");
+
+            
+            #line 363 "..\..\Views\Report\_Form.cshtml"
+                   Write(Html.LabelFor(model => model.RecipesNames));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                    </div>\r\n                    <div>\r\n");
+
+WriteLiteral("                        ");
+
+            
+            #line 366 "..\..\Views\Report\_Form.cshtml"
+                   Write(Html.ListBoxFor(model => model.RecipesNumbers, Model.RecipesNames, new { @class = "form-control", id = "recipes_multiselect", multiple = "multiple"}));
+
+            
+            #line default
+            #line hidden
+WriteLiteral(@"
+                        <script>
+                            function getValuesFromRcpMultiSelect() {
+                                console.log();
+                            }
+                            $(document).ready(function () {
+                                $(""#recipes_multiselect"").attr({
+                                    ""data-placeholder"": ""Select desired recipes"",
+                                });
+                                $(""#recipes_multiselect"").chosen({
+                                    width: ""100%"",
+                                    no_results_text: ""No recipe found!""
+                                });
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+");
+
+            
+            #line 384 "..\..\Views\Report\_Form.cshtml"
         }
 
             
             #line default
             #line hidden
-WriteLiteral("    </section>\r\n    \r\n</div>");
+WriteLiteral("    </section>\r\n</div>");
 
         }
     }

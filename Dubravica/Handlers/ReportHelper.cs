@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using Dubravica.Controllers;
 using Dubravica.Report.Models;
 using ServiceStack.Text;
@@ -10,6 +11,32 @@ namespace Dubravica.Handlers
 {
     public class ReportHelper
     {
+        public MultiSelectList getRecipesNames(string dbName)
+        {
+            List<object[]> results = new List<object[]>();
+            List<SelectListItem> recipes = new List<SelectListItem>();
+            db db = new db(dbName, 12);
+            string sql = "SELECT DISTINCT \"iRecipeNo\",\"sName\" FROM events WHERE \"iRecipeNo\" IN(SELECT DISTINCT \"iRecipeNo\" FROM events)";
+            results = db.multipleItemSelectPostgres(sql);
+            if (results != null)
+            {
+                foreach (object[] result in results)
+                {
+                    string recipeNumber = result[0].ToString();
+                    string recipeName = result[1].ToString();
+                    SelectListItem recipe = new SelectListItem();
+                    recipe.Text = recipeName;
+                    recipe.Value = recipeNumber;
+                    recipes.Add(recipe);
+                }
+            }
+
+            MultiSelectList recipelist = new MultiSelectList(recipes, "Value", "Text");
+
+            return recipelist;
+        }
+
+
         /// <summary>
         /// 
         /// </summary>

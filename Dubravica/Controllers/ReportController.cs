@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using Dubravica.Report.Models;
 using Dubravica.Handlers;
+using System.Linq;
 
 namespace Dubravica.Controllers
 {
@@ -31,7 +32,9 @@ namespace Dubravica.Controllers
             //ReportModel RVM = new ReportModel();
             //VM = SelectReports(RVM);
             //ViewBag.RVM = RVM;
+            ReportHelper reportHelper = new ReportHelper();
             ReportModel model = new ReportModel();
+            model.RecipesNames = reportHelper.getRecipesNames(Session["DB"].ToString());
             ViewBag.firstinit = true;
             Session["model"] = model;
             return View(model);
@@ -61,7 +64,11 @@ namespace Dubravica.Controllers
                 RedirectToAction("Index");
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Index(ReportModel model) {
             //DBConnnection();
@@ -72,6 +79,15 @@ namespace Dubravica.Controllers
             RVM = reportHelper.SelectReports(model, Session["DB"].ToString());
             int index = 0;
             uint[] batchIds = new uint[RVM.Batches.Count];
+            //Check if is set some recipe number which should be filtered
+            if (model.RecipesNumbers.Length > 0) {
+                List<int> rcpNumberList = model.RecipesNumbers.ToList();
+                //Saves all filtered batches back to model
+                RVM.Batches = RVM.Batches.Where(p => rcpNumberList.Contains(p.RecipeNo) == true).ToList();
+                RVM.RecipesNumbers = model.RecipesNumbers;
+                ReportModel reportModelhHelper = (ReportModel)Session["model"];
+                RVM.RecipesNames = reportModelhHelper.RecipesNames;
+            }
             foreach (Batch batch in RVM.Batches)
             {
                 batchIds[index] = batch.Id;

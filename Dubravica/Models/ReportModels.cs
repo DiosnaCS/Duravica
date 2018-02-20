@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace Dubravica.Report.Models
-{   
+{
 
     public class ReportModel
     {
         public Int32 ConvertDT2pkTime(DateTime dateTime)
         {
             DateTime pkTimeStart = DateTime.SpecifyKind(new DateTime(2000, 1, 1), DateTimeKind.Utc);
-            Int32 pkTime = 0;            
+            Int32 pkTime = 0;
             pkTime = (Int32)(dateTime.ToUniversalTime() - pkTimeStart).TotalSeconds;
 
             return pkTime;
@@ -57,11 +58,11 @@ namespace Dubravica.Report.Models
         [DataType(DataType.DateTime)]
         public DateTime DateTimeTo {
             get {
-                    return DateTimeFormTo;
+                return DateTimeFormTo;
             }
             set {
-                    DateTimeFormTo = value;
-                    pkTimeTo = ConvertDT2pkTime(value);
+                DateTimeFormTo = value;
+                pkTimeTo = ConvertDT2pkTime(value);
             }
         }
         public bool RecipeSel { get; set; }
@@ -82,12 +83,12 @@ namespace Dubravica.Report.Models
                 return sPar1Tol;
             }
             set {
-				if (value != null)
-				{
-					AmountTolerance = (int)(float.Parse(value) * Amount_coef);
-				}
-				else { }
-            } }        
+                if (value != null)
+                {
+                    AmountTolerance = (int)(float.Parse(value) * Amount_coef);
+                }
+                else { }
+            } }
         public const int Amount_coef = 1000;
         public int AmountTolerance { get; set; }
 
@@ -103,14 +104,14 @@ namespace Dubravica.Report.Models
             }
             set
             {
-				if (value != null)
-				{
-					TempTolerance = (int)(float.Parse(value) * Temp_coef);
-				}
-				else { }
+                if (value != null)
+                {
+                    TempTolerance = (int)(float.Parse(value) * Temp_coef);
+                }
+                else { }
             }
-        }        
-        public const int Temp_coef = 10;        
+        }
+        public const int Temp_coef = 10;
         public int TempTolerance { get; set; }
 
         // step time
@@ -125,14 +126,14 @@ namespace Dubravica.Report.Models
             }
             set
             {
-				if (value != null)
-				{
-					StepTimeTolerance = (int)(float.Parse(value) * StepTime_coef);
-				}
-				else { }
+                if (value != null)
+                {
+                    StepTimeTolerance = (int)(float.Parse(value) * StepTime_coef);
+                }
+                else { }
             }
         }
-        public const int StepTime_coef = 60;                
+        public const int StepTime_coef = 60;
         public int StepTimeTolerance { get; set; }
 
         // interstep time
@@ -147,15 +148,19 @@ namespace Dubravica.Report.Models
             }
             set
             {
-				if (value != null)
-				{
-					InterStepTimeTolerance = (int)(float.Parse(value) * InterStepTime_coef);
-				} else {}
+                if (value != null)
+                {
+                    InterStepTimeTolerance = (int)(float.Parse(value) * InterStepTime_coef);
+                } else { }
             }
         }
         public const int InterStepTime_coef = 60;
         public int InterStepTimeTolerance { get; set; }
-
+        [Display(Name = "Recipes ranges:")]
+        public string RecipesRanges { get; set; }
+        public int[] RecipesNumbers  { get; set; }
+        [Display(Name = "Recipes:")]
+        public MultiSelectList RecipesNames { get; set; }
 
         //Data should be also there
         public List<Batch> Batches = new List<Batch>(); //array of current batches 
