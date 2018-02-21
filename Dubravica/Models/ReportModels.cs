@@ -158,7 +158,7 @@ namespace Dubravica.Report.Models
         public int InterStepTimeTolerance { get; set; }
         [Display(Name = "Recipes ranges:")]
         public string RecipesRanges { get; set; }
-        public int[] RecipesNumbers  { get; set; }
+        public List<int> RecipesNumbers  { get; set; }
         [Display(Name = "Recipes:")]
         public MultiSelectList RecipesNames { get; set; }
 

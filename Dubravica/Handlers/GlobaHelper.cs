@@ -62,6 +62,22 @@ namespace Dubravica
             return array;
         }
 
+        /// <summary>
+        /// Add values into list 
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="fromValue"></param>
+        /// <param name="toValue"></param>
+        /// <returns></returns>
+        public static List<int> AddRangeOfValues(this List<int> list, int fromValue, int toValue) //Populate an array with value of T type
+        {
+            for (int i = 0; i < (toValue - fromValue); i++)
+            {
+                list.Add(fromValue + i);
+            }
+            return list;
+        }
+
         public static bool Exists<T>(T[] array, T value) //chack if exists a value in the array 
         {
             for (int i = 0; i < array.Length; i++)
