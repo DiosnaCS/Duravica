@@ -87,17 +87,18 @@ namespace Dubravica.Controllers
               //  RVM.Batches = RVM.Batches.Where(p => model.RecipesNumbers.Contains(p.RecipeNo) == true).ToList();
             //}
             //Check if there are some ranges of recipes numbers
-            if (model.RecipesRanges.Length > 0)
+            if (model.RecipesRanges != null)
             {
+                model.RecipesNumbers = new List<int>();
                 string[] ranges = model.RecipesRanges.Split(new char[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (string range in ranges)
                 {
                     string rangeTrimed = range.Trim();
                     int onlyNumber;
                     //solve single item if is it number
-                    if (model.RecipesNumbers == null) {
-                        model.RecipesNumbers = new List<int>();
-                    }
+                    //if (model.RecipesNumbers == null) {
+                      //model.RecipesNumbers = new List<int>();
+                    //}
                     if (int.TryParse(rangeTrimed, out onlyNumber) == true)
                     {
                         model.RecipesNumbers.Add(onlyNumber);
@@ -114,13 +115,13 @@ namespace Dubravica.Controllers
                 }
             }
             //Check if is set some recipe number which should be filtered
-            if (model.RecipesNumbers != null || model.RecipesRanges.Length > 0)
+            if (model.RecipesNumbers != null || model.RecipesRanges != null)
             {
                 RVM.Batches = RVM.Batches.Where(p => model.RecipesNumbers.Contains(p.RecipeNo) == true).ToList();
             }
             ReportModel reportModelhHelper = (ReportModel)Session["model"];
-            RVM.RecipesNames = reportModelhHelper.RecipesNames;
             RVM.RecipesNumbers = model.RecipesNumbers;
+            RVM.RecipesNames = model.RecipesNames;
             foreach (Batch batch in RVM.Batches)
             {
                 batchIds[index] = batch.Id;

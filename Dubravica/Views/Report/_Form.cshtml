@@ -345,7 +345,7 @@
                                     </div>
                                 </div>
                             </div>
-                        }
+                                                    }
                     </div>
                 </div>
                 <!-- recipes multi field -->
@@ -354,7 +354,8 @@
                         @Html.LabelFor(model => model.RecipesRanges)
                     </div>
                     <div>
-                        @Html.TextBoxFor(model => model.RecipesRanges, new { @class = "form-control", id = "recipes_numbers", onclick = "getValuesFromRcpMultiSelect()" })
+                        @{ string rcpRangesValue = ""; }
+                        @Html.TextBoxFor(model => model.RecipesRanges, new { @class = "form-control", id = "recipes_numbers", Value= rcpRangesValue })
                     </div>
                 </div>
                 <!-- recipes multi select -->
@@ -363,11 +364,12 @@
                         @Html.LabelFor(model => model.RecipesNames)
                     </div>
                     <div>
-                        @Html.ListBoxFor(model => model.RecipesNumbers, Model.RecipesNames, new { @class = "form-control", id = "recipes_multiselect", multiple = "multiple"})
+                        @{ var recipesNames = Model.RecipesNames.Items;}
+                        @{Model.RecipesNames = null;}
+                        @{Model.RecipesNames = new MultiSelectList(recipesNames, "Value", "Text");}
+
+                        @Html.ListBoxFor(model => model.RecipesNumbers, Model.RecipesNames, new { @class = "form-control", id = "recipes_multiselect", multiple = "multiple" })
                         <script>
-                            function getValuesFromRcpMultiSelect() {
-                                console.log();
-                            }
                             $(document).ready(function () {
                                 $("#recipes_multiselect").attr({
                                     "data-placeholder": "Select desired recipes",

@@ -71,7 +71,7 @@ namespace Dubravica
         /// <returns></returns>
         public static List<int> AddRangeOfValues(this List<int> list, int fromValue, int toValue) //Populate an array with value of T type
         {
-            for (int i = 0; i < (toValue - fromValue); i++)
+            for (int i = 0; i <= (toValue - fromValue); i++)
             {
                 list.Add(fromValue + i);
             }

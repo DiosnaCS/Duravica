@@ -951,7 +951,7 @@ WriteLiteral(">Close</button>\r\n                                        </div>\
 
             
             #line 348 "..\..\Views\Report\_Form.cshtml"
-                        }
+                                                    }
 
             
             #line default
@@ -974,11 +974,25 @@ WriteLiteral("                        ");
             #line hidden
 WriteLiteral("\r\n                    </div>\r\n                    <div>\r\n");
 
+            
+            #line 357 "..\..\Views\Report\_Form.cshtml"
+                        
+            
+            #line default
+            #line hidden
+            
+            #line 357 "..\..\Views\Report\_Form.cshtml"
+                           string rcpRangesValue = ""; 
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
 WriteLiteral("                        ");
 
             
-            #line 357 "..\..\Views\Report\_Form.cshtml"
-                   Write(Html.TextBoxFor(model => model.RecipesRanges, new { @class = "form-control", id = "recipes_numbers", onclick = "getValuesFromRcpMultiSelect()" }));
+            #line 358 "..\..\Views\Report\_Form.cshtml"
+                   Write(Html.TextBoxFor(model => model.RecipesRanges, new { @class = "form-control", id = "recipes_numbers", Value= rcpRangesValue }));
 
             
             #line default
@@ -993,7 +1007,7 @@ WriteLiteral(">\r\n                    <div>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 363 "..\..\Views\Report\_Form.cshtml"
+            #line 364 "..\..\Views\Report\_Form.cshtml"
                    Write(Html.LabelFor(model => model.RecipesNames));
 
             
@@ -1001,20 +1015,59 @@ WriteLiteral("                        ");
             #line hidden
 WriteLiteral("\r\n                    </div>\r\n                    <div>\r\n");
 
+            
+            #line 367 "..\..\Views\Report\_Form.cshtml"
+                        
+            
+            #line default
+            #line hidden
+            
+            #line 367 "..\..\Views\Report\_Form.cshtml"
+                           var recipesNames = Model.RecipesNames.Items;
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+            
+            #line 368 "..\..\Views\Report\_Form.cshtml"
+                        
+            
+            #line default
+            #line hidden
+            
+            #line 368 "..\..\Views\Report\_Form.cshtml"
+                          Model.RecipesNames = null;
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+            
+            #line 369 "..\..\Views\Report\_Form.cshtml"
+                        
+            
+            #line default
+            #line hidden
+            
+            #line 369 "..\..\Views\Report\_Form.cshtml"
+                          Model.RecipesNames = new MultiSelectList(recipesNames, "Value", "Text");
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n\r\n");
+
 WriteLiteral("                        ");
 
             
-            #line 366 "..\..\Views\Report\_Form.cshtml"
-                   Write(Html.ListBoxFor(model => model.RecipesNumbers, Model.RecipesNames, new { @class = "form-control", id = "recipes_multiselect", multiple = "multiple"}));
+            #line 371 "..\..\Views\Report\_Form.cshtml"
+                   Write(Html.ListBoxFor(model => model.RecipesNumbers, Model.RecipesNames, new { @class = "form-control", id = "recipes_multiselect", multiple = "multiple" }));
 
             
             #line default
             #line hidden
 WriteLiteral(@"
                         <script>
-                            function getValuesFromRcpMultiSelect() {
-                                console.log();
-                            }
                             $(document).ready(function () {
                                 $(""#recipes_multiselect"").attr({
                                     ""data-placeholder"": ""Select desired recipes"",
@@ -1031,7 +1084,7 @@ WriteLiteral(@"
 ");
 
             
-            #line 384 "..\..\Views\Report\_Form.cshtml"
+            #line 386 "..\..\Views\Report\_Form.cshtml"
         }
 
             

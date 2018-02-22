@@ -16,7 +16,7 @@ namespace Dubravica.Handlers
             List<object[]> results = new List<object[]>();
             List<SelectListItem> recipes = new List<SelectListItem>();
             db db = new db(dbName, 12);
-            string sql = "SELECT DISTINCT \"iRecipeNo\",\"sName\" FROM events WHERE \"iRecipeNo\" IN(SELECT DISTINCT \"iRecipeNo\" FROM events)";
+            string sql = "SELECT DISTINCT \"iRecipeNo\",\"sName\" FROM events WHERE \"iRecipeNo\" IN(SELECT DISTINCT \"iRecipeNo\" FROM events) ORDER BY \"iRecipeNo\" ASC";
             results = db.multipleItemSelectPostgres(sql);
             if (results != null)
             {
