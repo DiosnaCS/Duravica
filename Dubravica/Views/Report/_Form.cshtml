@@ -64,12 +64,12 @@
     }
     $('#date-time_from').datepicker();
 </script>
+@using (Html.BeginForm("Index", "Report", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+{
+    <div class="col-lg-12 form-inline">
+        <!-- pozdeji onclick tlacitka v menu -->
+        <section id="">
 
-<div>
-    <!-- pozdeji onclick tlacitka v menu -->
-    <section id="reportForm">
-        @using (Html.BeginForm("Index", "Report", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
-        {
             <div>
                 @Html.HiddenFor(model => model.StartId, new { @id = "start_id", @value = 0 })
                 @Html.HiddenFor(model => model.Count, new { @id = "count", @value = 60 })
@@ -78,6 +78,10 @@
                     int year, month, day, hours, minutes;
                     string datetimeToValue = "";
                     string datetimeFromValue = "";
+                    string datetimeFromDateVal = "";
+                    string datetimeFromTimeVal = "";
+                    string datetimeToDateVal = "";
+                    string datetimeToTimeVal = "";
                     if (Model.DateTimeFormFrom.Ticks == 0)
                     {
                         year = DateTime.Now.Year;
@@ -94,7 +98,6 @@
                         hours = Model.DateTimeFormFrom.Hour;
                         minutes = Model.DateTimeFormFrom.Minute;
                     }
-
                     string smonth = month.ToString();
                     string sday = day.ToString();
                     string shours = hours.ToString();
@@ -122,7 +125,8 @@
                     }
 
                     datetimeFromValue = year + "-" + smonth + "-" + sday + "T" + shours + ":" + sminutes;
-
+                    datetimeFromDateVal = year + "-" + smonth + "-" + sday;
+                    datetimeFromTimeVal = shours + ":" + sminutes;
                     if (Model.DateTimeFormTo.Ticks == 0)
                     {
                         year = DateTime.Now.Year;
@@ -164,6 +168,8 @@
                         sminutes = "0" + minutes;
                     }
                     datetimeToValue = year + "-" + smonth + "-" + sday + "T" + shours + ":" + sminutes;
+                    datetimeToDateVal = year + "-" + smonth + "-" + sday;
+                    datetimeToTimeVal = shours + ":" + sminutes;
                     bool recipeSel = false, par0 = false, par1 = false, par2 = false, par3 = false, par4 = false;
                     if (Model.RecipeSel == true)
                     {
@@ -192,25 +198,29 @@
                 }
 
                 <!-- time from -->
-                <div class="form-item">
+                <div class="form-group input-sm col-md-2">
                     <div>
                         @Html.LabelFor(model => model.DateTimeFormFrom)
                     </div>
                     <div>
-                        @Html.TextBoxFor(model => model.DateTimeFrom, new { @class = "date-time", id = "date-time_from", type = "datetime-local", Value = @datetimeFromValue })
+                        @*@Html.TextBoxFor(model => model.DateTimeFrom, new { @class = "date-time", id = "date-time_from", type = "datetime-local", Value = @datetimeFromValue })*@
+                        @Html.TextBoxFor(model => model.DateTimeFormFromDate, new { @class = "form-control input-sm", id = "date-time_from", type = "date", Value = @datetimeFromDateVal })
+                        @Html.TextBoxFor(model => model.DateTimeFormFromTime, new { @class = "form-control input-sm", id = "date-time_from", type = "time", Value = @datetimeFromTimeVal })
                     </div>
                 </div>
                 <!-- time to -->
-                <div class="form-item">
+                <div class="form-group input-sm col-md-2">
                     <div>
                         @Html.LabelFor(model => model.DateTimeFormTo)
                     </div>
                     <div>
-                        @Html.TextBoxFor(model => model.DateTimeTo, new { @id = "date-time_to", @class = "date-time", @type = "datetime-local", Value = @datetimeToValue })
+                        @*@@Html.TextBoxFor(model => model.DateTimeTo, new { @id = "date-time_to", @class = "date-time", @type = "datetime-local", Value = @datetimeToValue })*@
+                        @Html.TextBoxFor(model => model.DateTimeFormFromDate, new { @class = "form-control input-sm", id = "date-time_from", type = "date", Value = datetimeToDateVal })
+                        @Html.TextBoxFor(model => model.DateTimeFormFromTime, new { @class = "form-control input-sm", id = "date-time_from", type = "time", Value = datetimeToTimeVal })
                     </div>
                 </div>
                 <!-- rcpNo-->
-                <div class="form-item">
+                <div class="form-group">
                     <div>
                         @Html.CheckBoxFor(model => model.RecipeSel, new { @onclick = "InputEnable(this, recipe)", @checked = recipeSel })
                         @Html.LabelFor(model => model.Recipe)
@@ -227,7 +237,7 @@
                     </div>
                 </div>
                 <!-- amount -->
-                <div class="form-item">
+                <div class="form-group">
                     <div>
                         @Html.CheckBoxFor(model => model.Par1Sel, new { @onclick = "InputEnable(this, tol1)", @checked = par1 })
                         @Html.LabelFor(model => model.Par1Sel)
@@ -247,7 +257,7 @@
 
                 </div>
                 <!-- temperature -->
-                <div class="form-item">
+                <div class="form-group">
                     <div>
                         @Html.CheckBoxFor(model => model.Par2Sel, new { @onclick = "InputEnable(this, tol2)", @checked = par2 })
                         @Html.LabelFor(model => model.Par2Sel)
@@ -266,7 +276,7 @@
                     </div>
                 </div>
                 <!-- step time -->
-                <div class="form-item">
+                <div class="form-group">
                     <div>
                         @Html.CheckBoxFor(model => model.Par3Sel, new { @onclick = "InputEnable(this, tol3)", @checked = par3 })
                         @Html.LabelFor(model => model.Par3Sel)
@@ -285,7 +295,7 @@
                     </div>
                 </div>
                 <!-- interstep time -->
-                <div class="form-item">
+                <div class="form-group">
                     <div>
                         @Html.CheckBoxFor(model => model.Par4Sel, new { @onclick = "InputEnable(this, tol4)", @checked = par4 })
                         @Html.LabelFor(model => model.Par4Sel)
@@ -304,85 +314,85 @@
                     </div>
                 </div>
                 <!-- over Rcp limits -->
-                <div class="form-item">
+                <div class="form-group">
                     <div class="checkbox md">
                         @Html.CheckBoxFor(model => model.Par0Sel, new { @checked = par0 })
                         @Html.LabelFor(model => model.Par0Sel)
                     </div>
                 </div>
                 <!-- Buttons -->
-                <div class="form-item">
+                <div class="form-group">
                     <div>
                         <!-- old code of this button: style="display: block; float: right; margin-left: 15px; padding: 2px 2px 2px 2px;" -->
                         <input style="margin: 5px;" class="btn btn-default" type="submit" value="Submit" />
                     </div>
                     <div>
-                        @if (Model.Batches.Count > 0)
-                        {
-                            <button data-toggle="modal" data-target="#exportModal" style="margin:5px;" class="btn btn-sm btn-default">CSV Export</button>
-                            <div id="exportModal" class="modal fade" role="dialog">
-                                <div class="modal-dialog">
+                        <button data-toggle="modal" data-target="#exportModal" style="margin:5px;" class="btn btn-sm btn-default">CSV Export</button>
+                        <div id="exportModal" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
 
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">Batch report export to CSV</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>
-                                                @{
-                                                    double time = ((double)Model.Batches.Count / 1000);
-                                                }
-                                                You will export export @Model.Batches.Count batches to csv<br>
-                                                Very aproximatly it will take @time s
-                                            </p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <a href="~/Report/exportCSV" style="margin:5px;" class="btn btn-sm btn-default" onclick="closeDataModal()">CSV Export</a>
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        </div>
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Batch report export to CSV</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>
+                                            @{
+                                                double time = ((double)Model.Batches.Count / 1000);
+                                            }
+                                            You will export export @Model.Batches.Count batches to csv<br>
+                                            Very aproximatly it will take @time s
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="~/Report/exportCSV" style="margin:5px;" class="btn btn-sm btn-default" onclick="closeDataModal()">CSV Export</a>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
                             </div>
-                                                    }
-                    </div>
-                </div>
-                <!-- recipes multi field -->
-                <div class="form-item">
-                    <div>
-                        @Html.LabelFor(model => model.RecipesRanges)
-                    </div>
-                    <div>
-                        @{ string rcpRangesValue = ""; }
-                        @Html.TextBoxFor(model => model.RecipesRanges, new { @class = "form-control", id = "recipes_numbers", Value= rcpRangesValue })
-                    </div>
-                </div>
-                <!-- recipes multi select -->
-                <div class="form-group">
-                    <div>
-                        @Html.LabelFor(model => model.RecipesNames)
-                    </div>
-                    <div>
-                        @{ var recipesNames = Model.RecipesNames.Items;}
-                        @{Model.RecipesNames = null;}
-                        @{Model.RecipesNames = new MultiSelectList(recipesNames, "Value", "Text");}
-
-                        @Html.ListBoxFor(model => model.RecipesNumbers, Model.RecipesNames, new { @class = "form-control", id = "recipes_multiselect", multiple = "multiple" })
-                        <script>
-                            $(document).ready(function () {
-                                $("#recipes_multiselect").attr({
-                                    "data-placeholder": "Select desired recipes",
-                                });
-                                $("#recipes_multiselect").chosen({
-                                    width: "100%",
-                                    no_results_text: "No recipe found!"
-                                });
-                            });
-                        </script>
+                        </div>
                     </div>
                 </div>
             </div>
-        }
-    </section>
-</div>
+        </section>
+    </div>
+    <br>
+    <div class="col-md-12">
+        <!-- recipes multi field -->
+        <div class="col-md-3">
+            <div>
+                @Html.LabelFor(model => model.RecipesRanges)
+            </div>
+            <div>
+                @{ string rcpRangesValue = ""; }
+                @Html.TextBoxFor(model => model.RecipesRanges, new { @class = "form-control input-sm", id = "recipes_numbers", Value = rcpRangesValue })
+            </div>
+        </div>
+        <!-- recipes multi select -->
+        <div class="col-md-9">
+            <div>
+                @Html.LabelFor(model => model.RecipesNames)
+            </div>
+            <div>
+                @*@for (int i = 0; i < ViewBag.names[i]; i++) {
+                    @Html.ListBoxFor(model => model.RecipesNumbers2, new MultiSelectList { ViewBag.names[i], new { @class = "form-control", id = "recipes_multiselect2", multiple = "multiple" })
+                    }*@
+                @Html.ListBoxFor(model => model.RecipesNumbers, Model.RecipesNames, new { @class = "form-control", id = "recipes_multiselect", multiple = "multiple" })
+                <script>
+                    $(document).ready(function () {
+                        $("#recipes_multiselect").attr({
+                            "data-placeholder": "Select desired recipes",
+                        });
+                        $("#recipes_multiselect").chosen({
+                            width: "100%",
+                            no_results_text: "No recipe found!"
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+        <br />
+    </div>
+}

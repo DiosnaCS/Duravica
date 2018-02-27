@@ -616,8 +616,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Config\" />
-    <Folder Include="img\" />
-    <Folder Include="obj\" />
     <Folder Include="packages\" />
     <Folder Include="Views\Alarm\" />
     <Folder Include="Views\CMS\" />

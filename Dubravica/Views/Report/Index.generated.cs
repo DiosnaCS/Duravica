@@ -72,30 +72,30 @@ Write(Html.Partial("_Form"));
             
             #line default
             #line hidden
-WriteLiteral("\r\n");
+WriteLiteral("\r\n    <br>\r\n    <br>\r\n");
 
             
-            #line 10 "..\..\Views\Report\Index.cshtml"
+            #line 12 "..\..\Views\Report\Index.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 10 "..\..\Views\Report\Index.cshtml"
+            #line 12 "..\..\Views\Report\Index.cshtml"
      if (ViewBag.Steps != null) {
     
             
             #line default
             #line hidden
             
-            #line 11 "..\..\Views\Report\Index.cshtml"
+            #line 13 "..\..\Views\Report\Index.cshtml"
 Write(Html.Partial("_Detail"));
 
             
             #line default
             #line hidden
             
-            #line 11 "..\..\Views\Report\Index.cshtml"
+            #line 13 "..\..\Views\Report\Index.cshtml"
                             
     }
 
@@ -107,7 +107,7 @@ WriteLiteral("    <hr>\r\n");
 WriteLiteral("    ");
 
             
-            #line 14 "..\..\Views\Report\Index.cshtml"
+            #line 16 "..\..\Views\Report\Index.cshtml"
 Write(Html.Partial("_Overview"));
 
             

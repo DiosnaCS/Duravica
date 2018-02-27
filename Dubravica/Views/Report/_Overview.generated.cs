@@ -70,89 +70,90 @@ WriteLiteral(">\r\n");
             #line 13 "..\..\Views\Report\_Overview.cshtml"
       if (Model.Batches != null)
         {
-
-            
-            #line default
-            #line hidden
-WriteLiteral(@"            <tr>
-                <!--<th style=""width: 65px"">Batch No.</th>
-                <th style=""width: 155px"">Start</th>
-                <th style=""width: 155px"">End</th>
-                <th>Product</th>
-                <th style=""width: 55px;"">Recipe</th>
-                <th style=""width: 150px"">Differences</th> -->
-                <th>Batch No.</th>
-                <th>Start</th>
-                <th>End</th>
-                <th>Product</th>
-                <th>Recipe</th>
-                <th>Differences</th>
-            </tr>
-");
-
-            
-            #line 29 "..\..\Views\Report\_Overview.cshtml"
-            int i = 0;
-            foreach (Batch batch in Model.Batches)
-            {
-                
-            
-            #line default
-            #line hidden
-            
-            #line 32 "..\..\Views\Report\_Overview.cshtml"
-                                  
+            if (Model.Batches.Count > 0) { 
 
             
             #line default
             #line hidden
 WriteLiteral("                <tr");
 
-WriteAttribute("onclick", Tuple.Create(" onclick=\"", 1251), Tuple.Create("\"", 1280)
-, Tuple.Create(Tuple.Create("", 1261), Tuple.Create("getBatch(", 1261), true)
+WriteLiteral(" style=\"background-color:silver;\"");
+
+WriteLiteral(@">
+                    <th>Batch No.</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Product</th>
+                    <th>Recipe</th>
+                    <th>Differences</th>
+                    <th>Status</th>
+                </tr>
+");
+
             
-            #line 33 "..\..\Views\Report\_Overview.cshtml"
-, Tuple.Create(Tuple.Create("", 1270), Tuple.Create<System.Object, System.Int32>(batch.Id
+            #line 25 "..\..\Views\Report\_Overview.cshtml"
+            
+                int i = 0;
+                foreach (Batch batch in Model.Batches)
+                {
+                    
             
             #line default
             #line hidden
-, 1270), false)
-, Tuple.Create(Tuple.Create("", 1279), Tuple.Create(")", 1279), true)
+            
+            #line 29 "..\..\Views\Report\_Overview.cshtml"
+                                      
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                    <tr");
+
+WriteAttribute("onclick", Tuple.Create(" onclick=\"", 1117), Tuple.Create("\"", 1146)
+, Tuple.Create(Tuple.Create("", 1127), Tuple.Create("getBatch(", 1127), true)
+            
+            #line 30 "..\..\Views\Report\_Overview.cshtml"
+, Tuple.Create(Tuple.Create("", 1136), Tuple.Create<System.Object, System.Int32>(batch.Id
+            
+            #line default
+            #line hidden
+, 1136), false)
+, Tuple.Create(Tuple.Create("", 1145), Tuple.Create(")", 1145), true)
 );
 
 WriteLiteral(" style=\"cursor: pointer;\"");
 
-WriteLiteral(">\r\n                    <td");
+WriteLiteral(">\r\n                        <td");
 
 WriteLiteral(" id=\"BatchNo\"");
 
 WriteLiteral(">");
 
             
-            #line 34 "..\..\Views\Report\_Overview.cshtml"
-                                Write(batch.Id);
+            #line 31 "..\..\Views\Report\_Overview.cshtml"
+                                    Write(batch.Id);
 
             
             #line default
             #line hidden
-WriteLiteral("</td>\r\n                    <td");
+WriteLiteral("</td>\r\n                        <td");
 
-WriteAttribute("id", Tuple.Create(" id=\"", 1385), Tuple.Create("\"", 1400)
-, Tuple.Create(Tuple.Create("", 1390), Tuple.Create("startDT_", 1390), true)
+WriteAttribute("id", Tuple.Create(" id=\"", 1259), Tuple.Create("\"", 1274)
+, Tuple.Create(Tuple.Create("", 1264), Tuple.Create("startDT_", 1264), true)
             
-            #line 35 "..\..\Views\Report\_Overview.cshtml"
-, Tuple.Create(Tuple.Create("", 1398), Tuple.Create<System.Object, System.Int32>(i
+            #line 32 "..\..\Views\Report\_Overview.cshtml"
+, Tuple.Create(Tuple.Create("", 1272), Tuple.Create<System.Object, System.Int32>(i
             
             #line default
             #line hidden
-, 1398), false)
+, 1272), false)
 );
 
 WriteLiteral(">");
 
             
-            #line 35 "..\..\Views\Report\_Overview.cshtml"
-                                   Write(batch.StartTime);
+            #line 32 "..\..\Views\Report\_Overview.cshtml"
+                                       Write(batch.StartTime);
 
             
             #line default
@@ -160,47 +161,78 @@ WriteLiteral(">");
 WriteLiteral("</td>\r\n");
 
             
-            #line 36 "..\..\Views\Report\_Overview.cshtml"
-                    
+            #line 33 "..\..\Views\Report\_Overview.cshtml"
+                        
             
             #line default
             #line hidden
             
-            #line 36 "..\..\Views\Report\_Overview.cshtml"
-                     if (batch.EndTime.Year < 2016) {
+            #line 33 "..\..\Views\Report\_Overview.cshtml"
+                         if (batch.EndTime.Year < 2016) {
 
             
             #line default
             #line hidden
-WriteLiteral("                        <td><b>No end</b></td>\r\n");
+WriteLiteral("                            <td><b>No end</b></td>\r\n");
 
+            
+            #line 35 "..\..\Views\Report\_Overview.cshtml"
+                        }
+                        else
+                        {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                            <td");
+
+WriteAttribute("id", Tuple.Create(" id=\"", 1525), Tuple.Create("\"", 1538)
+, Tuple.Create(Tuple.Create("", 1530), Tuple.Create("endDT_", 1530), true)
             
             #line 38 "..\..\Views\Report\_Overview.cshtml"
-                    }
-                    else
-                    {
-
+, Tuple.Create(Tuple.Create("", 1536), Tuple.Create<System.Object, System.Int32>(i
             
             #line default
             #line hidden
-WriteLiteral("                        <td");
-
-WriteAttribute("id", Tuple.Create(" id=\"", 1627), Tuple.Create("\"", 1640)
-, Tuple.Create(Tuple.Create("", 1632), Tuple.Create("endDT_", 1632), true)
-            
-            #line 41 "..\..\Views\Report\_Overview.cshtml"
-, Tuple.Create(Tuple.Create("", 1638), Tuple.Create<System.Object, System.Int32>(i
-            
-            #line default
-            #line hidden
-, 1638), false)
+, 1536), false)
 );
 
 WriteLiteral(">");
 
             
+            #line 38 "..\..\Views\Report\_Overview.cshtml"
+                                         Write(batch.EndTime);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</td>\r\n");
+
+            
+            #line 39 "..\..\Views\Report\_Overview.cshtml"
+                        }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                        <td>");
+
+            
+            #line 40 "..\..\Views\Report\_Overview.cshtml"
+                       Write(batch.RecipeName);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</td>\r\n                        <td");
+
+WriteLiteral(" id=\"recipeno\"");
+
+WriteLiteral(">");
+
+            
             #line 41 "..\..\Views\Report\_Overview.cshtml"
-                                     Write(batch.EndTime);
+                                     Write(batch.RecipeNo);
 
             
             #line default
@@ -209,115 +241,85 @@ WriteLiteral("</td>\r\n");
 
             
             #line 42 "..\..\Views\Report\_Overview.cshtml"
-                    }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                    <td>");
-
-            
-            #line 43 "..\..\Views\Report\_Overview.cshtml"
-                   Write(batch.RecipeName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n                    <td");
-
-WriteLiteral(" id=\"recipeno\"");
-
-WriteLiteral(">");
-
-            
-            #line 44 "..\..\Views\Report\_Overview.cshtml"
-                                 Write(batch.RecipeNo);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</td>\r\n");
-
-            
-            #line 45 "..\..\Views\Report\_Overview.cshtml"
-                    
+                        
             
             #line default
             #line hidden
             
-            #line 45 "..\..\Views\Report\_Overview.cshtml"
-                       string title = ""; 
+            #line 42 "..\..\Views\Report\_Overview.cshtml"
+                           string title = ""; 
             
             #line default
             #line hidden
 WriteLiteral("\r\n");
 
             
-            #line 46 "..\..\Views\Report\_Overview.cshtml"
-                    
+            #line 43 "..\..\Views\Report\_Overview.cshtml"
+                        
             
             #line default
             #line hidden
             
-            #line 46 "..\..\Views\Report\_Overview.cshtml"
-                     if (batch.maxDiffAM != 0 || batch.minDiffAM != 0) { title += "Amount diff-" + "MAX: " + Math.Round((double)batch.maxDiffAM / 1000, 3) + "kg MIN: " + Math.Round((double)batch.minDiffAM / 1000, 3) + "kg \n"; }
+            #line 43 "..\..\Views\Report\_Overview.cshtml"
+                         if (batch.maxDiffAM != 0 || batch.minDiffAM != 0) { title += "Amount diff-" + "MAX: " + Math.Round((double)batch.maxDiffAM / 1000, 3) + "kg MIN: " + Math.Round((double)batch.minDiffAM / 1000, 3) + "kg \n"; }
 
             
             #line default
             #line hidden
-WriteLiteral("                    ");
+WriteLiteral("                        ");
 
+            
+            #line 44 "..\..\Views\Report\_Overview.cshtml"
+                         if (batch.maxDiffTemp != 0 || batch.minDiffTemp != 0) { title += "Temperature diff-" + "MAX: " + Math.Round((double)batch.maxDiffTemp / 10, 1) + "°C MIN: " + Math.Round((double)batch.minDiffTemp / 10, 2) + "°C \n"; }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                        ");
+
+            
+            #line 45 "..\..\Views\Report\_Overview.cshtml"
+                         if (batch.maxDiffST != 0 || batch.minDiffST != 0) { title += "steptime diff- MAX: " + Math.Round((double)batch.maxDiffST / 60, 2) + "min MIN: " + Math.Round((double)batch.minDiffST / 60, 2) + "min \n"; }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                        ");
+
+            
+            #line 46 "..\..\Views\Report\_Overview.cshtml"
+                         if (batch.maxDiffIST != 0 || batch.minDiffIST != 0) { title += "Inter step time diff- MAX: " + Math.Round((double)batch.maxDiffIST / 60, 2) + "min MIN: " + Math.Round((double)batch.minDiffIST / 60, 2) + "min \n"; }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                        <td");
+
+WriteAttribute("title", Tuple.Create(" title=\"", 2728), Tuple.Create("\"", 2742)
             
             #line 47 "..\..\Views\Report\_Overview.cshtml"
-                     if (batch.maxDiffTemp != 0 || batch.minDiffTemp != 0) { title += "Temperature diff-" + "MAX: " + Math.Round((double)batch.maxDiffTemp / 10, 1) + "°C MIN: " + Math.Round((double)batch.minDiffTemp / 10, 2) + "°C \n"; }
-
+, Tuple.Create(Tuple.Create("", 2736), Tuple.Create<System.Object, System.Int32>(title
             
             #line default
             #line hidden
-WriteLiteral("                    ");
-
-            
-            #line 48 "..\..\Views\Report\_Overview.cshtml"
-                     if (batch.maxDiffST != 0 || batch.minDiffST != 0) { title += "steptime diff- MAX: " + Math.Round((double)batch.maxDiffST / 60, 2) + "min MIN: " + Math.Round((double)batch.minDiffST / 60, 2) + "min \n"; }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                    ");
-
-            
-            #line 49 "..\..\Views\Report\_Overview.cshtml"
-                     if (batch.maxDiffIST != 0 || batch.minDiffIST != 0) { title += "Inter step time diff- MAX: " + Math.Round((double)batch.maxDiffIST / 60, 2) + "min MIN: " + Math.Round((double)batch.minDiffIST / 60, 2) + "min \n"; }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                    <td");
-
-WriteAttribute("title", Tuple.Create(" title=\"", 2794), Tuple.Create("\"", 2808)
-            
-            #line 50 "..\..\Views\Report\_Overview.cshtml"
-, Tuple.Create(Tuple.Create("", 2802), Tuple.Create<System.Object, System.Int32>(title
-            
-            #line default
-            #line hidden
-, 2802), false)
+, 2736), false)
 );
 
 WriteLiteral("><span><b>");
 
             
-            #line 50 "..\..\Views\Report\_Overview.cshtml"
-                                           Write(batch.status);
+            #line 47 "..\..\Views\Report\_Overview.cshtml"
+                                               Write(batch.status);
 
             
             #line default
             #line hidden
-WriteLiteral("</b></span></td>\r\n                </tr>\r\n");
+WriteLiteral("</b></span></td>\r\n                    </tr>\r\n");
 
             
-            #line 52 "..\..\Views\Report\_Overview.cshtml"
-                i++;
+            #line 49 "..\..\Views\Report\_Overview.cshtml"
+                    i++;
+                }
             }
         }
     
@@ -339,7 +341,7 @@ WriteLiteral(@"
 ");
 
             
-            #line 67 "..\..\Views\Report\_Overview.cshtml"
+            #line 65 "..\..\Views\Report\_Overview.cshtml"
  for(int i=0; i < Model.Batches.Count;i++) { 
 
             
@@ -348,7 +350,7 @@ WriteLiteral(@"
 WriteLiteral("    <script>\r\n            var year = ");
 
             
-            #line 69 "..\..\Views\Report\_Overview.cshtml"
+            #line 67 "..\..\Views\Report\_Overview.cshtml"
                   Write(Model.Batches[i].StartTime.Year);
 
             
@@ -357,7 +359,7 @@ WriteLiteral("    <script>\r\n            var year = ");
 WriteLiteral(";\r\n            var month = ");
 
             
-            #line 70 "..\..\Views\Report\_Overview.cshtml"
+            #line 68 "..\..\Views\Report\_Overview.cshtml"
                    Write(Model.Batches[i].StartTime.Month);
 
             
@@ -366,7 +368,7 @@ WriteLiteral(";\r\n            var month = ");
 WriteLiteral(";\r\n            var day = ");
 
             
-            #line 71 "..\..\Views\Report\_Overview.cshtml"
+            #line 69 "..\..\Views\Report\_Overview.cshtml"
                  Write(Model.Batches[i].StartTime.Day);
 
             
@@ -375,7 +377,7 @@ WriteLiteral(";\r\n            var day = ");
 WriteLiteral(";\r\n            var hour = ");
 
             
-            #line 72 "..\..\Views\Report\_Overview.cshtml"
+            #line 70 "..\..\Views\Report\_Overview.cshtml"
                   Write(Model.Batches[i].StartTime.Hour);
 
             
@@ -384,7 +386,7 @@ WriteLiteral(";\r\n            var hour = ");
 WriteLiteral(";\r\n            var minute = ");
 
             
-            #line 73 "..\..\Views\Report\_Overview.cshtml"
+            #line 71 "..\..\Views\Report\_Overview.cshtml"
                     Write(Model.Batches[i].StartTime.Minute);
 
             
@@ -393,7 +395,7 @@ WriteLiteral(";\r\n            var minute = ");
 WriteLiteral(";\r\n            var second = ");
 
             
-            #line 74 "..\..\Views\Report\_Overview.cshtml"
+            #line 72 "..\..\Views\Report\_Overview.cshtml"
                     Write(Model.Batches[i].StartTime.Second);
 
             
@@ -404,7 +406,7 @@ WriteLiteral(";\r\n            var date = new Date(year, month - 1, day, hour, m
 "entById(\"startDT_\" + \"");
 
             
-            #line 77 "..\..\Views\Report\_Overview.cshtml"
+            #line 75 "..\..\Views\Report\_Overview.cshtml"
                                              Write(i);
 
             
@@ -413,7 +415,7 @@ WriteLiteral(";\r\n            var date = new Date(year, month - 1, day, hour, m
 WriteLiteral("\").innerHTML = localDateTime;\r\n    </script>\r\n");
 
             
-            #line 79 "..\..\Views\Report\_Overview.cshtml"
+            #line 77 "..\..\Views\Report\_Overview.cshtml"
 
     if (Model.Batches[i].EndTime.Year < 2016) {
 
@@ -423,7 +425,7 @@ WriteLiteral("\").innerHTML = localDateTime;\r\n    </script>\r\n");
 WriteLiteral("        <script>\r\n            var yearExp = ");
 
             
-            #line 82 "..\..\Views\Report\_Overview.cshtml"
+            #line 80 "..\..\Views\Report\_Overview.cshtml"
                      Write(Model.Batches[i].EndTime.Year);
 
             
@@ -432,7 +434,7 @@ WriteLiteral("        <script>\r\n            var yearExp = ");
 WriteLiteral(";\r\n            var monthExp = ");
 
             
-            #line 83 "..\..\Views\Report\_Overview.cshtml"
+            #line 81 "..\..\Views\Report\_Overview.cshtml"
                       Write(Model.Batches[i].EndTime.Month);
 
             
@@ -441,7 +443,7 @@ WriteLiteral(";\r\n            var monthExp = ");
 WriteLiteral(";\r\n            var dayExp = ");
 
             
-            #line 84 "..\..\Views\Report\_Overview.cshtml"
+            #line 82 "..\..\Views\Report\_Overview.cshtml"
                     Write(Model.Batches[i].EndTime.Day);
 
             
@@ -450,7 +452,7 @@ WriteLiteral(";\r\n            var dayExp = ");
 WriteLiteral(";\r\n            var hourExp = ");
 
             
-            #line 85 "..\..\Views\Report\_Overview.cshtml"
+            #line 83 "..\..\Views\Report\_Overview.cshtml"
                      Write(Model.Batches[i].EndTime.Hour);
 
             
@@ -459,7 +461,7 @@ WriteLiteral(";\r\n            var hourExp = ");
 WriteLiteral(";\r\n            var minuteExp = ");
 
             
-            #line 86 "..\..\Views\Report\_Overview.cshtml"
+            #line 84 "..\..\Views\Report\_Overview.cshtml"
                        Write(Model.Batches[i].EndTime.Minute);
 
             
@@ -468,7 +470,7 @@ WriteLiteral(";\r\n            var minuteExp = ");
 WriteLiteral(";\r\n            var secondExp = ");
 
             
-            #line 87 "..\..\Views\Report\_Overview.cshtml"
+            #line 85 "..\..\Views\Report\_Overview.cshtml"
                        Write(Model.Batches[i].EndTime.Second);
 
             
@@ -479,7 +481,7 @@ WriteLiteral(";\r\n            var expDate = new Date(yearExp, monthExp - 1, day
 "\n            document.getElementById(\"endDT_\" + \"");
 
             
-            #line 91 "..\..\Views\Report\_Overview.cshtml"
+            #line 89 "..\..\Views\Report\_Overview.cshtml"
                                            Write(i);
 
             
@@ -488,7 +490,7 @@ WriteLiteral(";\r\n            var expDate = new Date(yearExp, monthExp - 1, day
 WriteLiteral("\").innerHTML = localExpDateTime;\r\n        </script>\r\n");
 
             
-            #line 93 "..\..\Views\Report\_Overview.cshtml"
+            #line 91 "..\..\Views\Report\_Overview.cshtml"
     }
 }
 

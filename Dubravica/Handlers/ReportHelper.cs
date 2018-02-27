@@ -16,7 +16,8 @@ namespace Dubravica.Handlers
             List<object[]> results = new List<object[]>();
             List<SelectListItem> recipes = new List<SelectListItem>();
             db db = new db(dbName, 12);
-            string sql = "SELECT DISTINCT \"iRecipeNo\",\"sName\" FROM events WHERE \"iRecipeNo\" IN(SELECT DISTINCT \"iRecipeNo\" FROM events) ORDER BY \"iRecipeNo\" ASC";
+            //string sql = "SELECT DISTINCT \"iRecipeNo\",\"sName\" FROM events WHERE \"iRecipeNo\" IN(SELECT DISTINCT \"iRecipeNo\" FROM events) ORDER BY \"iRecipeNo\" ASC";
+            string sql = "SELECT DISTINCT MAX(\"iRecipeNo\"),\"sName\" FROM events WHERE \"iRecipeNo\" IN(SELECT DISTINCT \"iRecipeNo\" FROM events GROUP BY \"iRecipeNo\")GROUP BY \"sName\"";
             results = db.multipleItemSelectPostgres(sql);
             if (results != null)
             {
@@ -30,7 +31,7 @@ namespace Dubravica.Handlers
                     recipes.Add(recipe);
                 }
             }
-
+            recipes = recipes.OrderBy(p => int.Parse(p.Value)).ToList();
             MultiSelectList recipelist = new MultiSelectList(recipes, "Value", "Text");
 
             return recipelist;

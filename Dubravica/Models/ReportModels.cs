@@ -31,18 +31,25 @@ namespace Dubravica.Report.Models
 
         // date time from
         [Display(Name = "From:")]
-        public DateTime DateTimeFormFrom { get; set; }
+        public DateTime DateTimeFormFrom {
+            get {
+                DateTime dateTime = new DateTime(DateTimeFormFromDate.Year, DateTimeFormFromDate.Month, DateTimeFormFromDate.Day, DateTimeFormFromTime.Hour, DateTimeFormFromTime.Minute, 0);
+                return dateTime;
+            }
+            set {
+                DateTimeFormTo = value;
+            }
+        }
+        public DateTime DateTimeFormFromDate { get; set; }
+        public DateTime DateTimeFormFromTime { get; set; }
         [DataType(DataType.DateTime)]
         public DateTime DateTimeFrom {
-            get
-            {
-                if (DateTimeFormTo.Ticks == 0)
-                {
+            get {
+                if (DateTimeFormTo.Ticks == 0)  {
                     pkTimeFrom = ConvertDT2pkTime(new DateTime(DateTime.Now.Ticks - 864000000000));
                     return DateTimeFormTo;
                 }
-                else
-                {
+                else {
                     return DateTimeFormTo;
                 }
             }
@@ -54,7 +61,16 @@ namespace Dubravica.Report.Models
 
         // date time to
         [Display(Name = "To:")]
-        public DateTime DateTimeFormTo { get; set; }
+        public DateTime DateTimeFormTo {
+            get {
+                DateTime dateTime = new DateTime(DateTimeFormToDate.Year, DateTimeFormToDate.Month, DateTimeFormToDate.Day, DateTimeFormToTime.Hour, DateTimeFormToDate.Minute, 0);
+                return dateTime;
+            }
+                set {
+                DateTimeFormTo = value;
+            } }
+        public DateTime DateTimeFormToDate { get; set; }
+        public DateTime DateTimeFormToTime { get; set; }
         [DataType(DataType.DateTime)]
         public DateTime DateTimeTo {
             get {
@@ -159,6 +175,7 @@ namespace Dubravica.Report.Models
         [Display(Name = "Recipes ranges:")]
         public string RecipesRanges { get; set; }
         public List<int> RecipesNumbers  { get; set; }
+        public int[] RecipesNumbers2 { get; set; }
         [Display(Name = "Recipes:")]
         public MultiSelectList RecipesNames { get; set; }
 

@@ -84,21 +84,22 @@ namespace Dubravica.Controllers
             //{
                 //List<int> rcpNumberList = model.RecipesNumbers.ToList();
                 //Saves all filtered batches back to model
-              //  RVM.Batches = RVM.Batches.Where(p => model.RecipesNumbers.Contains(p.RecipeNo) == true).ToList();
+            //  RVM.Batches = RVM.Batches.Where(p => model.RecipesNumbers.Contains(p.RecipeNo) == true).ToList();
             //}
+            //List<int> localRecipesNumbers = new List<int>();
             //Check if there are some ranges of recipes numbers
             if (model.RecipesRanges != null)
             {
-                model.RecipesNumbers = new List<int>();
+                //if (model.RecipesNumbers == null) {
+                    model.RecipesNumbers = new List<int>();
+                //}
                 string[] ranges = model.RecipesRanges.Split(new char[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (string range in ranges)
                 {
                     string rangeTrimed = range.Trim();
                     int onlyNumber;
                     //solve single item if is it number
-                    //if (model.RecipesNumbers == null) {
-                      //model.RecipesNumbers = new List<int>();
-                    //}
+                    
                     if (int.TryParse(rangeTrimed, out onlyNumber) == true)
                     {
                         model.RecipesNumbers.Add(onlyNumber);
@@ -109,7 +110,7 @@ namespace Dubravica.Controllers
                         int from, to;
                         if (int.TryParse(twoNumbersString[0], out from) == true && int.TryParse(twoNumbersString[1], out to) == true)
                         {
-                           model.RecipesNumbers = Extension.AddRangeOfValues(model.RecipesNumbers, from, to);
+                            model.RecipesNumbers = Extension.AddRangeOfValues(model.RecipesNumbers, from, to);
                         }                        
                     }
                 }
@@ -117,11 +118,13 @@ namespace Dubravica.Controllers
             //Check if is set some recipe number which should be filtered
             if (model.RecipesNumbers != null || model.RecipesRanges != null)
             {
-                RVM.Batches = RVM.Batches.Where(p => model.RecipesNumbers.Contains(p.RecipeNo) == true).ToList();
+                if (model.RecipesNumbers == null)
+                    model.RecipesNumbers = new List<int>();
+                RVM.Batches = RVM.Batches.Where(p =>/* localRecipesNumbers.Contains(p.RecipeNo) == true || */model.RecipesNumbers.Contains(p.RecipeNo) == true).ToList();
             }
             ReportModel reportModelhHelper = (ReportModel)Session["model"];
-            RVM.RecipesNumbers = model.RecipesNumbers;
-            RVM.RecipesNames = model.RecipesNames;
+            RVM.RecipesNames = reportModelhHelper.RecipesNames;
+           model.RecipesNumbers2 = model.RecipesNumbers.ToArray();
             foreach (Batch batch in RVM.Batches)
             {
                 batchIds[index] = batch.Id;
