@@ -454,6 +454,7 @@
     <Content Include="Scripts\chosen\chosen.jquery.min.js" />
     <Content Include="Scripts\chosen\chosen.proto.js" />
     <Content Include="Scripts\chosen\chosen.proto.min.js" />
+    <Content Include="Scripts\getBatches.js" />
     <Content Include="Scripts\hideShow.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

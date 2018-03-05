@@ -434,7 +434,7 @@ namespace Dubravica.Controllers
                 connection.Open();
             }
 
-            NpgsqlTransaction tran = connection.BeginTransaction();
+            //NpgsqlTransaction tran = connection.BeginTransaction();
             NpgsqlCommand cmd = new NpgsqlCommand(sql, connection);
             cmd.CommandType = CommandType.Text;
 

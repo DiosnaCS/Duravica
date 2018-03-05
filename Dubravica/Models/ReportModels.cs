@@ -34,6 +34,7 @@ namespace Dubravica.Report.Models
         public DateTime DateTimeFormFrom {
             get {
                 DateTime dateTime = new DateTime(DateTimeFormFromDate.Year, DateTimeFormFromDate.Month, DateTimeFormFromDate.Day, DateTimeFormFromTime.Hour, DateTimeFormFromTime.Minute, 0);
+                pkTimeFrom = ConvertDT2pkTime(dateTime);
                 return dateTime;
             }
             set {
@@ -41,6 +42,7 @@ namespace Dubravica.Report.Models
             }
         }
         public DateTime DateTimeFormFromDate { get; set; }
+        [DataType(DataType.Time)]
         public DateTime DateTimeFormFromTime { get; set; }
         [DataType(DataType.DateTime)]
         public DateTime DateTimeFrom {
@@ -63,13 +65,15 @@ namespace Dubravica.Report.Models
         [Display(Name = "To:")]
         public DateTime DateTimeFormTo {
             get {
-                DateTime dateTime = new DateTime(DateTimeFormToDate.Year, DateTimeFormToDate.Month, DateTimeFormToDate.Day, DateTimeFormToTime.Hour, DateTimeFormToDate.Minute, 0);
+                DateTime dateTime = new DateTime(DateTimeFormToDate.Year, DateTimeFormToDate.Month, DateTimeFormToDate.Day, DateTimeFormToTime.Hour, DateTimeFormToTime.Minute, 0);
+                pkTimeTo = ConvertDT2pkTime(dateTime);
                 return dateTime;
             }
                 set {
                 DateTimeFormTo = value;
             } }
         public DateTime DateTimeFormToDate { get; set; }
+        [DataType(DataType.Time)]
         public DateTime DateTimeFormToTime { get; set; }
         [DataType(DataType.DateTime)]
         public DateTime DateTimeTo {
@@ -224,7 +228,8 @@ namespace Dubravica.Report.Models
         public DateTime EndTime /*In pkTime from server, at a client conversion to dateTime*/ { get; set; }
         public string RecipeName /*string directly from db*/ { get; set; }
         public int RecipeNo /*string directly from db*/ { get; set; }
-        public BatchStatus status /* flag type */ { get; set; }
+        public BatchStatus diffStatus /* flag type */ { get; set; }
+        public StepStatus batchStatus /* flag type */ { get; set; }
         public int maxDiffAM { get; set; }
         public int minDiffAM { get; set; }
         public int maxDiffTemp { get; set; }

@@ -90,9 +90,9 @@ namespace Dubravica.Controllers
             //Check if there are some ranges of recipes numbers
             if (model.RecipesRanges != null)
             {
-                //if (model.RecipesNumbers == null) {
+                if (model.RecipesNumbers == null) {
                     model.RecipesNumbers = new List<int>();
-                //}
+                }
                 string[] ranges = model.RecipesRanges.Split(new char[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (string range in ranges)
                 {
@@ -124,7 +124,7 @@ namespace Dubravica.Controllers
             }
             ReportModel reportModelhHelper = (ReportModel)Session["model"];
             RVM.RecipesNames = reportModelhHelper.RecipesNames;
-           model.RecipesNumbers2 = model.RecipesNumbers.ToArray();
+           
             foreach (Batch batch in RVM.Batches)
             {
                 batchIds[index] = batch.Id;

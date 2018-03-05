@@ -66,6 +66,7 @@ namespace Dubravica.Handlers
         {
             List<CSVSteps> stepdata = new List<CSVSteps>();
             string csv = "";
+            db db = new db(dbName, 12);
             foreach (uint Id in batchIds) {
                 /*
                 Steps recipe = getBatchData(Id);
@@ -76,7 +77,7 @@ namespace Dubravica.Handlers
                 recipedata.Remove(recipe);
                 csv += CsvSerializer.SerializeToCsv(recipeSteps);
                 */
-                Steps recipe = getBatchData(Id, dbName);
+                Steps recipe = getBatchData(Id, dbName,db);
                 foreach (var batchstep in recipe.BatchSteps) {
                     CSVSteps CSVstep = new CSVSteps();
                     CSVstep.BatchNo = recipe.Id;
@@ -100,11 +101,11 @@ namespace Dubravica.Handlers
             csv = CsvSerializer.SerializeToCsv(stepdata);
             return csv;
         }
-        public Steps getBatchData(uint batchId, string dbName)
+        public Steps getBatchData(uint batchId, string dbName,db db)
         {
             string sql = "";
             List<object[]> results = new List<object[]>();
-            db db = new db(dbName, 12);
+            
 
             sql = "SELECT MAX(batchno)," +
                     "step," +
@@ -287,7 +288,7 @@ namespace Dubravica.Handlers
         {
             List<object[]> results = getReportData(model, dbName);
             //model.Batches = new Batch[results.Count];
-            //int i = 0;
+            int batchStatus = 0;
             foreach (object[] result in results)
             {
                 bool resultOK = true;
@@ -354,31 +355,44 @@ namespace Dubravica.Handlers
                         batch.RecipeNo = Convert.ToInt32(result[4]);
                     }
 
-                    batch.status = BatchStatus.None;
+                    batch.diffStatus = BatchStatus.None;
                     //Batch Status
                     if (result[5].ToString().Length != 0 && result[6].ToString().Length != 0)
                     {
-                        batch.status |= BatchStatus.AM;
+                        batch.diffStatus |= BatchStatus.AM;
                         batch.maxDiffAM = (int)result[5];
                         batch.minDiffAM = (int)result[6];
                     }
                     if (result[7].ToString().Length != 0 && result[8].ToString().Length != 0)
                     {
-                        batch.status |= BatchStatus.Temp;
+                        batch.diffStatus |= BatchStatus.Temp;
                         batch.maxDiffTemp = (int)result[7];
                         batch.minDiffTemp = (int)result[8];
                     }
                     if (result[9].ToString().Length != 0 && result[10].ToString().Length != 0)
                     {
-                        batch.status |= BatchStatus.ST;
+                        batch.diffStatus |= BatchStatus.ST;
                         batch.maxDiffST = (int)result[9];
                         batch.minDiffST = (int)result[10];
                     }
                     if (result[11].ToString().Length != 0 && result[12].ToString().Length != 0)
                     {
-                        batch.status |= BatchStatus.IST;
+                        batch.diffStatus |= BatchStatus.IST;
                         batch.maxDiffIST = (int)result[11];
                         batch.minDiffIST = (int)result[12];
+                    }
+                    //batch.status = StepStatus.Error;
+                    //Batch status
+                    if (result[13] != DBNull.Value)
+                    {
+                        batchStatus = (int)result[13];
+                        batch.batchStatus = (StepStatus)batchStatus;
+                    }
+                    if (result[14] != DBNull.Value)
+                    {
+                        batchStatus = (int)result[14];
+                        batchStatus = batchStatus << 16;
+                        batch.batchStatus |= (StepStatus)batchStatus;
                     }
                     //Batch to Batches
                     //model.Batches[i] = batch;
@@ -420,7 +434,8 @@ namespace Dubravica.Handlers
             sql += "MAX(maxamount) AS maxamnt, MAX(mintamount) AS minamnt,";
             sql += "MAX(maxtemperature) AS maxtemp, MAX(mintemperature) AS mintemp,";
             sql += "MAX(maxsteptime) AS maxst, MAX(minsteptime) AS minst,";
-            sql += "MAX(maxintersteptime) AS maxist, MAX(minintersteptime) AS minist ";
+            sql += "MAX(maxintersteptime) AS maxist, MAX(minintersteptime) AS minist, ";
+            sql += "MAX(startstatus) AS sstatus, MAX(endstatus) AS estatus ";
             sql = string.Format(sql + "FROM get_bad_batches({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}) GROUP BY dibatchno ORDER BY dibatchno DESC",
                 dateFrom, dateTo, recipeNo, OverLimits, AmountSel, model.AmountTolerance,
                 TempSel, model.TempTolerance, StepTimeSel, model.StepTimeTolerance, InterStepTimeSel,

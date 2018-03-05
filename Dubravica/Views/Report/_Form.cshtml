@@ -215,8 +215,8 @@
                     </div>
                     <div>
                         @*@@Html.TextBoxFor(model => model.DateTimeTo, new { @id = "date-time_to", @class = "date-time", @type = "datetime-local", Value = @datetimeToValue })*@
-                        @Html.TextBoxFor(model => model.DateTimeFormFromDate, new { @class = "form-control input-sm", id = "date-time_from", type = "date", Value = datetimeToDateVal })
-                        @Html.TextBoxFor(model => model.DateTimeFormFromTime, new { @class = "form-control input-sm", id = "date-time_from", type = "time", Value = datetimeToTimeVal })
+                        @Html.TextBoxFor(model => model.DateTimeFormToDate, new { @class = "form-control input-sm", id = "date-time_from", type = "date", Value = datetimeToDateVal })
+                        @Html.TextBoxFor(model => model.DateTimeFormToTime, new { @class = "form-control input-sm", id = "date-time_from", type = "time", Value = datetimeToTimeVal })
                     </div>
                 </div>
                 <!-- rcpNo-->
@@ -327,37 +327,40 @@
                         <input style="margin: 5px;" class="btn btn-default" type="submit" value="Submit" />
                     </div>
                     <div>
-                        <button data-toggle="modal" data-target="#exportModal" style="margin:5px;" class="btn btn-sm btn-default">CSV Export</button>
-                        <div id="exportModal" class="modal fade" role="dialog">
-                            <div class="modal-dialog">
-
-                                <!-- Modal content-->
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">Batch report export to CSV</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>
-                                            @{
-                                                double time = ((double)Model.Batches.Count / 1000);
-                                            }
-                                            You will export export @Model.Batches.Count batches to csv<br>
-                                            Very aproximatly it will take @time s
-                                        </p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <a href="~/Report/exportCSV" style="margin:5px;" class="btn btn-sm btn-default" onclick="closeDataModal()">CSV Export</a>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            @if (Model.Batches.Count > 0)
+                            {
+                                <button data-toggle="modal" data-target="#exportModal" style="margin:5px;" class="btn btn-sm btn-default">CSV Export</button>
+                                <div id="exportModal" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Batch report export to CSV</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>
+                                                    @{
+                                    double time = ((double)Model.Batches.Count / 8);
+                                                    }
+                                                    You will export export @Model.Batches.Count batches to csv<br>
+                                                    Very aproximatly it will take @time s
+                                                </p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="~/Report/exportCSV" style="margin:5px;" class="btn btn-sm btn-default" onclick="closeDataModal()">CSV Export</a>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            }
                     </div>
                 </div>
             </div>
         </section>
     </div>
+    <br>
     <br>
     <div class="col-md-12">
         <!-- recipes multi field -->
