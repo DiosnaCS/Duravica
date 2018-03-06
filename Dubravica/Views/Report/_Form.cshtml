@@ -75,130 +75,130 @@
                 @Html.HiddenFor(model => model.Count, new { @id = "count", @value = 60 })
                 <input type="hidden" value="@ViewBag.firstinit" />
                 @{
-                    int year, month, day, hours, minutes;
-                    string datetimeToValue = "";
-                    string datetimeFromValue = "";
-                    string datetimeFromDateVal = "";
-                    string datetimeFromTimeVal = "";
-                    string datetimeToDateVal = "";
-                    string datetimeToTimeVal = "";
-                    if (Model.DateTimeFormFrom.Ticks == 0)
-                    {
-                        year = DateTime.Now.Year;
-                        month = DateTime.Now.Month;
-                        day = DateTime.Now.Day - 1;
-                        hours = DateTime.Now.Hour;
-                        minutes = DateTime.Now.Minute;
-                    }
-                    else
-                    {
-                        year = Model.DateTimeFormFrom.Year;
-                        month = Model.DateTimeFormFrom.Month;
-                        day = Model.DateTimeFormFrom.Day;
-                        hours = Model.DateTimeFormFrom.Hour;
-                        minutes = Model.DateTimeFormFrom.Minute;
-                    }
-                    string smonth = month.ToString();
-                    string sday = day.ToString();
-                    string shours = hours.ToString();
-                    string sminutes = minutes.ToString();
+        int year, month, day, hours, minutes;
+        string datetimeToValue = "";
+        string datetimeFromValue = "";
+        string datetimeFromDateVal = "";
+        string datetimeFromTimeVal = "";
+        string datetimeToDateVal = "";
+        string datetimeToTimeVal = "";
+        if (Model.DateTimeFormFrom.Ticks == 0)
+        {
+            year = DateTime.Now.Year;
+            month = DateTime.Now.Month;
+            day = DateTime.Now.Day - 1;
+            hours = DateTime.Now.Hour;
+            minutes = DateTime.Now.Minute;
+        }
+        else
+        {
+            year = Model.DateTimeFormFrom.Year;
+            month = Model.DateTimeFormFrom.Month;
+            day = Model.DateTimeFormFrom.Day;
+            hours = Model.DateTimeFormFrom.Hour;
+            minutes = Model.DateTimeFormFrom.Minute;
+        }
+        string smonth = month.ToString();
+        string sday = day.ToString();
+        string shours = hours.ToString();
+        string sminutes = minutes.ToString();
 
-                    if (month < 10)
-                    {
-                        smonth = "0" + smonth;
-                    }
-                    if (day < 10)
-                    {
-                        sday = "0" + day;
-                    }
-                    if (hours < 10)
-                    {
-                        shours = "0" + hours;
-                    }
-                    if (minutes < 10)
-                    {
-                        sminutes = "0" + sminutes;
-                    }
-                    if (day < 1)
-                    {
-                        sday = "28";
-                    }
+        if (month < 10)
+        {
+            smonth = "0" + smonth;
+        }
+        if (day < 10)
+        {
+            sday = "0" + day;
+        }
+        if (hours < 10)
+        {
+            shours = "0" + hours;
+        }
+        if (minutes < 10)
+        {
+            sminutes = "0" + sminutes;
+        }
+        if (day < 1)
+        {
+            sday = "28";
+        }
 
-                    datetimeFromValue = year + "-" + smonth + "-" + sday + "T" + shours + ":" + sminutes;
-                    datetimeFromDateVal = year + "-" + smonth + "-" + sday;
-                    datetimeFromTimeVal = shours + ":" + sminutes;
-                    if (Model.DateTimeFormTo.Ticks == 0)
-                    {
-                        year = DateTime.Now.Year;
-                        month = DateTime.Now.Month;
-                        day = DateTime.Now.Day;
-                        hours = DateTime.Now.Hour;
-                        minutes = DateTime.Now.Minute;
-                    }
-                    else
-                    {
-                        year = Model.DateTimeFormTo.Year;
-                        month = Model.DateTimeFormTo.Month;
-                        day = Model.DateTimeFormTo.Day;
-                        hours = Model.DateTimeFormTo.Hour;
-                        minutes = Model.DateTimeFormTo.Minute;
-                    }
-                    smonth = month.ToString();
-                    sday = day.ToString();
-                    shours = hours.ToString();
-                    sminutes = minutes.ToString();
-                    if (month < 10)
-                    {
-                        smonth = "0" + month;
-                    }
-                    if (day < 10)
-                    {
-                        sday = "0" + day;
-                    }
-                    if (day < 1)
-                    {
-                        sday = "28";
-                    }
-                    if (hours < 10)
-                    {
-                        shours = "0" + hours;
-                    }
-                    if (minutes < 10)
-                    {
-                        sminutes = "0" + minutes;
-                    }
-                    datetimeToValue = year + "-" + smonth + "-" + sday + "T" + shours + ":" + sminutes;
-                    datetimeToDateVal = year + "-" + smonth + "-" + sday;
-                    datetimeToTimeVal = shours + ":" + sminutes;
-                    bool recipeSel = false, par0 = false, par1 = false, par2 = false, par3 = false, par4 = false;
-                    if (Model.RecipeSel == true)
-                    {
-                        recipeSel = true;
-                    }
-                    if (Model.Par0Sel == true)
-                    {
-                        par0 = true;
-                    }
-                    if (Model.Par1Sel == true)
-                    {
-                        par1 = true;
-                    }
-                    if (Model.Par2Sel == true)
-                    {
-                        par3 = true;
-                    }
-                    if (Model.Par3Sel == true)
-                    {
-                        par3 = true;
-                    }
-                    if (Model.Par4Sel == true)
-                    {
-                        par4 = true;
-                    }
+        datetimeFromValue = year + "-" + smonth + "-" + sday + "T" + shours + ":" + sminutes;
+        datetimeFromDateVal = year + "-" + smonth + "-" + sday;
+        datetimeFromTimeVal = shours + ":" + sminutes;
+        if (Model.DateTimeFormTo.Ticks == 0)
+        {
+            year = DateTime.Now.Year;
+            month = DateTime.Now.Month;
+            day = DateTime.Now.Day;
+            hours = DateTime.Now.Hour;
+            minutes = DateTime.Now.Minute;
+        }
+        else
+        {
+            year = Model.DateTimeFormTo.Year;
+            month = Model.DateTimeFormTo.Month;
+            day = Model.DateTimeFormTo.Day;
+            hours = Model.DateTimeFormTo.Hour;
+            minutes = Model.DateTimeFormTo.Minute;
+        }
+        smonth = month.ToString();
+        sday = day.ToString();
+        shours = hours.ToString();
+        sminutes = minutes.ToString();
+        if (month < 10)
+        {
+            smonth = "0" + month;
+        }
+        if (day < 10)
+        {
+            sday = "0" + day;
+        }
+        if (day < 1)
+        {
+            sday = "28";
+        }
+        if (hours < 10)
+        {
+            shours = "0" + hours;
+        }
+        if (minutes < 10)
+        {
+            sminutes = "0" + minutes;
+        }
+        datetimeToValue = year + "-" + smonth + "-" + sday + "T" + shours + ":" + sminutes;
+        datetimeToDateVal = year + "-" + smonth + "-" + sday;
+        datetimeToTimeVal = shours + ":" + sminutes;
+        bool recipeSel = false, par0 = false, par1 = false, par2 = false, par3 = false, par4 = false;
+        if (Model.RecipeSel == true)
+        {
+            recipeSel = true;
+        }
+        if (Model.Par0Sel == true)
+        {
+            par0 = true;
+        }
+        if (Model.Par1Sel == true)
+        {
+            par1 = true;
+        }
+        if (Model.Par2Sel == true)
+        {
+            par3 = true;
+        }
+        if (Model.Par3Sel == true)
+        {
+            par3 = true;
+        }
+        if (Model.Par4Sel == true)
+        {
+            par4 = true;
+        }
                 }
 
                 <!-- time from -->
-                <div class="form-group input-sm col-md-2">
+                <div class="form-group input-sm col-sm-2">
                     <div>
                         @Html.LabelFor(model => model.DateTimeFormFrom)
                     </div>
@@ -209,7 +209,7 @@
                     </div>
                 </div>
                 <!-- time to -->
-                <div class="form-group input-sm col-md-2">
+                <div class="form-group input-sm col-sm-2">
                     <div>
                         @Html.LabelFor(model => model.DateTimeFormTo)
                     </div>
@@ -219,10 +219,10 @@
                         @Html.TextBoxFor(model => model.DateTimeFormToTime, new { @class = "form-control input-sm", id = "date-time_from", type = "time", Value = datetimeToTimeVal })
                     </div>
                 </div>
-                <!-- rcpNo-->
+                <!-- rcpNo
                 <div class="form-group">
                     <div>
-                        @Html.CheckBoxFor(model => model.RecipeSel, new { @onclick = "InputEnable(this, recipe)", @checked = recipeSel })
+                        @*@Html.CheckBoxFor(model => model.RecipeSel, new { @onclick = "InputEnable(this, recipe)", @checked = recipeSel })
                         @Html.LabelFor(model => model.Recipe)
                     </div>
                     <div>
@@ -233,9 +233,9 @@
                         else
                         {
                             <input class="tol-set" disabled id="recipe" min="0" name="recipe" type="number" value="0">
-                        }
+                        }*@
                     </div>
-                </div>
+                </div>-->
                 <!-- amount -->
                 <div class="form-group">
                     <div>
@@ -250,7 +250,7 @@
                         }
                         else
                         {
-                            <input class="tol-set" disabled id="tol1" min="0" name="Par1Tol" step="0.1" type="number" value="0">
+                                    <input class="tol-set" disabled id="tol1" min="0" name="Par1Tol" step="0.1" type="number" value="0">
                         }
                         <span>kg</span>
                     </div>
@@ -270,7 +270,7 @@
                         }
                         else
                         {
-                            <input class="tol-set" disabled id="tol2" min="0" name="Par2Tol" step="0.1" type="number" value="0">
+                                    <input class="tol-set" disabled id="tol2" min="0" name="Par2Tol" step="0.1" type="number" value="0">
                         }
                         <span>°C</span>
                     </div>
@@ -289,7 +289,7 @@
                         }
                         else
                         {
-                            <input class="tol-set" disabled id="tol3" min="0" name="Par3Tol" step="0.1" type="number" value="0">
+                                    <input class="tol-set" disabled id="tol3" min="0" name="Par3Tol" step="0.1" type="number" value="0">
                         }
                         <span>min</span>
                     </div>
@@ -308,7 +308,7 @@
                         }
                         else
                         {
-                            <input class="tol-set" disabled id="tol4" min="0" name="Par4Tol" step="0.1" type="number" value="0">
+                                    <input class="tol-set"  disabled id="tol4" min="0" name="Par4Tol" step="0.1" type="number" value="0">
                         }
                         <span>min</span>
                     </div>
@@ -321,40 +321,40 @@
                     </div>
                 </div>
                 <!-- Buttons -->
-                <div class="form-group">
+                <div class="form-group mb-3">
                     <div>
                         <!-- old code of this button: style="display: block; float: right; margin-left: 15px; padding: 2px 2px 2px 2px;" -->
-                        <input style="margin: 5px;" class="btn btn-default" type="submit" value="Submit" />
+                        <input style="margin: 5px;" class="btn btn-primary" type="submit" value="Submit" />
                     </div>
                     <div>
-                            @if (Model.Batches.Count > 0)
-                            {
-                                <button data-toggle="modal" data-target="#exportModal" style="margin:5px;" class="btn btn-sm btn-default">CSV Export</button>
-                                <div id="exportModal" class="modal fade" role="dialog">
-                                    <div class="modal-dialog">
-                                        <!-- Modal content-->
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                <h4 class="modal-title">Batch report export to CSV</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>
-                                                    @{
+                        @if (Model.Batches.Count > 0)
+                        {
+                        <button data-toggle="modal" data-target="#exportModal" style="margin:5px;" class="btn btn-sm btn-default">CSV Export</button>
+                        <div id="exportModal" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Batch report export to CSV</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>
+                                            @{
                                     double time = ((double)Model.Batches.Count / 8);
-                                                    }
-                                                    You will export export @Model.Batches.Count batches to csv<br>
-                                                    Very aproximatly it will take @time s
-                                                </p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <a href="~/Report/exportCSV" style="margin:5px;" class="btn btn-sm btn-default" onclick="closeDataModal()">CSV Export</a>
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            </div>
-                                        </div>
+                                            }
+                                            You will export export @Model.Batches.Count batches to csv<br>
+                                            Very aproximatly it will take @time s
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="~/Report/exportCSV" style="margin:5px;" class="btn btn-sm btn-primary" onclick="closeDataModal()">CSV Export</a>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
-                            }
+                            </div>
+                        </div>
+                         }
                     </div>
                 </div>
             </div>

@@ -171,39 +171,33 @@ textarea {
     padding: 0px 5px 0px 5px;
     font-weight: 700;
 }
-.status-skipped {
+.status-warning {
     padding: 0px 0px 0px 5px;
-    font-weight: 700;
     color: darkorange;
 }
-#bootstrap-overrides .det-tab .status-skipped {
+#bootstrap-overrides .det-tab .status-warning {
     padding: 0px 0px 0px 5px;
-    font-weight: 700;
     color: darkorange;
 }
-.status-nok {
+.status-error {
     padding: 0px 0px 0px 5px;
-    font-weight: 700;
     color: #ff0000;
 }
-#bootstrap-overrides .det-tab .status-nok {
-    padding: 0px 0px 0px 5px;
-    font-weight: 700;
+#bootstrap-overrides .det-tab .status-error {
+    padding: 0px 0px 0px 5px;    
     color: #ff0000;
-}
-#bootstrap-overrides .det-tab .status-ok {
-    padding: 0px 5px 2px 5px;
-    font-weight: 700;
-    color: #00cc00;
 }
 .status-ok {
     padding: 0px 5px 2px 5px;
-    font-weight: 700;
+    color: darkgreen;
+}
+#bootstrap-overrides .det-tab .status-ok {
+    padding: 0px 5px 2px 5px;
+
     color: #00cc00;
 }
 #bootstrap-overrides .status-nok {
     padding: 0px 0px 0px 5px;
-    font-weight: 700;
     color: #ff0000;
 }
 

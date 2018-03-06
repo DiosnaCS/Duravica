@@ -52,52 +52,53 @@ WriteLiteral("\r\n\r\n<div");
 
 WriteLiteral(" id=\"bootstrap-overrides\"");
 
-WriteLiteral(">\r\n\r\n    <h4>");
+WriteLiteral(">\r\n        <h4>");
 
             
-            #line 8 "..\..\Views\Report\Index.cshtml"
-   Write(ViewBag.TitleReport);
+            #line 7 "..\..\Views\Report\Index.cshtml"
+       Write(ViewBag.TitleReport);
 
             
             #line default
             #line hidden
 WriteLiteral("</h4>\r\n");
 
-WriteLiteral("    ");
+WriteLiteral("        ");
 
             
-            #line 9 "..\..\Views\Report\Index.cshtml"
-Write(Html.Partial("_Form"));
+            #line 8 "..\..\Views\Report\Index.cshtml"
+   Write(Html.Partial("_Form"));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n    <br>\r\n    <br>\r\n");
+WriteLiteral("\r\n        <br>\r\n        <br>\r\n");
 
             
-            #line 12 "..\..\Views\Report\Index.cshtml"
-    
+            #line 11 "..\..\Views\Report\Index.cshtml"
+        
             
             #line default
             #line hidden
             
-            #line 12 "..\..\Views\Report\Index.cshtml"
-     if (ViewBag.Steps != null) {
-    
+            #line 11 "..\..\Views\Report\Index.cshtml"
+         if (ViewBag.Steps != null)
+        {
             
-            #line default
-            #line hidden
-            
-            #line 13 "..\..\Views\Report\Index.cshtml"
-Write(Html.Partial("_Detail"));
-
             
             #line default
             #line hidden
             
             #line 13 "..\..\Views\Report\Index.cshtml"
-                            
-    }
+       Write(Html.Partial("_Detail"));
+
+            
+            #line default
+            #line hidden
+            
+            #line 13 "..\..\Views\Report\Index.cshtml"
+                                    
+        }
 
             
             #line default

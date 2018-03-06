@@ -144,133 +144,133 @@ WriteLiteral(" />\r\n");
             
             #line 77 "..\..\Views\Report\_Form.cshtml"
                   
-                    int year, month, day, hours, minutes;
-                    string datetimeToValue = "";
-                    string datetimeFromValue = "";
-                    string datetimeFromDateVal = "";
-                    string datetimeFromTimeVal = "";
-                    string datetimeToDateVal = "";
-                    string datetimeToTimeVal = "";
-                    if (Model.DateTimeFormFrom.Ticks == 0)
-                    {
-                        year = DateTime.Now.Year;
-                        month = DateTime.Now.Month;
-                        day = DateTime.Now.Day - 1;
-                        hours = DateTime.Now.Hour;
-                        minutes = DateTime.Now.Minute;
-                    }
-                    else
-                    {
-                        year = Model.DateTimeFormFrom.Year;
-                        month = Model.DateTimeFormFrom.Month;
-                        day = Model.DateTimeFormFrom.Day;
-                        hours = Model.DateTimeFormFrom.Hour;
-                        minutes = Model.DateTimeFormFrom.Minute;
-                    }
-                    string smonth = month.ToString();
-                    string sday = day.ToString();
-                    string shours = hours.ToString();
-                    string sminutes = minutes.ToString();
+        int year, month, day, hours, minutes;
+        string datetimeToValue = "";
+        string datetimeFromValue = "";
+        string datetimeFromDateVal = "";
+        string datetimeFromTimeVal = "";
+        string datetimeToDateVal = "";
+        string datetimeToTimeVal = "";
+        if (Model.DateTimeFormFrom.Ticks == 0)
+        {
+            year = DateTime.Now.Year;
+            month = DateTime.Now.Month;
+            day = DateTime.Now.Day - 1;
+            hours = DateTime.Now.Hour;
+            minutes = DateTime.Now.Minute;
+        }
+        else
+        {
+            year = Model.DateTimeFormFrom.Year;
+            month = Model.DateTimeFormFrom.Month;
+            day = Model.DateTimeFormFrom.Day;
+            hours = Model.DateTimeFormFrom.Hour;
+            minutes = Model.DateTimeFormFrom.Minute;
+        }
+        string smonth = month.ToString();
+        string sday = day.ToString();
+        string shours = hours.ToString();
+        string sminutes = minutes.ToString();
 
-                    if (month < 10)
-                    {
-                        smonth = "0" + smonth;
-                    }
-                    if (day < 10)
-                    {
-                        sday = "0" + day;
-                    }
-                    if (hours < 10)
-                    {
-                        shours = "0" + hours;
-                    }
-                    if (minutes < 10)
-                    {
-                        sminutes = "0" + sminutes;
-                    }
-                    if (day < 1)
-                    {
-                        sday = "28";
-                    }
+        if (month < 10)
+        {
+            smonth = "0" + smonth;
+        }
+        if (day < 10)
+        {
+            sday = "0" + day;
+        }
+        if (hours < 10)
+        {
+            shours = "0" + hours;
+        }
+        if (minutes < 10)
+        {
+            sminutes = "0" + sminutes;
+        }
+        if (day < 1)
+        {
+            sday = "28";
+        }
 
-                    datetimeFromValue = year + "-" + smonth + "-" + sday + "T" + shours + ":" + sminutes;
-                    datetimeFromDateVal = year + "-" + smonth + "-" + sday;
-                    datetimeFromTimeVal = shours + ":" + sminutes;
-                    if (Model.DateTimeFormTo.Ticks == 0)
-                    {
-                        year = DateTime.Now.Year;
-                        month = DateTime.Now.Month;
-                        day = DateTime.Now.Day;
-                        hours = DateTime.Now.Hour;
-                        minutes = DateTime.Now.Minute;
-                    }
-                    else
-                    {
-                        year = Model.DateTimeFormTo.Year;
-                        month = Model.DateTimeFormTo.Month;
-                        day = Model.DateTimeFormTo.Day;
-                        hours = Model.DateTimeFormTo.Hour;
-                        minutes = Model.DateTimeFormTo.Minute;
-                    }
-                    smonth = month.ToString();
-                    sday = day.ToString();
-                    shours = hours.ToString();
-                    sminutes = minutes.ToString();
-                    if (month < 10)
-                    {
-                        smonth = "0" + month;
-                    }
-                    if (day < 10)
-                    {
-                        sday = "0" + day;
-                    }
-                    if (day < 1)
-                    {
-                        sday = "28";
-                    }
-                    if (hours < 10)
-                    {
-                        shours = "0" + hours;
-                    }
-                    if (minutes < 10)
-                    {
-                        sminutes = "0" + minutes;
-                    }
-                    datetimeToValue = year + "-" + smonth + "-" + sday + "T" + shours + ":" + sminutes;
-                    datetimeToDateVal = year + "-" + smonth + "-" + sday;
-                    datetimeToTimeVal = shours + ":" + sminutes;
-                    bool recipeSel = false, par0 = false, par1 = false, par2 = false, par3 = false, par4 = false;
-                    if (Model.RecipeSel == true)
-                    {
-                        recipeSel = true;
-                    }
-                    if (Model.Par0Sel == true)
-                    {
-                        par0 = true;
-                    }
-                    if (Model.Par1Sel == true)
-                    {
-                        par1 = true;
-                    }
-                    if (Model.Par2Sel == true)
-                    {
-                        par3 = true;
-                    }
-                    if (Model.Par3Sel == true)
-                    {
-                        par3 = true;
-                    }
-                    if (Model.Par4Sel == true)
-                    {
-                        par4 = true;
-                    }
+        datetimeFromValue = year + "-" + smonth + "-" + sday + "T" + shours + ":" + sminutes;
+        datetimeFromDateVal = year + "-" + smonth + "-" + sday;
+        datetimeFromTimeVal = shours + ":" + sminutes;
+        if (Model.DateTimeFormTo.Ticks == 0)
+        {
+            year = DateTime.Now.Year;
+            month = DateTime.Now.Month;
+            day = DateTime.Now.Day;
+            hours = DateTime.Now.Hour;
+            minutes = DateTime.Now.Minute;
+        }
+        else
+        {
+            year = Model.DateTimeFormTo.Year;
+            month = Model.DateTimeFormTo.Month;
+            day = Model.DateTimeFormTo.Day;
+            hours = Model.DateTimeFormTo.Hour;
+            minutes = Model.DateTimeFormTo.Minute;
+        }
+        smonth = month.ToString();
+        sday = day.ToString();
+        shours = hours.ToString();
+        sminutes = minutes.ToString();
+        if (month < 10)
+        {
+            smonth = "0" + month;
+        }
+        if (day < 10)
+        {
+            sday = "0" + day;
+        }
+        if (day < 1)
+        {
+            sday = "28";
+        }
+        if (hours < 10)
+        {
+            shours = "0" + hours;
+        }
+        if (minutes < 10)
+        {
+            sminutes = "0" + minutes;
+        }
+        datetimeToValue = year + "-" + smonth + "-" + sday + "T" + shours + ":" + sminutes;
+        datetimeToDateVal = year + "-" + smonth + "-" + sday;
+        datetimeToTimeVal = shours + ":" + sminutes;
+        bool recipeSel = false, par0 = false, par1 = false, par2 = false, par3 = false, par4 = false;
+        if (Model.RecipeSel == true)
+        {
+            recipeSel = true;
+        }
+        if (Model.Par0Sel == true)
+        {
+            par0 = true;
+        }
+        if (Model.Par1Sel == true)
+        {
+            par1 = true;
+        }
+        if (Model.Par2Sel == true)
+        {
+            par3 = true;
+        }
+        if (Model.Par3Sel == true)
+        {
+            par3 = true;
+        }
+        if (Model.Par4Sel == true)
+        {
+            par4 = true;
+        }
                 
             
             #line default
             #line hidden
 WriteLiteral("\r\n\r\n                <!-- time from -->\r\n                <div");
 
-WriteLiteral(" class=\"form-group input-sm col-md-2\"");
+WriteLiteral(" class=\"form-group input-sm col-sm-2\"");
 
 WriteLiteral(">\r\n                    <div>\r\n");
 
@@ -311,7 +311,7 @@ WriteLiteral("                        ");
 WriteLiteral("\r\n                    </div>\r\n                </div>\r\n                <!-- time t" +
 "o -->\r\n                <div");
 
-WriteLiteral(" class=\"form-group input-sm col-md-2\"");
+WriteLiteral(" class=\"form-group input-sm col-sm-2\"");
 
 WriteLiteral(">\r\n                    <div>\r\n");
 
@@ -349,93 +349,12 @@ WriteLiteral("                        ");
             
             #line default
             #line hidden
-WriteLiteral("\r\n                    </div>\r\n                </div>\r\n                <!-- rcpNo-" +
-"->\r\n                <div");
+WriteLiteral("\r\n                    </div>\r\n                </div>\r\n                <!-- rcpNo\r" +
+"\n                <div class=\"form-group\">\r\n                    <div>\r\n          " +
+"              ");
 
-WriteLiteral(" class=\"form-group\"");
-
-WriteLiteral(">\r\n                    <div>\r\n");
-
-WriteLiteral("                        ");
-
-            
-            #line 225 "..\..\Views\Report\_Form.cshtml"
-                   Write(Html.CheckBoxFor(model => model.RecipeSel, new { @onclick = "InputEnable(this, recipe)", @checked = recipeSel }));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("                        ");
-
-            
-            #line 226 "..\..\Views\Report\_Form.cshtml"
-                   Write(Html.LabelFor(model => model.Recipe));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                    </div>\r\n                    <div>\r\n");
-
-            
-            #line 229 "..\..\Views\Report\_Form.cshtml"
-                        
-            
-            #line default
-            #line hidden
-            
-            #line 229 "..\..\Views\Report\_Form.cshtml"
-                         if (ViewBag.firstinit == false && Model.RecipeSel == true)
-                        {
-                            
-            
-            #line default
-            #line hidden
-            
-            #line 231 "..\..\Views\Report\_Form.cshtml"
-                       Write(Html.TextBoxFor(model => model.Recipe, new { @id = "recipe", @class = "date-time", @type = "number", @name = "recipe", @value = Model.Recipe, @min = 0, @style = "width:50px;" }));
-
-            
-            #line default
-            #line hidden
-            
-            #line 231 "..\..\Views\Report\_Form.cshtml"
-                                                                                                                                                                                                              
-                        }
-                        else
-                        {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                            <input");
-
-WriteLiteral(" class=\"tol-set\"");
-
-WriteLiteral(" disabled");
-
-WriteLiteral(" id=\"recipe\"");
-
-WriteLiteral(" min=\"0\"");
-
-WriteLiteral(" name=\"recipe\"");
-
-WriteLiteral(" type=\"number\"");
-
-WriteLiteral(" value=\"0\"");
-
-WriteLiteral(">\r\n");
-
-            
-            #line 236 "..\..\Views\Report\_Form.cshtml"
-                        }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                    </div>\r\n                </div>\r\n                <!-- amount -" +
-"->\r\n                <div");
+WriteLiteral("\r\n                    </div>\r\n                </div>-->\r\n                <!-- amo" +
+"unt -->\r\n                <div");
 
 WriteLiteral(" class=\"form-group\"");
 
@@ -499,7 +418,7 @@ WriteLiteral(">&plusmn</label>\r\n");
             
             #line default
             #line hidden
-WriteLiteral("                            <input");
+WriteLiteral("                                    <input");
 
 WriteLiteral(" class=\"tol-set\"");
 
@@ -591,7 +510,7 @@ WriteLiteral(">&plusmn</label>\r\n");
             
             #line default
             #line hidden
-WriteLiteral("                            <input");
+WriteLiteral("                                    <input");
 
 WriteLiteral(" class=\"tol-set\"");
 
@@ -683,7 +602,7 @@ WriteLiteral(">&plusmn</label>\r\n");
             
             #line default
             #line hidden
-WriteLiteral("                            <input");
+WriteLiteral("                                    <input");
 
 WriteLiteral(" class=\"tol-set\"");
 
@@ -775,11 +694,11 @@ WriteLiteral(">&plusmn</label>\r\n");
             
             #line default
             #line hidden
-WriteLiteral("                            <input");
+WriteLiteral("                                    <input");
 
 WriteLiteral(" class=\"tol-set\"");
 
-WriteLiteral(" disabled");
+WriteLiteral("  disabled");
 
 WriteLiteral(" id=\"tol4\"");
 
@@ -836,7 +755,7 @@ WriteLiteral("                        ");
 WriteLiteral("\r\n                    </div>\r\n                </div>\r\n                <!-- Button" +
 "s -->\r\n                <div");
 
-WriteLiteral(" class=\"form-group\"");
+WriteLiteral(" class=\"form-group mb-3\"");
 
 WriteLiteral(">\r\n                    <div>\r\n                        <!-- old code of this butto" +
 "n: style=\"display: block; float: right; margin-left: 15px; padding: 2px 2px 2px " +
@@ -844,7 +763,7 @@ WriteLiteral(">\r\n                    <div>\r\n                        <!-- old
 
 WriteLiteral(" style=\"margin: 5px;\"");
 
-WriteLiteral(" class=\"btn btn-default\"");
+WriteLiteral(" class=\"btn btn-primary\"");
 
 WriteLiteral(" type=\"submit\"");
 
@@ -854,19 +773,19 @@ WriteLiteral(" />\r\n                    </div>\r\n                    <div>\r\n
 
             
             #line 330 "..\..\Views\Report\_Form.cshtml"
-                            
+                        
             
             #line default
             #line hidden
             
             #line 330 "..\..\Views\Report\_Form.cshtml"
-                             if (Model.Batches.Count > 0)
-                            {
+                         if (Model.Batches.Count > 0)
+                        {
 
             
             #line default
             #line hidden
-WriteLiteral("                                <button");
+WriteLiteral("                        <button");
 
 WriteLiteral(" data-toggle=\"modal\"");
 
@@ -878,7 +797,7 @@ WriteLiteral(" class=\"btn btn-sm btn-default\"");
 
 WriteLiteral(">CSV Export</button>\r\n");
 
-WriteLiteral("                                <div");
+WriteLiteral("                        <div");
 
 WriteLiteral(" id=\"exportModal\"");
 
@@ -886,20 +805,20 @@ WriteLiteral(" class=\"modal fade\"");
 
 WriteLiteral(" role=\"dialog\"");
 
-WriteLiteral(">\r\n                                    <div");
+WriteLiteral(">\r\n                            <div");
 
 WriteLiteral(" class=\"modal-dialog\"");
 
-WriteLiteral(">\r\n                                        <!-- Modal content-->\r\n               " +
-"                         <div");
+WriteLiteral(">\r\n                                <!-- Modal content-->\r\n                       " +
+"         <div");
 
 WriteLiteral(" class=\"modal-content\"");
 
-WriteLiteral(">\r\n                                            <div");
+WriteLiteral(">\r\n                                    <div");
 
 WriteLiteral(" class=\"modal-header\"");
 
-WriteLiteral(">\r\n                                                <button");
+WriteLiteral(">\r\n                                        <button");
 
 WriteLiteral(" type=\"button\"");
 
@@ -907,83 +826,83 @@ WriteLiteral(" class=\"close\"");
 
 WriteLiteral(" data-dismiss=\"modal\"");
 
-WriteLiteral(">&times;</button>\r\n                                                <h4");
+WriteLiteral(">&times;</button>\r\n                                        <h4");
 
 WriteLiteral(" class=\"modal-title\"");
 
-WriteLiteral(">Batch report export to CSV</h4>\r\n                                            </d" +
-"iv>\r\n                                            <div");
+WriteLiteral(">Batch report export to CSV</h4>\r\n                                    </div>\r\n   " +
+"                                 <div");
 
 WriteLiteral(" class=\"modal-body\"");
 
-WriteLiteral(">\r\n                                                <p>\r\n");
+WriteLiteral(">\r\n                                        <p>\r\n");
 
             
             #line 343 "..\..\Views\Report\_Form.cshtml"
-                                                    
+                                            
             
             #line default
             #line hidden
             
             #line 343 "..\..\Views\Report\_Form.cshtml"
-                                                      
+                                              
                                     double time = ((double)Model.Batches.Count / 8);
-                                                    
+                                            
             
             #line default
             #line hidden
-WriteLiteral("\r\n                                                    You will export export ");
+WriteLiteral("\r\n                                            You will export export ");
 
             
             #line 346 "..\..\Views\Report\_Form.cshtml"
-                                                                      Write(Model.Batches.Count);
+                                                              Write(Model.Batches.Count);
 
             
             #line default
             #line hidden
-WriteLiteral(" batches to csv<br>\r\n                                                    Very apr" +
-"oximatly it will take ");
+WriteLiteral(" batches to csv<br>\r\n                                            Very aproximatly" +
+" it will take ");
 
             
             #line 347 "..\..\Views\Report\_Form.cshtml"
-                                                                             Write(time);
+                                                                     Write(time);
 
             
             #line default
             #line hidden
-WriteLiteral(" s\r\n                                                </p>\r\n                       " +
-"                     </div>\r\n                                            <div");
+WriteLiteral(" s\r\n                                        </p>\r\n                               " +
+"     </div>\r\n                                    <div");
 
 WriteLiteral(" class=\"modal-footer\"");
 
-WriteLiteral(">\r\n                                                <a");
+WriteLiteral(">\r\n                                        <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 16763), Tuple.Create("\"", 16788)
-, Tuple.Create(Tuple.Create("", 16770), Tuple.Create<System.Object, System.Int32>(Href("~/Report/exportCSV")
-, 16770), false)
+WriteAttribute("href", Tuple.Create(" href=\"", 15229), Tuple.Create("\"", 15254)
+, Tuple.Create(Tuple.Create("", 15236), Tuple.Create<System.Object, System.Int32>(Href("~/Report/exportCSV")
+, 15236), false)
 );
 
 WriteLiteral(" style=\"margin:5px;\"");
 
-WriteLiteral(" class=\"btn btn-sm btn-default\"");
+WriteLiteral(" class=\"btn btn-sm btn-primary\"");
 
 WriteLiteral(" onclick=\"closeDataModal()\"");
 
-WriteLiteral(">CSV Export</a>\r\n                                                <button");
+WriteLiteral(">CSV Export</a>\r\n                                        <button");
 
 WriteLiteral(" type=\"button\"");
 
-WriteLiteral(" class=\"btn btn-default\"");
+WriteLiteral(" class=\"btn btn-primary\"");
 
 WriteLiteral(" data-dismiss=\"modal\"");
 
-WriteLiteral(">Close</button>\r\n                                            </div>\r\n            " +
-"                            </div>\r\n                                    </div>\r\n" +
-"                                </div>\r\n");
+WriteLiteral(">Close</button>\r\n                                    </div>\r\n                    " +
+"            </div>\r\n                            </div>\r\n                        " +
+"</div>\r\n");
 
             
             #line 357 "..\..\Views\Report\_Form.cshtml"
-                            }
+                         }
 
             
             #line default

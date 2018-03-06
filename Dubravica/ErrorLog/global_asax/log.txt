@@ -556,3 +556,11 @@
    at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
    at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
    at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+06.03.2018 11:58:032
+06.03.2018 12:15:521Session_onEnd hapened with null current context
+06.03.2018 13:00:062Session_onEnd hapened with null current context
+06.03.2018 13:00:063Session_onEnd hapened with null current context
+06.03.2018 13:27:061Session_onEnd hapened with null current context
+06.03.2018 13:27:062Session_onEnd hapened with null current context
+06.03.2018 13:41:231Session_onEnd hapened with null current context
+06.03.2018 13:41:232Session_onEnd hapened with null current context

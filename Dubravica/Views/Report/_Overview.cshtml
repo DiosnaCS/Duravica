@@ -3,7 +3,6 @@
 <script>
     function getBatch(id) {
         //var batchId = document.getElementById("batchid").textContent;
-        console.log(id);
         //var recipeno = document.getElementById("recipeno").textContent;
         window.location = "/Report/getBatch?batchid=" + id; //+ "&recipeno=" + recipeno;
     }
@@ -12,54 +11,64 @@
 <table class="table table-condensed table-bordered table-hover table-responsive">
     @{if (Model.Batches != null)
         {
-            if (Model.Batches.Count > 0) { 
+            if (Model.Batches.Count > 0)
+            {
                 string statusClass = "";
+                string runningStyle = "";
                 <tr style="background-color:silver;">
                     <th>Batch No.</th>
                     <th>Start</th>
                     <th>End</th>
                     <th>Product</th>
                     <th>Recipe</th>
-                    <th>Differences</th>
                     <th>Batch status</th>
+                    <th>Differences</th>
                 </tr>
-            
+
                 int i = 0;
                 foreach (Batch batch in Model.Batches)
                 {
                     @* to write ids *@
-                <tr onclick="getBatch(@batch.Id)" style="cursor: pointer;">
-                    <td id="BatchNo">@batch.Id</td>
-                    <td id="startDT_@i">@batch.StartTime</td>
-                    @if (batch.EndTime.Year < 2016)
+                    if (batch.EndTime.Year < 2016 && !batch.batchStatus.HasFlag(StepStatus.Cancelled) &&
+                        !batch.batchStatus.HasFlag(StepStatus.OK) && !batch.batchStatus.HasFlag(StepStatus.Error))
                     {
-                        <td><b>No end</b></td>
+                       runningStyle = "background-color: lightgreen;";
                     }
-                    else
-                    {
-                        <td id="endDT_@i">@batch.EndTime</td>
-                    }
-                    <td>@batch.RecipeName</td>
-                    <td id="recipeno">@batch.RecipeNo</td>
-                    @if (batch.batchStatus.HasFlag(StepStatus.OK))
-                    {
-                        statusClass = "status-ok";
-                    }
-                    @if (batch.batchStatus.HasFlag(StepStatus.Skipped) || batch.batchStatus.HasFlag(StepStatus.Cancelled) || batch.batchStatus.HasFlag(StepStatus.ForcedStart))
-                    {
-                        statusClass = "status-skipped";
-                    }
-                    @if (batch.batchStatus.HasFlag(StepStatus.Error) && !batch.batchStatus.HasFlag(StepStatus.OK) && !batch.batchStatus.HasFlag(StepStatus.Skipped) && !batch.batchStatus.HasFlag(StepStatus.Cancelled) && !batch.batchStatus.HasFlag(StepStatus.ForcedStart)) {
-                        statusClass = "status-nok";
-                    }
-                    @{ string title = ""; }
-                    @if (batch.maxDiffAM != 0 || batch.minDiffAM != 0) { title += "Amount diff-" + "MAX: " + Math.Round((double)batch.maxDiffAM / 1000, 3) + "kg MIN: " + Math.Round((double)batch.minDiffAM / 1000, 3) + "kg \n"; }
-                    @if (batch.maxDiffTemp != 0 || batch.minDiffTemp != 0) { title += "Temperature diff-" + "MAX: " + Math.Round((double)batch.maxDiffTemp / 10, 1) + "°C MIN: " + Math.Round((double)batch.minDiffTemp / 10, 2) + "°C \n"; }
-                    @if (batch.maxDiffST != 0 || batch.minDiffST != 0) { title += "steptime diff- MAX: " + Math.Round((double)batch.maxDiffST / 60, 2) + "min MIN: " + Math.Round((double)batch.minDiffST / 60, 2) + "min \n"; }
-                    @if (batch.maxDiffIST != 0 || batch.minDiffIST != 0) { title += "Inter step time diff- MAX: " + Math.Round((double)batch.maxDiffIST / 60, 2) + "min MIN: " + Math.Round((double)batch.minDiffIST / 60, 2) + "min \n"; }
-                    <td title="@title"><span><b>@batch.diffStatus</b></span></td>
-                    <td class="@statusClass"><b>@batch.batchStatus</b></td>
-                </tr>
+                        
+                    <tr onclick="getBatch(@batch.Id)" style="cursor: pointer;@runningStyle">
+                        @{runningStyle = "";}
+                        <td id="BatchNo">@batch.Id</td>
+                        <td id="startDT_@i">@batch.StartTime</td>
+                        @if (batch.EndTime.Year < 2016)
+                        {
+                            <td>No end</td>
+                        }
+                        else
+                        {
+                            <td id="endDT_@i">@batch.EndTime</td>
+                        }
+                        <td>@batch.RecipeName</td>
+                        <td id="recipeno">@batch.RecipeNo</td>
+                        @if (batch.batchStatus.HasFlag(StepStatus.OK))
+                        {
+                            statusClass = "status-ok";
+                        }
+                        @if (batch.batchStatus.HasFlag(StepStatus.Skipped) || batch.batchStatus.HasFlag(StepStatus.ForcedStart))
+                        {
+                            statusClass = "status-skipped";
+                        }
+                        @if (batch.batchStatus.HasFlag(StepStatus.Error) || batch.batchStatus.HasFlag(StepStatus.Cancelled))
+                        {
+                            statusClass = "status-nok";
+                        }
+                        @{ string title = ""; }
+                        @if (batch.maxDiffAM != 0 || batch.minDiffAM != 0) { title += "Amount diff-" + "MAX: " + Math.Round((double)batch.maxDiffAM / 1000, 3) + "kg MIN: " + Math.Round((double)batch.minDiffAM / 1000, 3) + "kg \n"; }
+                        @if (batch.maxDiffTemp != 0 || batch.minDiffTemp != 0) { title += "Temperature diff-" + "MAX: " + Math.Round((double)batch.maxDiffTemp / 10, 1) + "°C MIN: " + Math.Round((double)batch.minDiffTemp / 10, 2) + "°C \n"; }
+                        @if (batch.maxDiffST != 0 || batch.minDiffST != 0) { title += "steptime diff- MAX: " + Math.Round((double)batch.maxDiffST / 60, 2) + "min MIN: " + Math.Round((double)batch.minDiffST / 60, 2) + "min \n"; }
+                        @if (batch.maxDiffIST != 0 || batch.minDiffIST != 0) { title += "Inter step time diff- MAX: " + Math.Round((double)batch.maxDiffIST / 60, 2) + "min MIN: " + Math.Round((double)batch.minDiffIST / 60, 2) + "min \n"; }
+                        <td class="@statusClass">@batch.batchStatus</td>
+                        <td data-toggle="tooltip" data-placement="top" title="@title"><span><b>@batch.diffStatus</b></span></td>
+                    </tr>
                     i++;
                 }
             }

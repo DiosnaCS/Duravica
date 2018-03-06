@@ -49,6 +49,9 @@
     }
     <div class="container body-content"  id="container-body">
         <script>
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            })
             var sidenavWidth = $('.sidenav').width();
             document.getElementById('container-body').style.marginLeft = sidenavWidth + 'px';
             function responsive() {
