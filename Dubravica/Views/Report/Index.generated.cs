@@ -52,53 +52,63 @@ WriteLiteral("\r\n\r\n<div");
 
 WriteLiteral(" id=\"bootstrap-overrides\"");
 
-WriteLiteral(">\r\n        <h4>");
+WriteLiteral(">\r\n    <div");
+
+WriteLiteral(" class=\"panel panel-default\"");
+
+WriteLiteral(" data-spy=\"affix\"");
+
+WriteLiteral(">\r\n        <div");
+
+WriteLiteral(" class=\"panel-body\"");
+
+WriteLiteral(">\r\n\r\n            <h4>");
 
             
-            #line 7 "..\..\Views\Report\Index.cshtml"
-       Write(ViewBag.TitleReport);
+            #line 10 "..\..\Views\Report\Index.cshtml"
+           Write(ViewBag.TitleReport);
 
             
             #line default
             #line hidden
 WriteLiteral("</h4>\r\n");
 
-WriteLiteral("        ");
+WriteLiteral("            ");
 
             
-            #line 8 "..\..\Views\Report\Index.cshtml"
-   Write(Html.Partial("_Form"));
+            #line 11 "..\..\Views\Report\Index.cshtml"
+       Write(Html.Partial("_Form"));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n        <br>\r\n        <br>\r\n");
+WriteLiteral("\r\n            <br>\r\n            <br>\r\n        </div>\r\n    </div>\r\n");
 
             
-            #line 11 "..\..\Views\Report\Index.cshtml"
+            #line 16 "..\..\Views\Report\Index.cshtml"
+    
+            
+            #line default
+            #line hidden
+            
+            #line 16 "..\..\Views\Report\Index.cshtml"
+     if (ViewBag.Steps != null)
+    {
         
             
             #line default
             #line hidden
             
-            #line 11 "..\..\Views\Report\Index.cshtml"
-         if (ViewBag.Steps != null)
-        {
-            
-            
-            #line default
-            #line hidden
-            
-            #line 13 "..\..\Views\Report\Index.cshtml"
-       Write(Html.Partial("_Detail"));
+            #line 18 "..\..\Views\Report\Index.cshtml"
+   Write(Html.Partial("_Detail"));
 
             
             #line default
             #line hidden
             
-            #line 13 "..\..\Views\Report\Index.cshtml"
-                                    
-        }
+            #line 18 "..\..\Views\Report\Index.cshtml"
+                                
+    }
 
             
             #line default
@@ -108,7 +118,7 @@ WriteLiteral("    <hr>\r\n");
 WriteLiteral("    ");
 
             
-            #line 16 "..\..\Views\Report\Index.cshtml"
+            #line 21 "..\..\Views\Report\Index.cshtml"
 Write(Html.Partial("_Overview"));
 
             

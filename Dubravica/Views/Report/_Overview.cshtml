@@ -67,7 +67,7 @@
                         @if (batch.maxDiffST != 0 || batch.minDiffST != 0) { title += "steptime diff- MAX: " + Math.Round((double)batch.maxDiffST / 60, 2) + "min MIN: " + Math.Round((double)batch.minDiffST / 60, 2) + "min \n"; }
                         @if (batch.maxDiffIST != 0 || batch.minDiffIST != 0) { title += "Inter step time diff- MAX: " + Math.Round((double)batch.maxDiffIST / 60, 2) + "min MIN: " + Math.Round((double)batch.minDiffIST / 60, 2) + "min \n"; }
                         <td class="@statusClass">@batch.batchStatus</td>
-                        <td data-toggle="tooltip" data-placement="top" title="@title"><span><b>@batch.diffStatus</b></span></td>
+                        <td data-toggle="tooltip" data-placement="top" title="@title"><span>@batch.diffStatus</span></td>
                     </tr>
                     i++;
                 }

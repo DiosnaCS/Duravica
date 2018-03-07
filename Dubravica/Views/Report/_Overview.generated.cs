@@ -399,16 +399,16 @@ WriteAttribute("title", Tuple.Create(" title=\"", 4018), Tuple.Create("\"", 4032
 , 4026), false)
 );
 
-WriteLiteral("><span><b>");
+WriteLiteral("><span>");
 
             
             #line 70 "..\..\Views\Report\_Overview.cshtml"
-                                                                                          Write(batch.diffStatus);
+                                                                                       Write(batch.diffStatus);
 
             
             #line default
             #line hidden
-WriteLiteral("</b></span></td>\r\n                    </tr>\r\n");
+WriteLiteral("</span></td>\r\n                    </tr>\r\n");
 
             
             #line 72 "..\..\Views\Report\_Overview.cshtml"

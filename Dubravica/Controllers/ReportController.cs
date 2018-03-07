@@ -122,6 +122,7 @@ namespace Dubravica.Controllers
                     model.RecipesNumbers = new List<int>();
                 RVM.Batches = RVM.Batches.Where(p =>/* localRecipesNumbers.Contains(p.RecipeNo) == true || */model.RecipesNumbers.Contains(p.RecipeNo) == true).ToList();
             }
+            model.RecipesNumbers = null;
             ReportModel reportModelhHelper = (ReportModel)Session["model"];
             RVM.RecipesNames = reportModelhHelper.RecipesNames;
            
