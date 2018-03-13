@@ -4,15 +4,10 @@
 }
 
 <div id="bootstrap-overrides">
-    <div class="panel panel-default" data-spy="affix">
-        <div class="panel-body">
-
-            <h4>@ViewBag.TitleReport</h4>
-            @Html.Partial("_Form")
-            <br>
-            <br>
-        </div>
-    </div>
+    <h4>@ViewBag.TitleReport</h4>
+    @Html.Partial("_Form")
+    <br>
+    <br>
     @if (ViewBag.Steps != null)
     {
         @Html.Partial("_Detail")

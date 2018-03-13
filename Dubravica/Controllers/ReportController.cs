@@ -74,19 +74,11 @@ namespace Dubravica.Controllers
         public ActionResult Index(ReportModel model) {
             ViewBag.firstinit = false;
             ReportHelper reportHelper = new ReportHelper();
-            ReportModel RVM = (ReportModel)Session["model"];
+            ReportModel RVM; //(ReportModel)Session["model"];
 
             RVM = reportHelper.SelectReports(model, Session["DB"].ToString());
             int index = 0;
             uint[] batchIds = new uint[RVM.Batches.Count];
-
-            //if (model.RecipesNumbers != null)
-            //{
-                //List<int> rcpNumberList = model.RecipesNumbers.ToList();
-                //Saves all filtered batches back to model
-            //  RVM.Batches = RVM.Batches.Where(p => model.RecipesNumbers.Contains(p.RecipeNo) == true).ToList();
-            //}
-            //List<int> localRecipesNumbers = new List<int>();
             //Check if there are some ranges of recipes numbers
             if (model.RecipesRanges != null)
             {
@@ -120,7 +112,7 @@ namespace Dubravica.Controllers
             {
                 if (model.RecipesNumbers == null)
                     model.RecipesNumbers = new List<int>();
-                RVM.Batches = RVM.Batches.Where(p =>/* localRecipesNumbers.Contains(p.RecipeNo) == true || */model.RecipesNumbers.Contains(p.RecipeNo) == true).ToList();
+                RVM.Batches = RVM.Batches.Where(p =>model.RecipesNumbers.Contains(p.RecipeNo) == true).ToList();
             }
             model.RecipesNumbers = null;
             ReportModel reportModelhHelper = (ReportModel)Session["model"];
@@ -132,7 +124,7 @@ namespace Dubravica.Controllers
                 index++;
             }
             Session["batchesIds"] = batchIds;
-            ViewBag.RVM = RVM;
+            //ViewBag.RVM = RVM;
             Session["model"] = RVM;
             return View(RVM);
         }
@@ -143,6 +135,7 @@ namespace Dubravica.Controllers
             int batchId = int.Parse(Request.QueryString["batchid"].ToString());
             ReportHelper reportHelper = new ReportHelper();
             ReportModel RVM = (ReportModel)Session["model"];
+            //they are returned in the list of steps - BatchSteps
             ViewBag.Steps = reportHelper.getBatchData(batchId, Session["DB"].ToString());
             //they are returned in the list
             ViewBag.traceNumbers = ReportHelper.getTraceNumbers(batchId, Session["DB"].ToString());

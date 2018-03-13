@@ -11,172 +11,245 @@
     int doneSteps = ViewBag.Steps.BatchSteps.Count;
     double prePercent = (double)doneSteps / (double)ViewBag.Steps.StepsCount;
     double percent = prePercent*100;
+    List<RecipeStep> steps = ViewBag.Steps.BatchSteps;
 }
 
 <h4>@ViewBag.TitleDetail</h4>
 @{ if (ViewBag.Steps != null)
 {
-<div class="det-header">    
+<div class="det-header">
     <p>Batch ID:<span>@ViewBag.Steps.Id</span></p>
     <p>Bowl ID:<span>@ViewBag.Steps.BowlId</span></p>
     <p>Recipe:<span>@ViewBag.Steps.RecipeNo - @ViewBag.Steps.RecipeName</span></p>
     <p>
-        Time:<span>@ViewBag.Steps.StartTime</span>-
+        Time:<span id="startBatchDT">@ViewBag.Steps.StartTime</span>-
         @if (ViewBag.Steps.EndTime.Year < 2016)
         {
             <span>No end</span>
         }
         else
         {
-            <span>@ViewBag.Steps.EndTime</span>
+            <span id="endBatchDT">@ViewBag.Steps.EndTime</span>
         }
-    </p>    
+    </p>
+    @if (steps.Exists(p => p.EndTime.Year < 2016))
+    {
+        @{
+            List<RecipeStep> notEndedSteps = steps.Where(p => p.EndTime.Year < 2016).ToList();
+            RecipeStep currentStep = notEndedSteps[0];
+        }
+        <p>
+            Current step: <b>@currentStep.OperationNr.ToString()</b>
+            @if (currentStep.OperationNr == OperationType.Ripping)
+            {
+                TimeSpan timeFromRcpStart = DateTime.Now - ViewBag.Steps.StartTime;
+                TimeSpan timeToStepEnd = DateTime.Now - currentStep.StartTime;
+                double elapsedMinutes = currentStep.Need - timeToStepEnd.TotalSeconds;
+                percent = (elapsedMinutes / timeToStepEnd.TotalSeconds)*100;
+                TimeSpan timeSpan = DateTime.Now - currentStep.StartTime;
+
+                if (timeSpan.Ticks > 0 || currentStep.Need > Math.Abs(timeSpan.TotalSeconds))
+                {
+                          <div>Time elapsing:<span> @timeSpan.Hours h @timeSpan.Minutes min</span></div>
+                }
+                else
+                {
+                    <span style="color: orangered;">Batch is over time: @timeSpan.Hours h @timeSpan.Minutes min</span>
+                }
+            }
+        </p>
+    }
+    @if (ViewBag.steps.EndTime.Year < 2016 && Model.Batches.Exists(p => p.RecipeNo == ViewBag.Steps.RecipeNo))
+    {
+            @{  var lastSameRcp = Model.Batches.First(p => p.RecipeNo == ViewBag.Steps.RecipeNo).EndTime;
+                TimeSpan lastTimeSpan = Model.Batches.First(p => p.RecipeNo == ViewBag.Steps.RecipeNo).EndTime - Model.Batches.First(p => p.RecipeNo == ViewBag.Steps.RecipeNo).StartTime;
+                TimeSpan currElepsingTime = DateTime.Now - ViewBag.steps.StartTime;
+                TimeSpan predictedTime = currElepsingTime - lastTimeSpan;    }
+        <p>Estimated time elapsing: <span>@predictedTime.Hours h @predictedTime.Minutes min @predictedTime.Seconds s   (according to last batch with this recipe number)</span></p>
+    }
 </div>
 } }
 <div>
-    <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: @percent%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-    </div>
-    <table class="table table-bordered thin-row det-tab">
-        <tr>
-            <th style="width: 40px;">Step</th>
-            <th style="width: 155px">Start</th>
-            <th style="width: 155px">End</th>
-            <th style="width: 100px">Operation</th>
-            <th style="width: 105px">Device ID</th>
-            <th style="min-width: 160px">Device Name</th>
-            <th style="width: 105px">Need</th>
-            <th style="width: 105px">Done</th>
-            <th style="width: 105px">Diff</th>
-            <th style="width: 100px">Status</th>
-        </tr>
-        @{
-            if (ViewBag.Steps != null)
+<div class="progress">
+    <div class="progress-bar" role="progressbar" style="width: @Math.Round(percent)%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">@Math.Round(percent) %</div>
+</div>
+<table class="table table-bordered thin-row det-tab">
+    <tr>
+        <th style="width: 40px;">Step</th>
+        <th style="width: 155px">Start</th>
+        <th style="width: 155px">End</th>
+        <th style="width: 100px">Operation</th>
+        <th style="width: 105px">Device ID</th>
+        <th style="min-width: 160px">Device Name</th>
+        <th style="width: 105px">Need</th>
+        <th style="width: 105px">Done</th>
+        <th style="width: 105px">Diff</th>
+        <th style="width: 100px">Status</th>
+    </tr>
+    @{
+        if (ViewBag.Steps != null)
+        {
+            int toElementUnits = 1;
+            int id = 0;
+            foreach (RecipeStep step in ViewBag.Steps.BatchSteps)
             {
-                int toElementUnits = 1;
-                int id = 0;
-                foreach (RecipeStep step in ViewBag.Steps.BatchSteps)
+                traceToolpit = "";
+                switch (step.OperationNr)
                 {
-                    traceToolpit = "";
-                    switch (step.OperationNr)
+                    case OperationType.Dosing:
+                        if (ViewBag.traceNumbers.Count > tracePos && ViewBag.traceNumbers.Count > 0)
+                        {
+                            traceToolpit = "Trace ID:" + ViewBag.traceNumbers[tracePos];
+                            tracePos++;
+                        }
+                        unit = "kg";
+                        toElementUnits = 1000;
+                        break;
+                    case OperationType.Kneading:
+                        unit = "°C";
+                        toElementUnits = 10;
+                        break;
+                    case OperationType.Ripping:
+                        unit = "min";
+                        toElementUnits = 60;
+                        break;
+                }
+                double need = (double)step.Need / (double)toElementUnits;
+                need = Math.Round(need, 2);
+                double done = (double)step.Done / (double)toElementUnits;
+                done = Math.Round(done, 2);
+                double diff = (double)(step.Done - step.Need) / (double)toElementUnits;
+                diff = Math.Round(diff, 2);
+                if (step.Status.HasFlag(StepStatus.OK))
+                {
+                    statusClass = "status-ok";
+                }
+                if (step.Status.HasFlag(StepStatus.Skipped) || step.Status.HasFlag(StepStatus.ForcedStart))
+                {
+                    statusClass = "status-warning";
+                }
+                if (step.Status.HasFlag(StepStatus.Cancelled) || step.Status.HasFlag(StepStatus.Error))
+                {
+                    statusClass = "status-error";
+                }
+                <tr data-toggle="tooltip" data-placement="top" title="@traceToolpit">
+                    <td>@step.step</td>
+                    <td id="startStep_@id">@step.StartTime</td>
+                    @if (step.EndTime.Year < 2016)
                     {
-                        case OperationType.Dosing:
-                            if (ViewBag.traceNumbers.Count > tracePos && ViewBag.traceNumbers.Count > 0)
-                            {
-                                traceToolpit = "Trace ID:" + ViewBag.traceNumbers[tracePos];
-                                tracePos++;
-                            }
-                            unit = "kg";
-                            toElementUnits = 1000;
-                            break;
-                        case OperationType.Kneading:
-                            unit = "°C";
-                            toElementUnits = 10;
-                            break;
-                        case OperationType.Ripping:
-                            unit = "min";
-                            toElementUnits = 60;
-                            break;
+                        <td><b>No end</b></td>
                     }
-                    double need = (double)step.Need / (double)toElementUnits;
-                    need = Math.Round(need, 2);
-                    double done = (double)step.Done / (double)toElementUnits;
-                    done = Math.Round(done, 2);
-                    double diff = (double)(step.Done - step.Need) / (double)toElementUnits;
-                    diff = Math.Round(diff, 2);
-                    if (step.Status.HasFlag(StepStatus.OK))
+                    else
                     {
-                        statusClass = "status-ok";
+                        <td id="endStep_@id">@step.EndTime</td>
                     }
-                    if (step.Status.HasFlag(StepStatus.Skipped) || step.Status.HasFlag(StepStatus.ForcedStart))
+                    <td>@step.OperationNr</td>
+                    @if (step.DeviceId != 0)
                     {
-                        statusClass = "status-warning";
+                        <td>@step.DeviceId</td>
                     }
-                    if (step.Status.HasFlag(StepStatus.Cancelled) || step.Status.HasFlag(StepStatus.Error))
+                    else
                     {
-                        statusClass = "status-error";
+                        <td></td>
                     }
-                    <tr data-toggle="tooltip" data-placement="top" title="@traceToolpit">
-                        <td>@step.step</td>
-                        <td id="startStep_@id">@step.StartTime</td>
-                        @if (step.EndTime.Year < 2016)
-                        {
-                            <td><b>No end</b></td>
-                        }
-                        else
-                        {
-                            <td id="endStep_@id">@step.EndTime</td>
-                        }
-                        <td>@step.OperationNr</td>
-                        @if (step.DeviceId != 0)
-                        {
-                            <td>@step.DeviceId</td>
-                        }
-                        else
-                        {
-                            <td></td>
-                        }
-                        <td>@step.Device</td>
-                        <td class="text-right" data-toggle="tooltip" data-placement="top">@need @unit&ensp;</td>
-                        @if (step.EndTime.Year < 2016)
-                        {
-                            <td class="text-right"><b>Not done yet</b></td>
-                        }
-                        else
+                    <td>@step.Device</td>
+                    @if (step.OperationNr == OperationType.Tipping)
+                    {
+                        <td class="text-right">&ensp;</td>
+                    }
+                    else
+                    {
+                        <td class="text-right">@need @unit&ensp;</td>
+                    }
+                    @if (step.EndTime.Year < 2016)
+                    {
+                        <td class="text-right"><b>Not done yet</b></td>
+                    }
+                    else
+                    {
+                        if (step.OperationNr == OperationType.Tipping) {
+                        <td class="text-right">&ensp;</td>
+                        } else
                         {
                             <td class="text-right">@done @unit&ensp;</td>
                         }
-                        @if (step.EndTime.Year < 2016)
+                    }
+                    @if (step.EndTime.Year < 2016)
+                    {
+                        <td class="text-right"><b>Not done yet</b></td>
+                    }
+                    else
+                    {
+                        if (diff != 0)
                         {
-                            <td class="text-right"><b>Not done yet</b></td>
+                            <td class="text-right">@diff @unit&nbsp;</td>
                         }
                         else
                         {
-                            if (diff != 0)
-                            {
-                                <td class="text-right">@diff @unit&nbsp;</td>
-                            }
-                            else
-                            {
-                                <td class="text-right"></td>
-                            }
+                            <td class="text-right"></td>
                         }
-                        <td class="@statusClass">@step.Status</td>
-                    </tr>
-                    id++;
-                }
-                for (int j = 0; j < (futureSteps); j++)
-                {
-                    <tr data-toggle="tooltip" data-placement="top" title="Expected step">
-                        <td>&ensp;</td>
-                        <td>&ensp;</td>
-                        <td>&ensp;</td>
-                        <td>&ensp;</td>
-                        <td>&ensp;</td>
-                        <td>&ensp;</td>
-                        <td class="text-right" data-toggle="tooltip" data-placement="top">&ensp;</td>
-                        <td class="text-right">&ensp;</td>
-                        <td class="text-right">&ensp;</td>
-                        <td class="status-ok">&ensp;</td>
-                    </tr>
-                }
+                    }
+                    <td class="@statusClass">@step.Status</td>
+                </tr>
+                id++;
+            }
+            for (int j = 0; j < (futureSteps); j++)
+            {
+                <tr data-toggle="tooltip" data-placement="top" title="Expected step">
+                    <td>&ensp;</td>
+                    <td>&ensp;</td>
+                    <td>&ensp;</td>
+                    <td>&ensp;</td>
+                    <td>&ensp;</td>
+                    <td>&ensp;</td>
+                    <td class="text-right" data-toggle="tooltip" data-placement="top">&ensp;</td>
+                    <td class="text-right">&ensp;</td>
+                    <td class="text-right">&ensp;</td>
+                    <td class="status-ok">&ensp;</td>
+                </tr>
             }
         }
-    </table>
+    }
+</table>
+<script>
+    function DateTime(date) {
+        var offset = date.getTimezoneOffset();
+        console.log(offset);
+        var offseted_miliseconds = date.getTime() - (offset * 60000);
+        var DateTime = new Date(offseted_miliseconds);
+        var localDateTime = DateTime.toLocaleString();
+        return localDateTime;
+    }
+    var yearStartBatch = @ViewBag.Steps.StartTime.Year;
+    var monthStartBatch = @ViewBag.Steps.StartTime.Month;
+    var dayStartBatch = @ViewBag.Steps.StartTime.Day;
+    var hourStartBatch = @ViewBag.Steps.StartTime.Hour;
+    var minuteStartBatch = @ViewBag.Steps.StartTime.Minute;
+    var secondStartBatch = @ViewBag.Steps.StartTime.Second;
+    var dateStartBatch = new Date(yearStartBatch, monthStartBatch - 1, dayStartBatch, hourStartBatch, minuteStartBatch, secondStartBatch, 0);
+    var localStartBatch = DateTime(dateStartBatch);
+    console.log(localStartBatch);
+    document.getElementById("startBatchDT").innerHTML = localStartBatch;
+</script>
+@if (ViewBag.Steps.EndTime.Year > 2016)
+{
+<script>
+        var yearEndBatch = @ViewBag.Steps.EndTime.Year;
+        var monthEndBatch = @ViewBag.Steps.EndTime.Month;
+        var dayEndBatch = @ViewBag.Steps.EndTime.Day;
+        var hourEndBatch = @ViewBag.Steps.EndTime.Hour;
+        var minuteEndBatch = @ViewBag.Steps.EndTime.Minute;
+        var secondEndBatch = @ViewBag.Steps.EndTime.Second;
+        var dateEndBatch = new Date(yearEndBatch, monthEndBatch - 1, dayEndBatch, hourEndBatch, minuteEndBatch, secondEndBatch, 0);
+        var localEndBatch = DateTime(dateEndBatch);
+        console.log(localEndBatch);
+        document.getElementById("endBatchDT").innerHTML = localEndBatch;
+</script>
+}
+@{int i = 0; }
+@foreach (RecipeStep step in ViewBag.Steps.BatchSteps)
+{
     <script>
-        function DateTime(date) {
-            var offset = date.getTimezoneOffset();
-            console.log(offset);
-            var offseted_miliseconds = date.getTime() - (offset * 60000);
-            var DateTime = new Date(offseted_miliseconds);
-            var localDateTime = DateTime.toLocaleString();
-            return localDateTime;
-        }
-    </script>
-    @{int i = 0; }
-    @foreach (RecipeStep step in ViewBag.Steps.BatchSteps)
-    {
-        <script>
         var year = @step.StartTime.Year;
         var month = @step.StartTime.Month;
         var day = @step.StartTime.Day;
@@ -184,7 +257,13 @@
         var minute = @step.StartTime.Minute;
         var second = @step.StartTime.Second;
         var date = new Date(year, month - 1, day, hour, minute, second, 0);
-        console.log(date);
+        var localDateTime = DateTime(date);
+        console.log(localDateTime);
+        document.getElementById("startStep_" + "@i").innerHTML = localDateTime;
+    </script>
+    @if (step.EndTime.Year > 2016)
+    {
+    <script>
         var yearExp = @step.EndTime.Year;
         var monthExp = @step.EndTime.Month;
         var dayExp = @step.EndTime.Day;
@@ -192,12 +271,12 @@
         var minuteExp = @step.EndTime.Minute;
         var secondExp = @step.EndTime.Second;
         var expDate = new Date(yearExp, monthExp - 1, dayExp, hourExp, minuteExp, secondExp, 0);
-            var localDateTime = DateTime(date);
-            document.getElementById("starStep_" + "@i").innerHTML = localDateTime;
+
         var localExpDateTime = DateTime(expDate);
         document.getElementById("endStep_" + "@i").innerHTML = localExpDateTime;
-        </script>
-        i++;
+    </script>
     }
+    i++;
+}
 </div>
 

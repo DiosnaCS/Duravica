@@ -1,5 +1,10 @@
 ﻿@using Dubravica.Report.Models
 @model ReportModel
+@{
+    string statusClass = "status-default";
+    string runningStyle = "";
+    int i = 0;
+}
 <script>
     function getBatch(id) {
         //var batchId = document.getElementById("batchid").textContent;
@@ -8,73 +13,86 @@
     }
 </script>
 @*<div class="table table-bordered thin-row">*@
-<table class="table table-condensed table-bordered table-hover table-responsive">
-    @{if (Model.Batches != null)
+@if (Model.Batches != null)
+{
+    if (Model.Batches.Count > 0)
+    {
+        int cancelledBatchesCount = Model.Batches.Count(p => p.batchStatus.HasFlag(StepStatus.Cancelled));
+        int badBatchesCount = Model.Batches.Count(p => p.batchStatus.HasFlag(StepStatus.Error));
+        <span>Batches filtered: @Model.Batches.Count&ensp;</span>
+        @if (cancelledBatchesCount > 0)
         {
-            if (Model.Batches.Count > 0)
-            {
-                string statusClass = "";
-                string runningStyle = "";
-                <tr style="background-color:silver;">
-                    <th>Batch No.</th>
-                    <th>Start</th>
-                    <th>End</th>
-                    <th>Product</th>
-                    <th>Recipe</th>
-                    <th>Batch status</th>
-                    <th>Differences</th>
-                </tr>
-
-                int i = 0;
-                foreach (Batch batch in Model.Batches)
-                {
-                    @* to write ids *@
-                    if (batch.EndTime.Year < 2016 && !batch.batchStatus.HasFlag(StepStatus.Cancelled) &&
-                        !batch.batchStatus.HasFlag(StepStatus.OK) && !batch.batchStatus.HasFlag(StepStatus.Error))
-                    {
-                       runningStyle = "background-color: lightgreen;";
-                    }
-                        
-                    <tr onclick="getBatch(@batch.Id)" style="cursor: pointer;@runningStyle">
-                        @{runningStyle = "";}
-                        <td id="BatchNo">@batch.Id</td>
-                        <td id="startDT_@i">@batch.StartTime</td>
-                        @if (batch.EndTime.Year < 2016)
-                        {
-                            <td>No end</td>
-                        }
-                        else
-                        {
-                            <td id="endDT_@i">@batch.EndTime</td>
-                        }
-                        <td>@batch.RecipeName</td>
-                        <td id="recipeno">@batch.RecipeNo</td>
-                        @if (batch.batchStatus.HasFlag(StepStatus.OK))
-                        {
-                            statusClass = "status-ok";
-                        }
-                        @if (batch.batchStatus.HasFlag(StepStatus.Skipped) || batch.batchStatus.HasFlag(StepStatus.ForcedStart))
-                        {
-                            statusClass = "status-skipped";
-                        }
-                        @if (batch.batchStatus.HasFlag(StepStatus.Error) || batch.batchStatus.HasFlag(StepStatus.Cancelled))
-                        {
-                            statusClass = "status-nok";
-                        }
-                        @{ string title = ""; }
-                        @if (batch.maxDiffAM != 0 || batch.minDiffAM != 0) { title += "Amount diff-" + "MAX: " + Math.Round((double)batch.maxDiffAM / 1000, 3) + "kg MIN: " + Math.Round((double)batch.minDiffAM / 1000, 3) + "kg \n"; }
-                        @if (batch.maxDiffTemp != 0 || batch.minDiffTemp != 0) { title += "Temperature diff-" + "MAX: " + Math.Round((double)batch.maxDiffTemp / 10, 1) + "°C MIN: " + Math.Round((double)batch.minDiffTemp / 10, 2) + "°C \n"; }
-                        @if (batch.maxDiffST != 0 || batch.minDiffST != 0) { title += "steptime diff- MAX: " + Math.Round((double)batch.maxDiffST / 60, 2) + "min MIN: " + Math.Round((double)batch.minDiffST / 60, 2) + "min \n"; }
-                        @if (batch.maxDiffIST != 0 || batch.minDiffIST != 0) { title += "Inter step time diff- MAX: " + Math.Round((double)batch.maxDiffIST / 60, 2) + "min MIN: " + Math.Round((double)batch.minDiffIST / 60, 2) + "min \n"; }
-                        <td class="@statusClass">@batch.batchStatus</td>
-                        <td data-toggle="tooltip" data-placement="top" title="@title"><span>@batch.diffStatus</span></td>
-                    </tr>
-                    i++;
-                }
-            }
+            <span>Cancelled batches: @cancelledBatchesCount </span>
         }
+        @if (badBatchesCount > 0)
+        {
+            <span>Cancelled batches: @badBatchesCount</span>
+        }
+        <table class="table table-condensed table-bordered table-hover table-responsive">
+            <tr style="background-color:silver;">
+                <th>Batch No.</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Product</th>
+                <th>Recipe</th>
+                <th>Batch status</th>
+                <th>Differences</th>
+            </tr>
+
+            @foreach (Batch batch in Model.Batches)
+            {
+                @* to write ids *@
+                if (batch.EndTime.Year < 2016 && !batch.batchStatus.HasFlag(StepStatus.Cancelled) &&
+                    !batch.batchStatus.HasFlag(StepStatus.OK) && !batch.batchStatus.HasFlag(StepStatus.Error))
+                {
+                    runningStyle = "background-color: lightgreen;";
+                }
+
+                <tr onclick="getBatch(@batch.Id)" style="cursor: pointer;@runningStyle">
+                    @{runningStyle = "";}
+                    <td id="BatchNo">@batch.Id</td>
+                    <td id="startDT_@i">@batch.StartTime</td>
+                    @if (batch.EndTime.Year < 2016)
+                    {
+                        <td>No end</td>
+                    }
+                    else
+                    {
+                        <td id="endDT_@i">@batch.EndTime</td>
+                    }
+                    <td>@batch.RecipeName</td>
+                    <td id="recipeno">@batch.RecipeNo</td>
+                    @if (batch.batchStatus.HasFlag(StepStatus.OK))
+                    {
+                        statusClass = "status-ok";
+                    }
+                    @if (batch.batchStatus.HasFlag(StepStatus.Skipped) || batch.batchStatus.HasFlag(StepStatus.ForcedStart))
+                    {
+                        statusClass = "status-skipped";
+                    }
+                    @if (batch.batchStatus.HasFlag(StepStatus.Error) || batch.batchStatus.HasFlag(StepStatus.Cancelled))
+                    {
+                        statusClass = "status-nok";
+                    }
+                    @{ string title = ""; }
+                    @if (batch.maxDiffAM != 0 || batch.minDiffAM != 0) { title += "Amount diff-" + "MAX: " + Math.Round((double)batch.maxDiffAM / 1000, 3) + "kg MIN: " + Math.Round((double)batch.minDiffAM / 1000, 3) + "kg \n"; }
+                    @if (batch.maxDiffTemp != 0 || batch.minDiffTemp != 0) { title += "Temperature diff-" + "MAX: " + Math.Round((double)batch.maxDiffTemp / 10, 1) + "°C MIN: " + Math.Round((double)batch.minDiffTemp / 10, 2) + "°C \n"; }
+                    @if (batch.maxDiffST != 0 || batch.minDiffST != 0) { title += "steptime diff- MAX: " + Math.Round((double)batch.maxDiffST / 60, 2) + "min MIN: " + Math.Round((double)batch.minDiffST / 60, 2) + "min \n"; }
+                    @if (batch.maxDiffIST != 0 || batch.minDiffIST != 0) { title += "Inter step time diff- MAX: " + Math.Round((double)batch.maxDiffIST / 60, 2) + "min MIN: " + Math.Round((double)batch.minDiffIST / 60, 2) + "min \n"; }
+                    <td class="@statusClass">@batch.batchStatus</td>
+                    <td data-toggle="tooltip" data-placement="top" title="@title"><span>@batch.diffStatus</span></td>
+                </tr>
+                i++;
+            }
+        </table>
     }
-</table>
+}
+else
+{
+    <div>
+        No data are present
+    </div>
+}
 <script>
     function DateTime(date) {
         var offset = date.getTimezoneOffset();
@@ -85,31 +103,33 @@
         return localDateTime;
     }
 </script>
-@for(int i=0; i < Model.Batches.Count;i++) { 
+@for (int j = 0; j < Model.Batches.Count; j++)
+{
     <script>
-            var year = @Model.Batches[i].StartTime.Year;
-            var month = @Model.Batches[i].StartTime.Month;
-            var day = @Model.Batches[i].StartTime.Day;
-            var hour = @Model.Batches[i].StartTime.Hour;
-            var minute = @Model.Batches[i].StartTime.Minute;
-            var second = @Model.Batches[i].StartTime.Second;
+            var year = @Model.Batches[j].StartTime.Year;
+            var month = @Model.Batches[j].StartTime.Month;
+            var day = @Model.Batches[j].StartTime.Day;
+            var hour = @Model.Batches[j].StartTime.Hour;
+            var minute = @Model.Batches[j].StartTime.Minute;
+            var second = @Model.Batches[j].StartTime.Second;
             var date = new Date(year, month - 1, day, hour, minute, second, 0);
             var localDateTime = DateTime(date);
-            document.getElementById("startDT_" + "@i").innerHTML = localDateTime;
+            document.getElementById("startDT_" + "@j").innerHTML = localDateTime;
     </script>
 
-    if (Model.Batches[i].EndTime.Year < 2016) {
+    if (Model.Batches[j].EndTime.Year > 2016)
+    {
         <script>
-            var yearExp = @Model.Batches[i].EndTime.Year;
-            var monthExp = @Model.Batches[i].EndTime.Month;
-            var dayExp = @Model.Batches[i].EndTime.Day;
-            var hourExp = @Model.Batches[i].EndTime.Hour;
-            var minuteExp = @Model.Batches[i].EndTime.Minute;
-            var secondExp = @Model.Batches[i].EndTime.Second;
+            var yearExp = @Model.Batches[j].EndTime.Year;
+            var monthExp = @Model.Batches[j].EndTime.Month;
+            var dayExp = @Model.Batches[j].EndTime.Day;
+            var hourExp = @Model.Batches[j].EndTime.Hour;
+            var minuteExp = @Model.Batches[j].EndTime.Minute;
+            var secondExp = @Model.Batches[j].EndTime.Second;
             var expDate = new Date(yearExp, monthExp - 1, dayExp, hourExp, minuteExp, secondExp, 0);
 
             var localExpDateTime = DateTime(expDate);
-            document.getElementById("endDT_" + "@i").innerHTML = localExpDateTime;
+            document.getElementById("endDT_" + "@j").innerHTML = localExpDateTime;
         </script>
     }
 }

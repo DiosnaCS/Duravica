@@ -171,6 +171,14 @@ textarea {
     padding: 0px 5px 0px 5px;
     font-weight: 700;
 }
+.status-default {
+    padding: 0px 0px 0px 5px;
+    color: black;
+}
+#bootstrap-overrides .det-tab .status-default {
+    padding: 0px 0px 0px 5px;
+    color: black;
+}
 .status-warning {
     padding: 0px 0px 0px 5px;
     color: darkorange;
