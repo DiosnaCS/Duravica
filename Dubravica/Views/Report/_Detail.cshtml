@@ -13,7 +13,6 @@
     double percent = prePercent*100;
     List<RecipeStep> steps = ViewBag.Steps.BatchSteps;
 }
-
 <h4>@ViewBag.TitleDetail</h4>
 @{ if (ViewBag.Steps != null)
 {
@@ -279,4 +278,10 @@
     i++;
 }
 </div>
-
+<script>
+    var pxFromTop = document.getElementById("batchRow_" + @(ViewBag.Steps.Id+1)).offsetTop;
+    console.log(pxFromTop);
+    var absoulteOffset = pxFromTop + 500;
+    console.log(absoulteOffset);
+    window.scrollTo(0, pxFromTop);
+</script>

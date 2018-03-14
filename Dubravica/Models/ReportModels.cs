@@ -105,7 +105,7 @@ namespace Dubravica.Report.Models
             set {
                 if (value != null)
                 {
-                    AmountTolerance = (int)(float.Parse(value) * Amount_coef);
+                    AmountTolerance = (int)(float.Parse(value.Replace(".", ",")) * Amount_coef);
                 }
                 else { }
             } }
@@ -126,7 +126,7 @@ namespace Dubravica.Report.Models
             {
                 if (value != null)
                 {
-                    TempTolerance = (int)(float.Parse(value) * Temp_coef);
+                    TempTolerance = (int)(float.Parse(value.Replace(".", ",")) * Temp_coef);
                 }
                 else { }
             }
@@ -148,7 +148,7 @@ namespace Dubravica.Report.Models
             {
                 if (value != null)
                 {
-                    StepTimeTolerance = (int)(float.Parse(value) * StepTime_coef);
+                    StepTimeTolerance = (int)(float.Parse(value.Replace(".", ",")) * StepTime_coef);
                 }
                 else { }
             }
@@ -170,7 +170,7 @@ namespace Dubravica.Report.Models
             {
                 if (value != null)
                 {
-                    InterStepTimeTolerance = (int)(float.Parse(value) * InterStepTime_coef);
+                    InterStepTimeTolerance = (int)(float.Parse(value.Replace(".", ",")) * InterStepTime_coef);
                 } else { }
             }
         }

@@ -91,7 +91,7 @@ WriteLiteral("></script>\r\n<script>\r\n\r\n    var windowHeight;\r\n\r\n    fun
             #line hidden
 WriteLiteral("    <div");
 
-WriteLiteral(" class=\"col-lg-12 form-inline\"");
+WriteLiteral(" class=\"col-sm-12 form-inline\"");
 
 WriteLiteral(">\r\n        <!-- pozdeji onclick tlacitka v menu -->\r\n        <section");
 
@@ -272,6 +272,8 @@ WriteLiteral("\r\n\r\n                <!-- time from -->\r\n                <div
 
 WriteLiteral(" class=\"form-group input-sm col-sm-2\"");
 
+WriteLiteral(" style=\"margin-bottom:45px\"");
+
 WriteLiteral(">\r\n                    <div>\r\n");
 
 WriteLiteral("                        ");
@@ -312,6 +314,8 @@ WriteLiteral("\r\n                    </div>\r\n                </div>\r\n      
 "o -->\r\n                <div");
 
 WriteLiteral(" class=\"form-group input-sm col-sm-2\"");
+
+WriteLiteral(" style=\"margin-bottom:45px\"");
 
 WriteLiteral(">\r\n                    <div>\r\n");
 
@@ -755,7 +759,7 @@ WriteLiteral("                        ");
 WriteLiteral("\r\n                    </div>\r\n                </div>\r\n                <!-- Button" +
 "s -->\r\n                <div");
 
-WriteLiteral(" class=\"form-group mb-3\"");
+WriteLiteral(" class=\"form-group\"");
 
 WriteLiteral(">\r\n                    <div>\r\n                        <!-- old code of this butto" +
 "n: style=\"display: block; float: right; margin-left: 15px; padding: 2px 2px 2px " +
@@ -877,9 +881,9 @@ WriteLiteral(" class=\"modal-footer\"");
 
 WriteLiteral(">\r\n                                        <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 15229), Tuple.Create("\"", 15254)
-, Tuple.Create(Tuple.Create("", 15236), Tuple.Create<System.Object, System.Int32>(Href("~/Report/exportCSV")
-, 15236), false)
+WriteAttribute("href", Tuple.Create(" href=\"", 15278), Tuple.Create("\"", 15303)
+, Tuple.Create(Tuple.Create("", 15285), Tuple.Create<System.Object, System.Int32>(Href("~/Report/exportCSV")
+, 15285), false)
 );
 
 WriteLiteral(" style=\"margin:5px;\"");

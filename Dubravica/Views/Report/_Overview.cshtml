@@ -7,8 +7,6 @@
 }
 <script>
     function getBatch(id) {
-        //var batchId = document.getElementById("batchid").textContent;
-        //var recipeno = document.getElementById("recipeno").textContent;
         window.location = "/Report/getBatch?batchid=" + id; //+ "&recipeno=" + recipeno;
     }
 </script>
@@ -48,7 +46,7 @@
                     runningStyle = "background-color: lightgreen;";
                 }
 
-                <tr onclick="getBatch(@batch.Id)" style="cursor: pointer;@runningStyle">
+                <tr onclick="getBatch(@batch.Id)" id="batchRow_@batch.Id" style="cursor: pointer;@runningStyle">
                     @{runningStyle = "";}
                     <td id="BatchNo">@batch.Id</td>
                     <td id="startDT_@i">@batch.StartTime</td>
@@ -82,6 +80,16 @@
                     <td class="@statusClass">@batch.batchStatus</td>
                     <td data-toggle="tooltip" data-placement="top" title="@title"><span>@batch.diffStatus</span></td>
                 </tr>
+                @*That should take detail on the position where was *@
+                    @if (ViewBag.Steps != null)
+                    {
+                        @if(batch.Id == int.Parse(Request.QueryString["batchid"]))
+                        {
+                            @Html.Raw("</table>")
+                            @Html.Partial("_Detail")
+                            @Html.Raw("<table class=\"table table-condensed table-bordered table-hover table-responsive\">")
+                        }
+                    }
                 i++;
             }
         </table>

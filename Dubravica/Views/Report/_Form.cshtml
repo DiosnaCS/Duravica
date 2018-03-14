@@ -66,7 +66,7 @@
 </script>
 @using (Html.BeginForm("Index", "Report", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
 {
-    <div class="col-lg-12 form-inline">
+    <div class="col-sm-12 form-inline">
         <!-- pozdeji onclick tlacitka v menu -->
         <section id="">
 
@@ -198,7 +198,7 @@
                 }
 
                 <!-- time from -->
-                <div class="form-group input-sm col-sm-2">
+                <div class="form-group input-sm col-sm-2" style="margin-bottom:45px">
                     <div>
                         @Html.LabelFor(model => model.DateTimeFormFrom)
                     </div>
@@ -209,7 +209,7 @@
                     </div>
                 </div>
                 <!-- time to -->
-                <div class="form-group input-sm col-sm-2">
+                <div class="form-group input-sm col-sm-2" style="margin-bottom:45px">
                     <div>
                         @Html.LabelFor(model => model.DateTimeFormTo)
                     </div>
@@ -321,7 +321,7 @@
                     </div>
                 </div>
                 <!-- Buttons -->
-                <div class="form-group mb-3">
+                <div class="form-group">
                     <div>
                         <!-- old code of this button: style="display: block; float: right; margin-left: 15px; padding: 2px 2px 2px 2px;" -->
                         <input style="margin: 5px;" class="btn btn-primary" type="submit" value="Submit" />
